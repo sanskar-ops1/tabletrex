@@ -1,0 +1,11 @@
+{
+  "name": "tableterex-workspace",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "npm --prefix tableterex run dev",
+    "build": "npm --prefix tableterex run build",
+    "start": "npm --prefix tableterex run start",
+    "lint": "npm --prefix tableterex run lint"
+  }
+}
