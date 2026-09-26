@@ -1,0 +1,6 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "buildCommand": "cd tableterex && npm run build",
+  "outputDirectory": "tableterex/out",
+  "cleanUrls": true
+}
