@@ -95,41 +95,40 @@ export default function HomePage() {
           <BuildYourSetup />
         </div>
 
-        {/* 8 ── PHILOSOPHY SECTION ── dark to cream band with TASK/GOAL/APPROACH card */}
-        <PhilosophySection />
+        {/* dark → cream */}
+        <D2C seed={0} />
 
-        {/* 9 ── TECHNOLOGY & PERFORMANCE ── dark */}
+        {/* 9 ── WHY TABLETREX ── cream */}
+        <div style={{ background: 'var(--cream)' }}>
+          <WhyTableTrex />
+        </div>
+
+        {/* cream → dark */}
+        <C2D seed={2} />
+
+        {/* 10 ── TECHNOLOGY & PERFORMANCE ── dark */}
         <div style={{ background: 'var(--black)' }}>
           <TechPerformance />
         </div>
 
         {/* dark → cream */}
-        <D2C seed={0} />
+        <D2C seed={1} />
 
-        {/* 10 ── GEAR STORE (ALL BRANDED GEAR) ── cream */}
+        {/* GEAR STORE (BRANDED GEAR) + 11 ── COMMUNITY SHOWCASE ── cream */}
         <div style={{ background: 'var(--cream)' }}>
           <GearSection onProductClick={setProduct} />
-        </div>
-
-        {/* 11 ── WHY TABLETEREX & WHOLESALE ── cream */}
-        <div style={{ background: 'var(--cream)' }}>
-          <WhyTableTrex />
-        </div>
-
-        {/* 12 ── COMMUNITY SHOWCASE ── cream */}
-        <div style={{ background: 'var(--cream)' }}>
           <Community />
         </div>
 
         {/* cream → dark */}
         <C2D seed={1} />
 
-        {/* 13 ── REVIEWS & TESTIMONIALS ── dark */}
+        {/* 12 ── REVIEWS & TESTIMONIALS ── dark */}
         <div style={{ background: 'var(--black)' }}>
           <Reviews />
         </div>
 
-        {/* 14 ── FINAL CTA ── high-energy orange */}
+        {/* 13 ── FINAL CTA ── high-energy orange */}
         <FinalCTA />
       </main>
 
