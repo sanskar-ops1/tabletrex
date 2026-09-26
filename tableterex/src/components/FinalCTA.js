@@ -9,8 +9,10 @@ export default function FinalCTA() {
           [13] — GET STARTED
         </span>
         <h2 className="final-cta-headline text-display">
-          BUILD YOUR SETUP.<br />
-          <span className="final-cta-accent">PLAY YOUR GAME.</span>
+          <span className="final-cta-line">BUILD YOUR</span>
+          <span className="final-cta-line">SETUP.</span>
+          <span className="final-cta-line final-cta-accent">PLAY YOUR</span>
+          <span className="final-cta-line final-cta-accent">GAME.</span>
         </h2>
         <p className="final-cta-sub">
           WHOLESALE PRICES. FRESH WEEKLY BATCHES. HAND-ASSEMBLED CUSTOM SETUPS.<br />

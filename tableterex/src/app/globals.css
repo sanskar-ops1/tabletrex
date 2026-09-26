@@ -2208,7 +2208,8 @@ body::before {
 .final-cta-section { background:var(--orange); padding:120px 40px; position:relative; overflow:hidden; text-align:center; }
 .final-cta-watermark { position:absolute; font-family:var(--font-display); font-size:20vw; color:rgba(0,0,0,0.07); bottom:-20px; left:50%; transform:translateX(-50%); pointer-events:none; white-space:nowrap; letter-spacing:0.05em; line-height:1; }
 .final-cta-inner { position:relative; z-index:1; display:flex; flex-direction:column; align-items:center; gap:24px; }
-.final-cta-headline { font-family:var(--font-display); font-size:clamp(4rem,12vw,14rem); line-height:0.88; color:var(--white); }
+.final-cta-headline { font-family:var(--font-display); font-size:clamp(3.8rem,10.5vw,11.5rem); line-height:0.86; color:var(--white); letter-spacing:0.01em; text-align:center; }
+.final-cta-line { display:block; }
 .final-cta-accent { color:var(--black-soft); }
 .final-cta-sub { font-family:var(--font-mono); font-size:0.7rem; letter-spacing:0.12em; color:rgba(245,240,232,0.6); text-transform:uppercase; line-height:1.8; max-width:500px; }
 .final-cta-buttons { display:flex; gap:12px; flex-wrap:wrap; justify-content:center; margin-top:8px; }
