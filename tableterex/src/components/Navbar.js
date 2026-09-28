@@ -3,10 +3,11 @@ import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 
 const NAV_LINKS = [
-  { label: 'About Us',  href: '/about'   },
-  { label: 'Store',     href: '/store'   },
-  { label: 'Brands',    href: '/brands'  },
-  { label: 'Contact',   href: '/contact' },
+  { label: 'Product Page', href: '/products' },
+  { label: 'Store',        href: '/store'    },
+  { label: 'Brands',       href: '/brands'   },
+  { label: 'About Us',     href: '/about'    },
+  { label: 'Contact',      href: '/contact'  },
 ];
 
 export default function Navbar({ onMenuOpen }) {
@@ -41,6 +42,9 @@ export default function Navbar({ onMenuOpen }) {
         </Link>
 
         <div className="nav-right">
+          <Link href="/products" className="nav-product-btn">
+            PRODUCT PAGE
+          </Link>
           <button
             ref={btnRef}
             className={`nav-menu-btn${menuOpen ? ' open' : ''}`}
