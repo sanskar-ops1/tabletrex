@@ -3,21 +3,21 @@ import Link from 'next/link';
 import { useState } from 'react';
 
 const NAV_LINKS = [
-  { label: 'Home',    href: '/'        },
-  { label: 'About',   href: '/about'   },
-  { label: 'Store',   href: '/store'   },
-  { label: 'Brands',  href: '/brands'  },
+  { label: 'Home', href: '/' },
+  { label: 'About', href: '/about' },
+  { label: 'Store', href: '/store' },
+  { label: 'Brands', href: '/brands' },
   { label: 'Contact', href: '/contact' },
 ];
 const SOCIAL_LINKS = [
   { label: 'INSTAGRAM', href: 'https://instagram.com' },
-  { label: 'WHATSAPP',  href: 'https://wa.me/919999999999' },
-  { label: 'YOUTUBE',   href: 'https://youtube.com' },
+  { label: 'WHATSAPP', href: 'https://wa.me/919999999999' },
+  { label: 'YOUTUBE', href: 'https://youtube.com' },
 ];
 
 export default function Footer() {
   const [email, setEmail] = useState('');
-  const [sent,  setSent]  = useState(false);
+  const [sent, setSent] = useState(false);
 
   const handleSubscribe = (e) => {
     e.preventDefault();
@@ -80,8 +80,10 @@ export default function Footer() {
             EXCLUSIVE DEALS &amp; PRO TIPS.
           </p>
           {sent ? (
-            <p style={{ fontFamily: 'var(--font-mono)', fontSize: '0.65rem',
-              letterSpacing: '0.1em', color: 'var(--orange)', textTransform: 'uppercase' }}>
+            <p style={{
+              fontFamily: 'var(--font-mono)', fontSize: '0.65rem',
+              letterSpacing: '0.1em', color: 'var(--orange)', textTransform: 'uppercase'
+            }}>
               ✓ YOU&apos;RE SUBSCRIBED!
             </p>
           ) : (

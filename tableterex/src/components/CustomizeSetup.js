@@ -1,10 +1,10 @@
 'use client';
 import { useEffect } from 'react';
 import {
-  RacketBladeIcon,
-  RubberSurfaceIcon,
-  SlidersConfigIcon,
-  CompletedSetupIcon,
+  ChooseRacketIsometricIcon,
+  ChooseRubberIsometricIcon,
+  CustomizeSetupIsometricIcon,
+  PlayReadySetupIsometricIcon,
 } from '@/components/icons';
 
 const PROCESS_STEPS = [
@@ -15,7 +15,7 @@ const PROCESS_STEPS = [
     title: 'Choose Your Racket',
     desc: 'Select your blade foundation from 250+ pro-grade wood and carbon frames tailored to your grip and blade weight.',
     tag: 'BLADE SELECTION',
-    icon: RacketBladeIcon,
+    icon: ChooseRacketIsometricIcon,
   },
   {
     num: '02',
@@ -24,7 +24,7 @@ const PROCESS_STEPS = [
     title: 'Choose Your Rubber',
     desc: 'Pair high-tension forehand and backhand rubber sheets with customized sponge thickness and hardness ratings.',
     tag: 'RUBBER SELECTION',
-    icon: RubberSurfaceIcon,
+    icon: ChooseRubberIsometricIcon,
   },
   {
     num: '03',
@@ -33,7 +33,7 @@ const PROCESS_STEPS = [
     title: 'Customize Your Setup',
     desc: 'Specify grip shape (Flared, Straight, Penhold), edge tape protection, and custom weight balance distribution.',
     tag: 'CONFIGURATION',
-    icon: SlidersConfigIcon,
+    icon: CustomizeSetupIsometricIcon,
   },
   {
     num: '04',
@@ -42,7 +42,7 @@ const PROCESS_STEPS = [
     title: 'Your Setup',
     desc: 'Hand-assembled with VOC-free pro glue, laser edge trimmed, and dispatched ready to take to the match table.',
     tag: 'PLAY READY',
-    icon: CompletedSetupIcon,
+    icon: PlayReadySetupIsometricIcon,
   },
 ];
 
@@ -126,7 +126,7 @@ export default function CustomizeSetup() {
                   </div>
 
                   <div className="cust-step-icon-box">
-                    <IconComp size={48} className="cust-48-icon" color="var(--black)" />
+                    <IconComp size={50} className="cust-48-icon" variant="orange" />
                   </div>
 
                   <span className="cust-step-tag text-label">{step.tag}</span>

@@ -1,11 +1,11 @@
 'use client';
 import {
-  BeginnerGuideIcon,
-  SpinSpiralIcon,
-  SpeedLightningIcon,
-  ControlPrecisionIcon,
-  OffensiveStrikeIcon,
-  DefensiveShieldIcon,
+  BeginnerSetupIsometricIcon,
+  SpinSetupIsometricIcon,
+  SpeedSetupIsometricIcon,
+  ControlSetupIsometricIcon,
+  OffensiveSetupIsometricIcon,
+  DefensiveSetupIsometricIcon,
 } from '@/components/icons';
 
 const SETUPS = [
@@ -13,7 +13,7 @@ const SETUPS = [
     id: 's1',
     style: 'BEGINNER',
     name: 'Beginner Setup',
-    icon: BeginnerGuideIcon,
+    icon: BeginnerSetupIsometricIcon,
     blade: 'Stiga Clipper Wood',
     rubber: 'DHS Hurricane 3',
     price: '₹4,799',
@@ -26,7 +26,7 @@ const SETUPS = [
     id: 's2',
     style: 'SPIN',
     name: 'Spin Setup',
-    icon: SpinSpiralIcon,
+    icon: SpinSetupIsometricIcon,
     blade: 'Donic Waldner Carbon',
     rubber: 'DHS Hurricane 3 Blue',
     price: '₹7,699',
@@ -39,7 +39,7 @@ const SETUPS = [
     id: 's3',
     style: 'SPEED',
     name: 'Speed Setup',
-    icon: SpeedLightningIcon,
+    icon: SpeedSetupIsometricIcon,
     blade: 'DHS Hurricane Long 5',
     rubber: 'Butterfly Tenergy 64',
     price: '₹8,149',
@@ -52,7 +52,7 @@ const SETUPS = [
     id: 's4',
     style: 'CONTROL',
     name: 'Control Setup',
-    icon: ControlPrecisionIcon,
+    icon: ControlSetupIsometricIcon,
     blade: 'Stiga Clipper Wood',
     rubber: 'Yasaka Rakza 7 Soft',
     price: '₹5,199',
@@ -65,7 +65,7 @@ const SETUPS = [
     id: 's5',
     style: 'OFFENSIVE',
     name: 'Offensive Setup',
-    icon: OffensiveStrikeIcon,
+    icon: OffensiveSetupIsometricIcon,
     blade: 'Butterfly Timo Boll ALC',
     rubber: 'Butterfly Tenergy 05',
     price: '₹16,349',
@@ -78,7 +78,7 @@ const SETUPS = [
     id: 's6',
     style: 'DEFENSIVE',
     name: 'Defensive Setup',
-    icon: DefensiveShieldIcon,
+    icon: DefensiveSetupIsometricIcon,
     blade: 'Tibhar Stratus Power',
     rubber: 'Donic Slice 40 CD',
     price: '₹6,299',
@@ -113,9 +113,8 @@ export default function BuildYourSetup() {
                 <div className="setup-card-icon-title">
                   <div className="setup-icon-wrap" title={s.name}>
                     <IconComponent
-                      size={48}
+                      size={56}
                       className="setup-card-48-icon"
-                      color={s.color === 'orange' ? 'var(--orange)' : 'var(--cream)'}
                     />
                   </div>
                   <div>

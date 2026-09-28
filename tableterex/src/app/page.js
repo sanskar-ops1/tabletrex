@@ -1,24 +1,22 @@
 'use client';
 import { useState } from 'react';
-import TornDivider        from '@/components/TornDivider';
-import Navbar             from '@/components/Navbar';
-import Hero               from '@/components/Hero';
-import Marquee            from '@/components/Marquee';
-import ShopByCategory     from '@/components/ShopByCategory';
-import FreshThisWeek      from '@/components/FreshThisWeek';
-import BestSellers        from '@/components/BestSellers';
-import FindYourPlay       from '@/components/FindYourPlay';
-import CustomizeSetup     from '@/components/CustomizeSetup';
-import BuildYourSetup     from '@/components/BuildYourSetup';
-import PhilosophySection  from '@/components/PhilosophySection';
-import TechPerformance    from '@/components/TechPerformance';
-import GearSection        from '@/components/GearSection';
-import WhyTableTrex       from '@/components/WhyTableTrex';
-import Community          from '@/components/Community';
-import Reviews            from '@/components/Testimonials';
-import FinalCTA           from '@/components/FinalCTA';
-import Footer             from '@/components/Footer';
-import ProductModal       from '@/components/ProductModal';
+import TornDivider from '@/components/TornDivider';
+import Navbar from '@/components/Navbar';
+import Hero from '@/components/Hero';
+import Marquee from '@/components/Marquee';
+import ShopByCategory from '@/components/ShopByCategory';
+import FreshThisWeek from '@/components/FreshThisWeek';
+import BestSellers from '@/components/BestSellers';
+import FindYourPlay from '@/components/FindYourPlay';
+import CustomizeSetup from '@/components/CustomizeSetup';
+import BuildYourSetup from '@/components/BuildYourSetup';
+import PhilosophySection from '@/components/PhilosophySection';
+import TechPerformance from '@/components/TechPerformance';
+import WhyTableTrex from '@/components/WhyTableTrex';
+import Reviews from '@/components/Testimonials';
+import FinalCTA from '@/components/FinalCTA';
+import Footer from '@/components/Footer';
+import ProductModal from '@/components/ProductModal';
 
 /* ─── Seamless In-Flow Torn Transitions ─── */
 const D2C = ({ seed = 0 }) => ( // Dark → Cream
@@ -111,17 +109,6 @@ export default function HomePage() {
           <TechPerformance />
         </div>
 
-        {/* dark → cream */}
-        <D2C seed={1} />
-
-        {/* GEAR STORE (BRANDED GEAR) + 11 ── COMMUNITY SHOWCASE ── cream */}
-        <div style={{ background: 'var(--cream)' }}>
-          <GearSection onProductClick={setProduct} />
-          <Community />
-        </div>
-
-        {/* cream → dark */}
-        <C2D seed={1} />
 
         {/* 12 ── REVIEWS & TESTIMONIALS ── dark */}
         <div style={{ background: 'var(--black)' }}>

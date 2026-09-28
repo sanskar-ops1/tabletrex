@@ -41,7 +41,6 @@ export default function Navbar({ onMenuOpen }) {
         </Link>
 
         <div className="nav-right">
-          <span className="nav-tag">DESKTOP 1920</span>
           <button
             ref={btnRef}
             className={`nav-menu-btn${menuOpen ? ' open' : ''}`}

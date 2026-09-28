@@ -32,9 +32,11 @@ export default function ShopByCategory() {
       import('gsap/ScrollTrigger').then(({ ScrollTrigger }) => {
         gsap.registerPlugin(ScrollTrigger);
         gsap.fromTo('.cat-card',
-          { opacity:0, y:60 },
-          { opacity:1, y:0, duration:0.9, stagger:0.15, ease:'power3.out',
-            scrollTrigger:{ trigger:'.shop-category-section', start:'top 80%' } }
+          { opacity: 0, y: 60 },
+          {
+            opacity: 1, y: 0, duration: 0.9, stagger: 0.15, ease: 'power3.out',
+            scrollTrigger: { trigger: '.shop-category-section', start: 'top 80%' }
+          }
         );
       });
     });
@@ -44,7 +46,7 @@ export default function ShopByCategory() {
     <section className="shop-category-section" id="categories">
       <div className="shop-cat-header">
         <span className="text-label">[02] — SHOP BY CATEGORY</span>
-        <span className="text-label" style={{color:'var(--gray)'}}>SELECT YOUR WEAPON</span>
+        <span className="text-label" style={{ color: 'var(--gray)' }}>SELECT YOUR WEAPON</span>
       </div>
 
       <div className="cat-grid">

@@ -1,55 +1,52 @@
 'use client';
 import { useState } from 'react';
 import {
-  BeginnerGuideIcon,
-  ProgressUpIcon,
-  PerformanceStarIcon,
-  OffensiveStrikeIcon,
-  DefensiveShieldIcon,
-  AllRoundBalanceIcon,
-  SpinSpiralIcon,
-  SpeedLightningIcon,
-  ControlPrecisionIcon,
-  OffensiveImpactIcon,
-  RubberDefensiveShieldIcon,
-  RubberEquilibriumIcon,
+  BeginnerSetupIsometricIcon,
+  IntermediateSetupIsometricIcon,
+  AdvanceSetupIsometricIcon,
+  AllRoundSetupIsometricIcon,
+  SpinSetupIsometricIcon,
+  SpeedSetupIsometricIcon,
+  ControlSetupIsometricIcon,
+  OffensiveSetupIsometricIcon,
+  DefensiveSetupIsometricIcon,
 } from '@/components/icons';
 
 const RACKET_CARDS = [
   {
     id: 'BEGINNER',
     name: 'Beginner',
-    icon: BeginnerGuideIcon,
+    icon: BeginnerSetupIsometricIcon,
     desc: 'Targeted control & forgiving flex for learning fundamental stroke mechanics.',
   },
   {
     id: 'INTERMEDIATE',
     name: 'Intermediate',
-    icon: ProgressUpIcon,
+    icon: IntermediateSetupIsometricIcon,
     desc: 'Progressive speed with expanded sweet spot to transition from rallies to attack.',
   },
   {
     id: 'ADVANCED',
     name: 'Advanced',
-    icon: PerformanceStarIcon,
+    icon: AdvanceSetupIsometricIcon,
     desc: 'Elite carbon stiffness and acute tactile feedback for tournament match play.',
   },
   {
     id: 'OFFENSIVE',
     name: 'Offensive',
-    icon: OffensiveStrikeIcon,
+    icon: OffensiveSetupIsometricIcon,
     desc: 'Aggressive forward strike dynamics engineered for high-velocity looping & kills.',
   },
   {
     id: 'DEFENSIVE',
     name: 'Defensive',
-    icon: DefensiveShieldIcon,
+    icon: DefensiveSetupIsometricIcon,
     desc: 'Max dampening shield profile to absorb incoming loops and reset long chops.',
   },
   {
     id: 'ALL-ROUND',
     name: 'All-Round',
-    icon: AllRoundBalanceIcon,
+    icon: AllRoundSetupIsometricIcon,
     desc: 'Harmonic equilibrium of spin, speed, and placement across every table zone.',
   },
 ];
@@ -58,37 +55,37 @@ const RUBBER_CARDS = [
   {
     id: 'SPIN',
     name: 'Spin',
-    icon: SpinSpiralIcon,
+    icon: SpinSetupIsometricIcon,
     desc: 'High-friction tacky topsheet for aggressive curve and looping arc trajectory.',
   },
   {
     id: 'SPEED',
     name: 'Speed',
-    icon: SpeedLightningIcon,
+    icon: SpeedSetupIsometricIcon,
     desc: 'Explosive tensor spring sponge for blistering flat drives and quick counters.',
   },
   {
     id: 'CONTROL',
     name: 'Control',
-    icon: ControlPrecisionIcon,
+    icon: ControlSetupIsometricIcon,
     desc: 'Precision target dwell time for sharp short-game placement and serve returns.',
   },
   {
     id: 'OFFENSIVE',
     name: 'Offensive',
-    icon: OffensiveImpactIcon,
+    icon: OffensiveSetupIsometricIcon,
     desc: 'Direct forward kinetic energy transfer on high-impact attacking loops.',
   },
   {
     id: 'DEFENSIVE',
     name: 'Defensive',
-    icon: RubberDefensiveShieldIcon,
+    icon: DefensiveSetupIsometricIcon,
     desc: 'Energy-absorbing sponge matrix to neutralize heavy incoming topspin.',
   },
   {
     id: 'ALL-ROUND',
     name: 'All-Round',
-    icon: RubberEquilibriumIcon,
+    icon: AllRoundSetupIsometricIcon,
     desc: 'Harmonic balance of tension and softness for versatile transition play.',
   },
 ];
@@ -147,9 +144,9 @@ export default function FindYourPlay() {
                 >
                   <div className="finder-card-icon-wrap">
                     <IconComponent
-                      size={48}
+                      size={46}
+                      variant={isSelected ? 'orange' : 'cream'}
                       className="finder-card-icon"
-                      color={isSelected ? 'var(--orange)' : 'var(--cream)'}
                     />
                   </div>
                   <span className="finder-card-title">{card.name}</span>
@@ -207,9 +204,9 @@ export default function FindYourPlay() {
                 >
                   <div className="finder-card-icon-wrap">
                     <IconComponent
-                      size={48}
+                      size={46}
+                      variant={isSelected ? 'orange' : 'cream'}
                       className="finder-card-icon"
-                      color={isSelected ? 'var(--orange)' : 'var(--cream)'}
                     />
                   </div>
                   <span className="finder-card-title">{card.name}</span>

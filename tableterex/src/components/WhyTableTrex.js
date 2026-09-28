@@ -1,10 +1,10 @@
 'use client';
 import {
-  WholesalePriceIcon,
-  FreshWeeklyCalendarIcon,
-  NewMixReshuffleIcon,
-  PersonalCustomIcon,
-  PerformanceFocusIcon,
+  WholesalePricesIsometricIcon,
+  FreshBatchesIsometricIcon,
+  SomethingNewIsometricIcon,
+  BuildYourOwnSetupIsometricIcon,
+  BuiltAroundYourGameIsometricIcon,
 } from '@/components/icons';
 
 const REASONS = [
@@ -13,35 +13,35 @@ const REASONS = [
     headline: 'Wholesale Prices. Retail Quantities.',
     sub: 'Wholesale at Retail',
     desc: 'Wholesale-level pricing without requiring traditional bulk orders. Sourced direct from certified manufacturers for genuine player savings.',
-    icon: WholesalePriceIcon,
+    icon: WholesalePricesIsometricIcon,
   },
   {
     num: '02',
     headline: 'Fresh Batches Every Week',
     sub: 'Fresh Every Week',
     desc: 'Fresh product batches arrive every single Monday. Never buy stale, dried rubber sheets sitting on warehouse shelves for months.',
-    icon: FreshWeeklyCalendarIcon,
+    icon: FreshBatchesIsometricIcon,
   },
   {
     num: '03',
     headline: 'Something New to Discover',
     sub: 'New Product Mix',
     desc: 'The available product mix regularly reshuffles with limited runs, new sponge densities, and upgraded carbon blade plies.',
-    icon: NewMixReshuffleIcon,
+    icon: SomethingNewIsometricIcon,
   },
   {
     num: '04',
     headline: 'Build Your Own Setup',
     sub: 'Personal Customization',
     desc: 'Customize your blade, forehand, backhand, and grip dimensions. Each racket is hand-assembled to your exact competition specifications.',
-    icon: PersonalCustomIcon,
+    icon: BuildYourOwnSetupIsometricIcon,
   },
   {
     num: '05',
     headline: 'Built Around Your Game',
     sub: 'Performance Focused',
     desc: 'Every item is curated for specific playing styles and technical performance. Zero generic filler—only gear tested to elevate match play.',
-    icon: PerformanceFocusIcon,
+    icon: BuiltAroundYourGameIsometricIcon,
   },
 ];
 
@@ -49,7 +49,7 @@ export default function WhyTableTrex() {
   return (
     <section className="why-section" id="why-tableterex">
       <div className="why-header">
-        <span className="text-label">[09] — WHY TABLETREX</span>
+        <span className="text-label">[08] — WHY TABLETREX</span>
         <h2 className="why-title text-display">
           WHY CHOOSE<br /><span className="why-accent">TABLETREX</span>
         </h2>
@@ -71,9 +71,9 @@ export default function WhyTableTrex() {
 
               <div className="why-icon-box">
                 <IconComponent
-                  size={48}
+                  size={52}
                   className="why-48-icon"
-                  color="var(--orange)"
+                  variant="orange"
                 />
               </div>
 
