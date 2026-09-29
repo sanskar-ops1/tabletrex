@@ -45,7 +45,7 @@ export default function ShopByCategory() {
   return (
     <section className="shop-category-section" id="categories">
       <div className="shop-cat-header">
-        <span className="text-label">[02] — SHOP BY CATEGORY</span>
+        <span className="text-label">SHOP BY CATEGORY</span>
         <span className="text-label" style={{ color: 'var(--gray)' }}>SELECT YOUR WEAPON</span>
       </div>
 
@@ -60,7 +60,6 @@ export default function ShopByCategory() {
 
             {/* Content */}
             <div className="cat-content">
-              <span className="cat-num text-label">[{c.num}]</span>
               <h2 className="cat-title text-display">{c.title}</h2>
               <p className="cat-desc">{c.desc}</p>
               <div className="cat-footer">

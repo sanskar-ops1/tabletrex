@@ -435,31 +435,55 @@
   text-transform: capitalize;
 }
 
-/* 4. VALUE PROPS STRIP */
+/* 4. VALUE PROPS STRIP (Continuous Marquee right-to-left) */
 .nl-value-props {
   background: var(--cream-dark);
-  border-top: 1px solid rgba(17, 17, 16, 0.08);
+  border-top: 1px solid rgba(17, 17, 16, 0.12);
   border-bottom: 1px solid rgba(17, 17, 16, 0.08);
-  padding: 24px 40px;
+  padding: 18px 0;
+  overflow: hidden;
+  position: relative;
+  width: 100%;
 }
 
-.nl-value-props-grid {
-  max-width: 1440px;
-  margin: 0 auto;
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 24px;
+.nl-vp-marquee {
+  display: flex;
+  overflow: hidden;
+  user-select: none;
+  width: 100%;
+}
+
+.nl-vp-track {
+  display: flex;
+  flex-shrink: 0;
+  min-width: 100%;
+  animation: vpMarqueeLeft 28s linear infinite;
+  will-change: transform;
+}
+
+.nl-vp-marquee:hover .nl-vp-track {
+  animation-play-state: paused;
+}
+
+.nl-vp-group {
+  display: flex;
+  align-items: center;
+  gap: 56px;
+  padding-right: 56px;
+  flex-shrink: 0;
 }
 
 .nl-vp-item {
   display: flex;
   align-items: center;
   gap: 14px;
+  flex-shrink: 0;
+  white-space: nowrap;
 }
 
 .nl-vp-icon {
-  width: 36px;
-  height: 36px;
+  width: 34px;
+  height: 34px;
   color: var(--orange);
   flex-shrink: 0;
 }
@@ -475,6 +499,19 @@
   font-size: 0.7rem;
   color: var(--gray);
   margin-top: 2px;
+}
+
+@keyframes vpMarqueeLeft {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.nl-value-props-grid {
+  display: none;
 }
 
 /* 5. SHOP BY CATEGORY (8 CIRCULAR TILES) */

@@ -183,7 +183,7 @@ export default function FinalCTA() {
       {/* ── Headline & Section Tag ── */}
       <div className="final-cta-inner">
         <span className="text-label" style={{ color: 'rgba(245,240,232,0.7)' }}>
-          [13] — GET STARTED
+          GET STARTED
         </span>
         <h2 className="final-cta-headline text-display">
           <span className="final-cta-line">BUILD YOUR</span>

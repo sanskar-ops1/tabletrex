@@ -143,7 +143,6 @@ export default function BestSellers({ onProductClick }) {
     <section className="bestsellers-section" id="best-sellers">
       <div className="bs-header">
         <div>
-          <span className="text-label">[04] — BEST SELLERS</span>
           <h2 className="bs-title text-display">
             PLAYERS&apos;
             <br />

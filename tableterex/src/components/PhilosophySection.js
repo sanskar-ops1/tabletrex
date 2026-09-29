@@ -62,8 +62,6 @@ export default function PhilosophySection() {
     <>
       {/* ── DARK SECTION ── */}
       <section className="philosophy-section" id="philosophy">
-        {/* [1] label */}
-        <span className="phil-tag">[1]</span>
         <span className="phil-tag-right">
           TABLE TENNIS IS A GAME OF PRECISION,<br />REACTION, AND SYNERGY
         </span>

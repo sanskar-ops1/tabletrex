@@ -134,7 +134,7 @@ export default function FindYourPlay() {
         {/* ── 05: FIND YOUR RACKET ── */}
         <div className="finder-col" id="find-racket">
           <div className="finder-col-header">
-            <span className="text-label">[05] — FIND YOUR RACKET</span>
+            <span className="text-label">FIND YOUR RACKET</span>
             <h2 className="finder-title text-display">FIND YOUR<br />RACKET</h2>
             <p className="finder-sub">SELECT YOUR PLAYING LEVEL OR STYLE</p>
           </div>
@@ -196,7 +196,7 @@ export default function FindYourPlay() {
         {/* ── 06: FIND YOUR RUBBER ── */}
         <div className="finder-col" id="find-rubber">
           <div className="finder-col-header">
-            <span className="text-label">[06] — FIND YOUR RUBBER</span>
+            <span className="text-label">FIND YOUR RUBBER</span>
             <h2 className="finder-title text-display">FIND YOUR<br />RUBBER</h2>
             <p className="finder-sub">SELECT YOUR PREFERRED PERFORMANCE CHARACTERISTIC</p>
           </div>

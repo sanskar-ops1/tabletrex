@@ -5,7 +5,7 @@ export default function WhyTableTrex() {
     <section className="why-editorial-section" id="why-tableterex">
       {/* ── Section Title Header ── */}
       <div className="why-header">
-        <span className="text-label">[08] — WHY TABLETREX</span>
+        <span className="text-label">WHY TABLETREX</span>
         <h2 className="why-title text-display">
           WHY CHOOSE<br /><span className="why-accent">TABLETREX</span>
         </h2>
@@ -17,7 +17,7 @@ export default function WhyTableTrex() {
       {/* ── 1. TOP HERO FEATURE BLOCK (Pillar 01) ── */}
       <div className="why-hero-block">
         <div className="why-hero-text">
-          <div className="why-hero-tag text-label">[01] — WHOLESALE AT RETAIL</div>
+          <div className="why-hero-tag text-label">WHOLESALE AT RETAIL</div>
           <h3 className="why-hero-heading">
             Wholesale prices.<br />
             Retail quantities.
@@ -159,7 +159,7 @@ export default function WhyTableTrex() {
 
         {/* Closing CTA Box (Pillar 05: Built Around Your Game) */}
         <div className="why-lineup-cta-box">
-          <div className="why-cta-tag text-label">[04 &amp; 05] — YOUR SETUP</div>
+          <div className="why-cta-tag text-label">YOUR SETUP</div>
           <h3 className="why-lineup-cta-title">
             Built around<br />your game.
           </h3>

@@ -14,7 +14,7 @@ export default function Community() {
     <section className="community-section" id="community">
       <div className="community-header">
         <div>
-          <span className="text-label">[11] — PLAYERS &amp; COMMUNITY</span>
+          <span className="text-label">PLAYERS &amp; COMMUNITY</span>
           <h2 className="community-title text-display">THE TABLE<br />TENNIS<br /><span className="comm-accent">LIFE</span></h2>
         </div>
         <div className="community-header-right">

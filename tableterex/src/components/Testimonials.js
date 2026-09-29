@@ -47,7 +47,7 @@ export default function Reviews() {
       <div className="rev-watermark" aria-hidden="true">REVIEWS</div>
 
       <div className="rev-header">
-        <span className="text-label">[12] — REVIEWS &amp; SOCIAL PROOF</span>
+        <span className="text-label">REVIEWS &amp; SOCIAL PROOF</span>
         <div className="rev-aggregate">
           <span className="rev-big-stars">★★★★★</span>
           <span className="rev-score">4.9</span>

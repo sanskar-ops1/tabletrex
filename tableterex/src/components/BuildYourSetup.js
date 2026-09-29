@@ -95,7 +95,7 @@ export default function BuildYourSetup() {
       <div className="build-watermark" aria-hidden="true">SETUP</div>
 
       <div className="build-header">
-        <span className="text-label">[08] — BUILD YOUR SETUP</span>
+        <span className="text-label">BUILD YOUR SETUP</span>
         <h2 className="build-title text-display">RECOMMENDED<br />COMBINATIONS</h2>
         <p className="build-sub">
           CURATED RACKET + RUBBER COMBINATIONS BUILT AROUND SPECIFIC PLAYING STYLES.<br />

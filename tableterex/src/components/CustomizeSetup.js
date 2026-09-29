@@ -83,7 +83,7 @@ export default function CustomizeSetup() {
       {/* Header & Mission */}
       <div className="cust-inner">
         <div className="cust-left">
-          <span className="text-label">[07] — CUSTOMIZE YOUR SETUP</span>
+          <span className="text-label">CUSTOMIZE YOUR SETUP</span>
           <h2 className="cust-headline text-display">
             BUILD IT<br />
             <span className="cust-accent">YOUR WAY</span>

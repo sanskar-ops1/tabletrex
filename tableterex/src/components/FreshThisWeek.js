@@ -131,9 +131,6 @@ const WEEK_DROPS = [
   },
 ];
 
-const WEEK_NUM = 'WEEK 39';
-const WEEK_DATE = 'SEP 2026';
-
 export default function FreshThisWeek() {
   const [activeIndex, setActiveIndex] = useState(0);
   const [touchStart, setTouchStart] = useState(0);
@@ -174,7 +171,6 @@ export default function FreshThisWeek() {
               </div>
               <div>
                 <div className="fresh-header-badges">
-                  <span className="text-label">[03] — ROTATING INVENTORY</span>
                   <span className="fresh-new-batch-badge">NEW BATCH</span>
                 </div>
                 <h2 className="fresh-section-title text-display">
@@ -182,11 +178,6 @@ export default function FreshThisWeek() {
                 </h2>
               </div>
             </div>
-          </div>
-
-          <div className="fresh-week-badge">
-            <span className="fresh-week-num">{WEEK_NUM}</span>
-            <span className="fresh-week-date">{WEEK_DATE}</span>
           </div>
         </div>
 
@@ -285,8 +276,7 @@ export default function FreshThisWeek() {
 
       {/* ── Bottom Section CTA ── */}
       <div className="fresh-cta-row">
-        <a href="/store" className="btn-primary" id="fresh-shop-drop-btn">SHOP ALL WEEK 39 DROPS</a>
-        <span className="fresh-cta-note text-label">NEW RELEASES ROTATE EVERY MONDAY</span>
+        <a href="/store" className="btn-primary" id="fresh-shop-drop-btn">SHOP ALL DROPS</a>
       </div>
     </section>
   );

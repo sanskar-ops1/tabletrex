@@ -139,7 +139,7 @@ export default function TechPerformance() {
       <div className="tech-watermark" aria-hidden="true">TECH</div>
 
       <div className="tech-header">
-        <span className="text-label">[10] — TECHNOLOGY &amp; PERFORMANCE</span>
+        <span className="text-label">TECHNOLOGY &amp; PERFORMANCE</span>
         <h2 className="tech-title text-display">
           WHAT MAKES<br />
           <span className="tech-accent">THE DIFFERENCE</span>

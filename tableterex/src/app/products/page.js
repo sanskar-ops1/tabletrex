@@ -2,9 +2,54 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
-import TornDivider from '@/components/TornDivider';
 import { ALL_PRODUCTS } from '@/data/allProducts';
 import './products.css';
+
+/* ─── 4 Value Props for the Continuous Right-to-Left Marquee ─── */
+const VALUE_PROPS = [
+  {
+    icon: (
+      <svg className="nl-vp-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
+        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+      </svg>
+    ),
+    title: '100% Genuine Gear',
+    desc: 'Authorized Indian Distributors',
+  },
+  {
+    icon: (
+      <svg className="nl-vp-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
+        <rect x="1" y="3" width="15" height="13" />
+        <polygon points="16 8 20 8 23 11 23 16 16 16 8" />
+        <circle cx="5.5" cy="18.5" r="2.5" />
+        <circle cx="18.5" cy="18.5" r="2.5" />
+      </svg>
+    ),
+    title: 'Pan-India Dispatch',
+    desc: 'Fast insured express shipping',
+  },
+  {
+    icon: (
+      <svg className="nl-vp-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
+        <polygon points="12 2 2 7 12 12 22 7 12 2" />
+        <polyline points="2 17 12 22 22 17" />
+        <polyline points="2 12 12 17 22 12" />
+      </svg>
+    ),
+    title: 'Custom Assembly',
+    desc: 'Pro rubber cutting & VOC-free gluing',
+  },
+  {
+    icon: (
+      <svg className="nl-vp-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
+        <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+        <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+      </svg>
+    ),
+    title: 'Secure Payments',
+    desc: 'UPI, Cards & Netbanking Verified',
+  },
+];
 
 /* ─── 8 Circular Category Tiles (Authentic Table Tennis Equipment) ─── */
 const CATEGORIES = [
@@ -293,22 +338,6 @@ export default function ProductsPage() {
 
   return (
     <div className="nl-page-container">
-      {/* ── 1. TOP ANNOUNCEMENT BAR ── */}
-      <div className="nl-top-bar">
-        <div className="nl-top-bar-inner">
-          <div className="nl-top-left">
-            <span>⚡ Authorized Indian Distributors: Butterfly · Nittaku · Donic · Tibhar</span>
-          </div>
-          <div className="nl-top-right">
-            <span>100% Genuine Certified Equipment</span>
-            <span className="nl-dot">•</span>
-            <Link href="/" className="nl-back-home-link">
-              ← Return to TableTrex Home
-            </Link>
-          </div>
-        </div>
-      </div>
-
       {/* ── 2. STORE HEADER & NAVIGATION ── */}
       <header className="nl-navbar">
         <div className="nl-navbar-inner">
@@ -413,7 +442,7 @@ export default function ProductsPage() {
 
         <div className="hero-content">
           <span className="hero-eyebrow text-label">
-            [02] — OFFICIAL STORE &nbsp;•&nbsp; INDIA&apos;S PREMIUM TABLE TENNIS CATALOG
+            OFFICIAL STORE &nbsp;•&nbsp; INDIA&apos;S PREMIUM TABLE TENNIS CATALOG
           </span>
 
           <div className="hero-headline-wrap">
@@ -441,58 +470,23 @@ export default function ProductsPage() {
         </div>
       </section>
 
-      {/* ── Torn Paper Divider Transition: Dark Hero → Cream Store Body ── */}
-      <div style={{ background: 'var(--cream)', marginTop: '-3px', marginBottom: '-1px', lineHeight: 0, position: 'relative', zIndex: 5, overflow: 'hidden' }}>
-        <TornDivider variant="top" fill="#111110" height={80} variantIndex={0} />
-      </div>
-
-      {/* ── 4. VALUE PROPS / TRUST BAR ── */}
-      <section className="nl-value-props">
-        <div className="nl-value-props-grid">
-          <div className="nl-vp-item">
-            <svg className="nl-vp-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
-              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-            </svg>
-            <div>
-              <div className="nl-vp-title">100% Genuine Gear</div>
-              <div className="nl-vp-desc">Authorized Indian Distributors</div>
-            </div>
-          </div>
-
-          <div className="nl-vp-item">
-            <svg className="nl-vp-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
-              <rect x="1" y="3" width="15" height="13" />
-              <polygon points="16 8 20 8 23 11 23 16 16 16 8" />
-              <circle cx="5.5" cy="18.5" r="2.5" />
-              <circle cx="18.5" cy="18.5" r="2.5" />
-            </svg>
-            <div>
-              <div className="nl-vp-title">Pan-India Dispatch</div>
-              <div className="nl-vp-desc">Fast insured express shipping</div>
-            </div>
-          </div>
-
-          <div className="nl-vp-item">
-            <svg className="nl-vp-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
-              <polygon points="12 2 2 7 12 12 22 7 12 2" />
-              <polyline points="2 17 12 22 22 17" />
-              <polyline points="2 12 12 17 22 12" />
-            </svg>
-            <div>
-              <div className="nl-vp-title">Custom Assembly</div>
-              <div className="nl-vp-desc">Pro rubber cutting & VOC-free gluing</div>
-            </div>
-          </div>
-
-          <div className="nl-vp-item">
-            <svg className="nl-vp-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
-              <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
-              <path d="M7 11V7a5 5 0 0 1 10 0v4" />
-            </svg>
-            <div>
-              <div className="nl-vp-title">Secure Payments</div>
-              <div className="nl-vp-desc">UPI, Cards & Netbanking Verified</div>
-            </div>
+      {/* ── 4. VALUE PROPS / TRUST BAR (Moving Right to Left) ── */}
+      <section className="nl-value-props" aria-label="Store Guarantees">
+        <div className="nl-vp-marquee">
+          <div className="nl-vp-track">
+            {[0, 1, 2, 3].map((copyIndex) => (
+              <div key={copyIndex} className="nl-vp-group" aria-hidden={copyIndex > 0 ? 'true' : undefined}>
+                {VALUE_PROPS.map((vp, i) => (
+                  <div key={i} className="nl-vp-item">
+                    {vp.icon}
+                    <div>
+                      <div className="nl-vp-title">{vp.title}</div>
+                      <div className="nl-vp-desc">{vp.desc}</div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            ))}
           </div>
         </div>
       </section>
