@@ -442,7 +442,7 @@ export default function ProductsPage() {
       </section>
 
       {/* ── Torn Paper Divider Transition: Dark Hero → Cream Store Body ── */}
-      <div style={{ background: 'var(--cream)', marginTop: '-2px', lineHeight: 0, position: 'relative', zIndex: 5 }}>
+      <div style={{ background: 'var(--cream)', marginTop: '-3px', marginBottom: '-1px', lineHeight: 0, position: 'relative', zIndex: 5, overflow: 'hidden' }}>
         <TornDivider variant="top" fill="#111110" height={80} variantIndex={0} />
       </div>
 

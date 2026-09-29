@@ -20,13 +20,13 @@ import ProductModal from '@/components/ProductModal';
 
 /* ─── Seamless In-Flow Torn Transitions ─── */
 const D2C = ({ seed = 0 }) => ( // Dark → Cream
-  <div style={{ background: 'var(--cream)', marginTop: '-2px', lineHeight: 0, position: 'relative', zIndex: 5 }}>
+  <div style={{ background: 'var(--cream)', marginTop: '-3px', marginBottom: '-1px', lineHeight: 0, position: 'relative', zIndex: 5, overflow: 'hidden' }}>
     <TornDivider variant="top" fill="#111110" height={80} variantIndex={seed} />
   </div>
 );
 
 const C2D = ({ seed = 0 }) => ( // Cream → Dark
-  <div style={{ background: 'var(--black)', marginTop: '-2px', lineHeight: 0, position: 'relative', zIndex: 5 }}>
+  <div style={{ background: 'var(--black)', marginTop: '-3px', marginBottom: '-1px', lineHeight: 0, position: 'relative', zIndex: 5, overflow: 'hidden' }}>
     <TornDivider variant="top" fill="#E8E0D0" height={80} variantIndex={seed} />
   </div>
 );

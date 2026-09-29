@@ -1,5 +1,6 @@
 'use client';
 import { useState } from 'react';
+import dynamic from 'next/dynamic';
 import {
   BeginnerSetupIsometricIcon,
   IntermediateSetupIsometricIcon,
@@ -11,6 +12,16 @@ import {
   OffensiveSetupIsometricIcon,
   DefensiveSetupIsometricIcon,
 } from '@/components/icons';
+
+// Lazy-load the heavy 3D viewers (Three.js) only on client
+const RacketViewer = dynamic(
+  () => import('@/components/RacketViewer'),
+  { ssr: false, loading: () => <div className="rv-placeholder" /> }
+);
+const RubberViewer = dynamic(
+  () => import('@/components/RubberViewer'),
+  { ssr: false, loading: () => <div className="rv-placeholder" /> }
+);
 
 const RACKET_CARDS = [
   {
@@ -91,28 +102,28 @@ const RUBBER_CARDS = [
 ];
 
 const RACKET_PICKS = {
-  BEGINNER:     { name:'Stiga Clipper Wood', brand:'STIGA', price:'₹3,499', desc:'PERFECT FIRST BLADE. FULL WOOD, GREAT FEEL.' },
-  INTERMEDIATE: { name:'Donic Waldner Senso', brand:'DONIC', price:'₹5,999', desc:'UPGRADE READY. CARBON ASSIST FOR MORE PACE.' },
-  ADVANCED:     { name:'Butterfly TB-ALC', brand:'BUTTERFLY', price:'₹12,499', desc:'ARYLATE-CARBON. WORLD-CLASS PERFORMANCE.' },
-  OFFENSIVE:    { name:'DHS Hurricane Long 5', brand:'DHS', price:'₹4,299', desc:'POWER AND SPEED. MADE FOR ATTACKERS.' },
-  DEFENSIVE:    { name:'Tibhar Stratus Power', brand:'TIBHAR', price:'₹4,899', desc:'CONTROL-FOCUSED. EXCELLENT FOR CHOPPERS.' },
-  'ALL-ROUND':  { name:'Cornilleau Vari 400', brand:'CORNILLEAU', price:'₹3,200', desc:'BALANCED FOR EVERY STYLE OF PLAY.' },
+  BEGINNER:     { name:'Stiga Clipper Wood',    brand:'STIGA',      price:'₹3,499',  desc:'PERFECT FIRST BLADE. FULL WOOD, GREAT FEEL.' },
+  INTERMEDIATE: { name:'Donic Waldner Senso',   brand:'DONIC',      price:'₹5,999',  desc:'UPGRADE READY. CARBON ASSIST FOR MORE PACE.' },
+  ADVANCED:     { name:'Butterfly TB-ALC',      brand:'BUTTERFLY',  price:'₹12,499', desc:'ARYLATE-CARBON. WORLD-CLASS PERFORMANCE.' },
+  OFFENSIVE:    { name:'DHS Hurricane Long 5',  brand:'DHS',        price:'₹4,299',  desc:'POWER AND SPEED. MADE FOR ATTACKERS.' },
+  DEFENSIVE:    { name:'Tibhar Stratus Power',  brand:'TIBHAR',     price:'₹4,899',  desc:'CONTROL-FOCUSED. EXCELLENT FOR CHOPPERS.' },
+  'ALL-ROUND':  { name:'Cornilleau Vari 400',   brand:'CORNILLEAU', price:'₹3,200',  desc:'BALANCED FOR EVERY STYLE OF PLAY.' },
 };
 
 const RUBBER_PICKS = {
-  SPIN:         { name:'DHS Hurricane 3', brand:'DHS', price:'₹1,299', desc:'KING OF SPIN. CHINESE TACKY SHEET.' },
-  SPEED:        { name:'Butterfly Tenergy 64', brand:'BUTTERFLY', price:'₹3,850', desc:'FASTEST TENSOR ON THE MARKET.' },
-  CONTROL:      { name:'Yasaka Rakza 7 Soft', brand:'YASAKA', price:'₹1,699', desc:'FORGIVING, CONSISTENT, RELIABLE.' },
-  OFFENSIVE:    { name:'Butterfly Tenergy 05', brand:'BUTTERFLY', price:'₹3,850', desc:'SPIN + SPEED COMBO. #1 WORLDWIDE.' },
-  DEFENSIVE:    { name:'Donic Slice 40', brand:'DONIC', price:'₹1,400', desc:'EXCELLENT CHOP CONTROL AND PLACEMENT.' },
-  'ALL-ROUND':  { name:'Xiom Vega Asia', brand:'XIOM', price:'₹2,100', desc:'TENSOR TECH. SPIN, SPEED, CONTROL BALANCED.' },
+  SPIN:         { name:'DHS Hurricane 3',       brand:'DHS',        price:'₹1,299', desc:'KING OF SPIN. CHINESE TACKY SHEET.' },
+  SPEED:        { name:'Butterfly Tenergy 64',  brand:'BUTTERFLY',  price:'₹3,850', desc:'FASTEST TENSOR ON THE MARKET.' },
+  CONTROL:      { name:'Yasaka Rakza 7 Soft',   brand:'YASAKA',     price:'₹1,699', desc:'FORGIVING, CONSISTENT, RELIABLE.' },
+  OFFENSIVE:    { name:'Butterfly Tenergy 05',  brand:'BUTTERFLY',  price:'₹3,850', desc:'SPIN + SPEED COMBO. #1 WORLDWIDE.' },
+  DEFENSIVE:    { name:'Donic Slice 40',        brand:'DONIC',      price:'₹1,400', desc:'EXCELLENT CHOP CONTROL AND PLACEMENT.' },
+  'ALL-ROUND':  { name:'Xiom Vega Asia',        brand:'XIOM',       price:'₹2,100', desc:'TENSOR TECH. SPIN, SPEED, CONTROL BALANCED.' },
 };
 
 export default function FindYourPlay() {
   const [racketStyle, setRacketStyle] = useState('BEGINNER');
   const [rubberStyle, setRubberStyle] = useState('SPIN');
 
-  const rPick = RACKET_PICKS[racketStyle];
+  const rPick  = RACKET_PICKS[racketStyle];
   const ruPick = RUBBER_PICKS[rubberStyle];
 
   return (
@@ -128,7 +139,25 @@ export default function FindYourPlay() {
             <p className="finder-sub">SELECT YOUR PLAYING LEVEL OR STYLE</p>
           </div>
 
-          {/* 6 Selection Cards with 48x48 Geometric Line Icons */}
+          {/* ── 3D Racket Viewer ── */}
+          <RacketViewer selectedLevel={racketStyle} />
+
+          {/* ── Recommended Racket Result (below racket) ── */}
+          <div className="finder-result">
+            <div className="finder-result-main">
+              <div>
+                <span className="finder-result-label">{rPick.brand}</span>
+                <span className="finder-result-name">{rPick.name}</span>
+              </div>
+              <span className="finder-result-price">{rPick.price}</span>
+            </div>
+            <p className="finder-result-desc">{rPick.desc}</p>
+            <a href="/rackets" className="finder-cta" id="finder-racket-cta">
+              EXPLORE THIS RACKET →
+            </a>
+          </div>
+
+          {/* ── 6 Selection Cards ── */}
           <div className="finder-cards-grid" role="group" aria-label="Racket style selection">
             {RACKET_CARDS.map((card) => {
               const IconComponent = card.icon;
@@ -158,22 +187,6 @@ export default function FindYourPlay() {
               );
             })}
           </div>
-
-          {/* Recommended Racket Result */}
-          <div className="finder-result">
-            <span className="finder-result-badge text-label">RECOMMENDED BLADE MATCH</span>
-            <div className="finder-result-main">
-              <div>
-                <span className="finder-result-label">{rPick.brand}</span>
-                <span className="finder-result-name">{rPick.name}</span>
-              </div>
-              <span className="finder-result-price">{rPick.price}</span>
-            </div>
-            <p className="finder-result-desc">{rPick.desc}</p>
-            <a href="/rackets" className="finder-cta" id="finder-racket-cta">
-              EXPLORE THIS RACKET →
-            </a>
-          </div>
         </div>
 
         <div className="finder-divider" aria-hidden="true">
@@ -188,7 +201,25 @@ export default function FindYourPlay() {
             <p className="finder-sub">SELECT YOUR PREFERRED PERFORMANCE CHARACTERISTIC</p>
           </div>
 
-          {/* 6 Selection Cards with 48x48 Performance Line Icons */}
+          {/* ── 3D Rubber Viewer ── */}
+          <RubberViewer selectedStyle={rubberStyle} />
+
+          {/* ── Recommended Rubber Result (below rubber) ── */}
+          <div className="finder-result">
+            <div className="finder-result-main">
+              <div>
+                <span className="finder-result-label">{ruPick.brand}</span>
+                <span className="finder-result-name">{ruPick.name}</span>
+              </div>
+              <span className="finder-result-price">{ruPick.price}</span>
+            </div>
+            <p className="finder-result-desc">{ruPick.desc}</p>
+            <a href="/rubber" className="finder-cta" id="finder-rubber-cta">
+              EXPLORE THIS RUBBER →
+            </a>
+          </div>
+
+          {/* ── 6 Performance Cards ── */}
           <div className="finder-cards-grid" role="group" aria-label="Rubber performance selection">
             {RUBBER_CARDS.map((card) => {
               const IconComponent = card.icon;
@@ -217,22 +248,6 @@ export default function FindYourPlay() {
                 </button>
               );
             })}
-          </div>
-
-          {/* Recommended Rubber Result */}
-          <div className="finder-result">
-            <span className="finder-result-badge text-label">RECOMMENDED RUBBER MATCH</span>
-            <div className="finder-result-main">
-              <div>
-                <span className="finder-result-label">{ruPick.brand}</span>
-                <span className="finder-result-name">{ruPick.name}</span>
-              </div>
-              <span className="finder-result-price">{ruPick.price}</span>
-            </div>
-            <p className="finder-result-desc">{ruPick.desc}</p>
-            <a href="/rubber" className="finder-cta" id="finder-rubber-cta">
-              EXPLORE THIS RUBBER →
-            </a>
           </div>
         </div>
       </div>

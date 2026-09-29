@@ -465,7 +465,21 @@ body::before {
 .hero-bg-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(135deg, rgba(10, 10, 8, 0.78) 0%, rgba(10, 10, 8, 0.38) 50%, rgba(10, 10, 8, 0.72) 100%);
+  background: 
+    linear-gradient(to bottom, transparent 50%, rgba(17, 17, 16, 0.75) 80%, #111110 97%, #111110 100%),
+    linear-gradient(135deg, rgba(10, 10, 8, 0.78) 0%, rgba(10, 10, 8, 0.38) 50%, rgba(10, 10, 8, 0.72) 100%);
+}
+
+.hero::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 160px;
+  background: linear-gradient(to bottom, transparent 0%, rgba(17, 17, 16, 0.8) 60%, #111110 100%);
+  pointer-events: none;
+  z-index: 1;
 }
 
 .hero-content {
@@ -3773,6 +3787,8 @@ body::before {
   padding: 100px 40px;
   position: relative;
   overflow: hidden;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .finder-watermark {
@@ -3791,28 +3807,38 @@ body::before {
 
 .finder-grid {
   display: grid;
-  grid-template-columns: 1fr 60px 1fr;
+  grid-template-columns: minmax(0, 1fr) 50px minmax(0, 1fr);
   gap: 0;
   position: relative;
   z-index: 1;
+  width: 100%;
+  max-width: 1600px;
+  margin: 0 auto;
+  box-sizing: border-box;
 }
 
 .finder-col {
-  padding: 0 36px 0 0;
+  padding: 0 32px 0 0;
+  min-width: 0;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .finder-col:last-child {
-  padding: 0 0 0 36px;
+  padding: 0 0 0 32px;
   border-left: 1px solid rgba(255, 255, 255, 0.06);
+  min-width: 0;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .finder-col-header {
-  margin-bottom: 30px;
+  margin-bottom: 24px;
 }
 
 .finder-title {
   font-family: var(--font-display);
-  font-size: clamp(2.8rem, 5.5vw, 6.5rem);
+  font-size: clamp(2.4rem, 4.5vw, 5.5rem);
   line-height: 0.88;
   color: var(--cream);
   margin: 14px 0 8px;
@@ -3830,6 +3856,9 @@ body::before {
   display: flex;
   align-items: center;
   justify-content: center;
+  width: 50px;
+  min-width: 50px;
+  box-sizing: border-box;
 }
 
 .finder-divider span {
@@ -3843,15 +3872,18 @@ body::before {
 /* 6-Card Interactive Style Grid */
 .finder-cards-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 10px;
-  margin-bottom: 28px;
+  margin-bottom: 0;
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
 }
 
 .finder-style-card {
   background: rgba(255, 255, 255, 0.03);
   border: 1px solid rgba(255, 255, 255, 0.08);
-  padding: 18px 14px;
+  padding: 16px 12px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -3860,6 +3892,11 @@ body::before {
   transition: all 0.25s var(--ease-out);
   position: relative;
   min-height: 148px;
+  min-width: 0;
+  width: 100%;
+  box-sizing: border-box;
+  overflow: hidden;
+  white-space: normal;
 }
 
 .finder-style-card:hover {
@@ -3913,11 +3950,14 @@ body::before {
 
 .finder-card-title {
   font-family: var(--font-display);
-  font-size: 1.35rem;
+  font-size: clamp(1.05rem, 1.25vw, 1.35rem);
   color: var(--cream);
   letter-spacing: 0.04em;
   line-height: 1;
   margin-bottom: 6px;
+  white-space: normal;
+  word-break: break-word;
+  max-width: 100%;
 }
 
 .finder-style-card.active .finder-card-title {
@@ -3926,11 +3966,14 @@ body::before {
 
 .finder-card-desc {
   font-family: var(--font-mono);
-  font-size: 0.54rem;
+  font-size: clamp(0.5rem, 0.52vw, 0.54rem);
   letter-spacing: 0.05em;
   color: var(--gray-light);
-  line-height: 1.55;
+  line-height: 1.5;
   text-transform: uppercase;
+  white-space: normal;
+  word-break: break-word;
+  max-width: 100%;
 }
 
 .finder-card-indicator {
@@ -3963,12 +4006,16 @@ body::before {
 }
 
 .finder-result {
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  padding: 24px 22px;
+  background: transparent;
+  border: none;
+  padding: 0;
   display: flex;
   flex-direction: column;
   gap: 8px;
+  min-width: 0;
+  width: 100%;
+  box-sizing: border-box;
+  margin-bottom: 24px;
 }
 
 .finder-result-badge {
@@ -4203,9 +4250,9 @@ body::before {
 .cust-process-strip {
   display: flex;
   align-items: center;
-  background: var(--black);
-  padding: 22px 40px;
-  margin: 0 -40px;
+  background: transparent;
+  padding: 30px 0 40px;
+  margin: 0;
   gap: 0;
 }
 
@@ -4227,7 +4274,7 @@ body::before {
   font-family: var(--font-mono);
   font-size: 0.65rem;
   letter-spacing: 0.18em;
-  color: var(--cream);
+  color: var(--black);
   font-weight: 700;
   text-transform: uppercase;
 }
@@ -4235,7 +4282,7 @@ body::before {
 .cust-strip-arrow {
   font-family: var(--font-mono);
   font-size: 1.1rem;
-  color: rgba(255, 255, 255, 0.2);
+  color: rgba(17, 17, 16, 0.35);
   margin-left: auto;
   margin-right: 16px;
 }
@@ -4489,23 +4536,32 @@ body::before {
 }
 
 /* ==============================================
-   09 ── WHY TABLETREX
+   09 ── WHY TABLETREX (EDITORIAL FULL-BLEED AUREL-INSPIRED SYSTEM)
    ============================================== */
-.why-section {
-  background: var(--cream);
-  padding: 100px 40px;
+.why-editorial-section {
+  width: 100%;
+  background: var(--cream) url('/images/why-wall-texture.jpg') center / cover repeat;
+  position: relative;
+  color: var(--black);
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
 }
 
+/* ── Section Title Header ── */
 .why-header {
-  margin-bottom: 50px;
-  padding-bottom: 20px;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 84px clamp(24px, 5vw, 96px) 44px;
+  border-top: 1px solid rgba(17, 17, 16, 0.22);
+  border-bottom: 1px solid rgba(17, 17, 16, 0.22);
+  width: 100%;
+  background: url('/images/why-wall-texture.jpg') center / cover;
+  position: relative;
 }
 
 .why-title {
   font-family: var(--font-display);
-  font-size: clamp(3rem, 7vw, 8rem);
-  line-height: 0.88;
+  font-size: clamp(3rem, 6.5vw, 6.8rem);
+  line-height: 0.9;
   color: var(--black);
   margin-top: 12px;
 }
@@ -4516,104 +4572,518 @@ body::before {
 
 .why-header-sub {
   color: var(--gray);
-  margin-top: 8px;
+  margin-top: 12px;
   display: block;
-}
-
-.why-grid {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 0;
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  margin-bottom: 60px;
-  background: var(--cream);
-}
-
-.why-item {
-  padding: 36px 24px;
-  border-right: 1px solid rgba(0, 0, 0, 0.1);
-  transition: background 0.3s;
-  display: flex;
-  flex-direction: column;
-}
-
-.why-item:last-child {
-  border-right: none;
-}
-
-.why-item:hover {
-  background: rgba(0, 0, 0, 0.03);
-}
-
-.why-card-top {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 18px;
-}
-
-.why-num {
-  color: var(--orange);
-  letter-spacing: 0.2em;
-  font-size: 0.6rem;
-  font-weight: 700;
-}
-
-.why-sub-tag {
-  color: var(--gray);
-  font-size: 0.55rem;
+  font-size: 0.7rem;
   letter-spacing: 0.15em;
 }
 
-.why-icon-box {
-  width: auto;
-  height: 52px;
-  border: none;
-  background: transparent;
+/* ── 1. Top Hero Block (Pillar 01 - Panoramic Studio Architectural Scene) ── */
+.why-hero-block {
+  width: 100%;
+  min-height: 700px;
+  background: #E8E0D0 url('/images/why-hero-panoramic-clean.jpg') no-repeat right bottom / cover;
+  position: relative;
   display: flex;
   align-items: center;
-  justify-content: flex-start;
-  margin-bottom: 22px;
-  border-radius: 0;
-  transition: transform 0.3s var(--ease-out);
-}
-
-.why-item:hover .why-icon-box {
-  border-color: transparent;
-  background: transparent;
-  transform: translateY(-2px);
-}
-
-.why-item-title {
-  font-family: var(--font-display);
-  font-size: 1.5rem;
-  line-height: 0.95;
-  color: var(--black);
-  letter-spacing: 0.03em;
-  margin-bottom: 14px;
-}
-
-.why-item-desc {
-  font-family: var(--font-mono);
-  font-size: 0.58rem;
-  letter-spacing: 0.06em;
-  line-height: 1.85;
-  color: var(--gray);
-  text-transform: uppercase;
-  flex: 1;
-}
-
-.why-tagline-row {
-  border-top: 1px solid rgba(0, 0, 0, 0.08);
-  padding-top: 32px;
   overflow: hidden;
+  border-bottom: 1px solid rgba(17, 17, 16, 0.2);
 }
 
-.why-tagline {
-  font-size: clamp(2rem, 5vw, 5.5rem);
-  color: rgba(0, 0, 0, 0.08);
-  white-space: nowrap;
-  letter-spacing: 0.05em;
+.why-hero-text {
+  max-width: 620px;
+  padding: 80px 48px 100px clamp(24px, 5vw, 96px);
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.why-hero-tag {
+  color: var(--orange);
+  font-size: 0.68rem;
+  letter-spacing: 0.2em;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+.why-hero-heading {
+  font-family: var(--font-sans);
+  font-size: clamp(2.6rem, 4.4vw, 4.4rem);
+  font-weight: 600;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  color: var(--black);
+  margin-bottom: 24px;
+}
+
+.why-hero-desc {
+  font-family: var(--font-sans);
+  font-size: clamp(1rem, 1.25vw, 1.15rem);
+  line-height: 1.6;
+  color: rgba(17, 17, 16, 0.76);
+  max-width: 480px;
+  margin-bottom: 36px;
+  font-weight: 400;
+}
+
+.why-hero-cta {
+  margin-bottom: 56px;
+}
+
+/* Pill CTA Buttons (Vibrant Lime/Neon Chartreuse) */
+.why-pill-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: #D8F836;
+  color: #111110;
+  font-family: var(--font-sans);
+  font-size: 0.92rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  padding: 15px 32px;
+  border-radius: 9999px;
+  text-decoration: none;
+  box-shadow: 0 4px 18px rgba(216, 248, 54, 0.35);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: pointer;
+  border: none;
+}
+
+.why-pill-btn span {
+  font-size: 1.1rem;
+  display: inline-block;
+  transition: transform 0.25s var(--ease-out);
+}
+
+.why-pill-btn:hover {
+  background: #E5FF4B;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(216, 248, 54, 0.45);
+}
+
+.why-pill-btn:hover span {
+  transform: translateX(5px);
+}
+
+.why-pill-btn--accent {
+  background: #D8F836;
+}
+
+/* Hero Meta (Lower Left) */
+.why-hero-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.why-meta-dash {
+  width: 28px;
+  height: 2px;
+  background: rgba(17, 17, 16, 0.4);
+  margin-bottom: 10px;
+}
+
+.why-meta-label {
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  font-weight: 700;
+  color: var(--black);
+}
+
+.why-meta-sub {
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  color: var(--gray);
+  font-weight: 600;
+}
+
+/* Hero Badge (Floating on lower right travertine table) */
+.why-hero-badge {
+  position: absolute;
+  bottom: 40px;
+  right: clamp(24px, 4vw, 64px);
+  background: rgba(235, 230, 220, 0.94);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  padding: 14px 18px;
+  border-radius: 6px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  z-index: 3;
+}
+
+.why-badge-line {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  color: rgba(17, 17, 16, 0.7);
+  line-height: 1.4;
+}
+
+/* ── 2. Middle Split Grid (Pillars 02 & 03 - 100% Width Edge-to-Edge) ── */
+.why-split-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border-bottom: 1px solid rgba(17, 17, 16, 0.2);
+  width: 100%;
+  background: var(--cream);
+}
+
+.why-split-card {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 500px;
+  align-items: stretch;
+  position: relative;
+  background: url('/images/why-wall-texture.jpg') center / cover;
+  transition: background 0.3s ease;
+}
+
+.why-split-card:first-child {
+  border-right: 1px solid rgba(17, 17, 16, 0.18);
+}
+
+.why-split-card:hover {
+  background: rgba(0, 0, 0, 0.015);
+}
+
+.why-split-content {
+  background: transparent;
+  padding: 64px 44px 56px clamp(24px, 5vw, 96px);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.why-split-card:last-child .why-split-content {
+  padding: 64px 44px 56px 48px;
+}
+
+.why-card-num-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.why-card-num {
+  font-family: var(--font-sans);
+  font-size: 1.15rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--black);
+}
+
+.why-card-line {
+  width: 32px;
+  height: 1.5px;
+  background: rgba(17, 17, 16, 0.4);
+}
+
+.why-card-heading {
+  font-family: var(--font-sans);
+  font-size: clamp(1.8rem, 2.3vw, 2.5rem);
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: -0.025em;
+  color: var(--black);
+  margin-bottom: 18px;
+}
+
+.why-card-desc {
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: rgba(17, 17, 16, 0.68);
+  font-weight: 400;
+  margin-bottom: 36px;
+  max-width: 340px;
+}
+
+.why-card-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.why-tag {
+  font-size: 0.62rem;
+  letter-spacing: 0.18em;
+  font-weight: 700;
+  color: rgba(17, 17, 16, 0.55);
+}
+
+.why-split-media {
+  position: relative;
+  overflow: hidden;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+}
+
+.why-split-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: right center;
+  display: block;
+  mask-image: linear-gradient(to right, transparent 0%, rgba(0, 0, 0, 0.35) 60px, rgba(0, 0, 0, 0.85) 180px, black 280px);
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, rgba(0, 0, 0, 0.35) 60px, rgba(0, 0, 0, 0.85) 180px, black 280px);
+  transition: transform 0.7s var(--ease-out);
+}
+
+.why-split-card:hover .why-split-img {
+  transform: scale(1.04);
+}
+
+/* ── 3. Bottom Lineup Showcase & CTA Block (Pillars 04 & 05) ── */
+.why-lineup-block {
+  background: url('/images/why-wall-texture.jpg') center / cover;
+  display: grid;
+  grid-template-columns: 2.2fr 1fr;
+  align-items: center;
+  gap: clamp(32px, 5vw, 72px);
+  padding: 88px clamp(24px, 5vw, 96px) 72px;
+  border-bottom: 1px solid rgba(17, 17, 16, 0.2);
+  width: 100%;
+}
+
+.why-lineup-items {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 36px;
+  align-items: flex-end;
+}
+
+.why-lineup-card {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  align-items: center;
+  background: transparent;
+  border: none;
+}
+
+.why-lineup-img-box {
+  width: 100%;
+  height: 260px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  border: none;
+  margin-bottom: 24px;
+  position: relative;
+  overflow: visible;
+  transition: transform 0.4s var(--ease-out);
+}
+
+.why-lineup-card:hover .why-lineup-img-box {
+  transform: translateY(-8px);
+}
+
+.why-lineup-img {
+  max-width: 95%;
+  max-height: 95%;
+  object-fit: contain;
+  display: block;
+  transition: transform 0.5s var(--ease-out);
+}
+
+.why-lineup-card:hover .why-lineup-img {
+  transform: scale(1.04);
+}
+
+.why-lineup-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.why-lineup-title {
+  font-family: var(--font-sans);
+  font-size: 0.88rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: var(--black);
+  text-transform: uppercase;
+}
+
+.why-lineup-sub {
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  color: var(--gray);
+  font-weight: 500;
+}
+
+.why-lineup-dash {
+  font-size: 0.9rem;
+  color: rgba(17, 17, 16, 0.35);
+  margin-top: 4px;
+}
+
+/* Closing CTA Box (Right Column) */
+.why-lineup-cta-box {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding-left: 10px;
+}
+
+.why-cta-tag {
+  color: var(--orange);
+  font-size: 0.68rem;
+  letter-spacing: 0.18em;
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+
+.why-lineup-cta-title {
+  font-family: var(--font-sans);
+  font-size: clamp(2.2rem, 3.2vw, 3.2rem);
+  font-weight: 600;
+  line-height: 1.08;
+  letter-spacing: -0.03em;
+  color: var(--black);
+  margin-bottom: 18px;
+}
+
+.why-lineup-cta-desc {
+  font-family: var(--font-sans);
+  font-size: 0.98rem;
+  line-height: 1.6;
+  color: rgba(17, 17, 16, 0.7);
+  margin-bottom: 32px;
+  font-weight: 400;
+}
+
+/* ── 4. Editorial Bottom Strip ── */
+.why-footer-strip {
+  background: url('/images/why-wall-texture.jpg') center / cover;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 28px clamp(24px, 5vw, 96px);
+  width: 100%;
+}
+
+.why-strip-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 0.68rem;
+  letter-spacing: 0.2em;
+  font-weight: 600;
+  color: rgba(17, 17, 16, 0.65);
+}
+
+.why-strip-dash {
+  font-size: 0.9rem;
+  color: rgba(17, 17, 16, 0.5);
+}
+
+.why-strip-right {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  font-size: 0.68rem;
+  letter-spacing: 0.22em;
+  font-weight: 700;
+  color: rgba(17, 17, 16, 0.55);
+}
+
+/* Responsive Editorial Breakpoints */
+@media (max-width: 1024px) {
+  .why-hero-block {
+    min-height: 600px;
+    background-position: 75% bottom;
+  }
+
+  .why-hero-text {
+    padding: 60px clamp(24px, 5vw, 48px) 60px;
+    max-width: 520px;
+    background: rgba(232, 224, 208, 0.75);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border-radius: 8px;
+    margin: 24px;
+  }
+
+  .why-split-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .why-split-card:first-child {
+    border-right: none;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+  }
+
+  .why-split-card {
+    min-height: 420px;
+  }
+
+  .why-split-content {
+    padding: 48px 36px 44px clamp(24px, 5vw, 48px);
+  }
+
+  .why-split-card:last-child .why-split-content {
+    padding: 48px 36px 44px clamp(24px, 5vw, 48px);
+  }
+
+  .why-lineup-block {
+    grid-template-columns: 1fr;
+    gap: 56px;
+    padding: 64px clamp(24px, 5vw, 48px);
+  }
+
+  .why-lineup-cta-box {
+    padding-left: 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .why-hero-block {
+    min-height: 520px;
+    background-position: 85% bottom;
+  }
+
+  .why-hero-text {
+    margin: 16px;
+    padding: 36px 20px;
+  }
+
+  .why-split-card {
+    grid-template-columns: 1fr;
+  }
+
+  .why-split-media {
+    height: 320px;
+  }
+
+  .why-lineup-items {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .why-footer-strip {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
 }
 
 /* ==============================================
@@ -5242,10 +5712,6 @@ body::before {
    RESPONSIVE — ALL NEW SECTIONS
    ============================================== */
 @media (max-width:1280px) {
-  .why-grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
-
   .bs-grid {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -5266,14 +5732,37 @@ body::before {
     display: none;
   }
 
+  .finder-grid {
+    grid-template-columns: minmax(0, 1fr) 36px minmax(0, 1fr);
+  }
+
+  .finder-col {
+    padding: 0 16px 0 0;
+  }
+
+  .finder-col:last-child {
+    padding: 0 0 0 16px;
+  }
+
   .finder-cards-grid {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 8px;
+  }
+
+  .finder-style-card {
+    padding: 14px 10px;
+    min-height: 140px;
   }
 }
 
 @media (max-width:1024px) {
   .finder-grid {
     grid-template-columns: 1fr;
+    gap: 48px;
+  }
+
+  .finder-divider {
+    display: none;
   }
 
   .finder-col {
@@ -5310,10 +5799,6 @@ body::before {
     grid-template-columns: 1fr;
   }
 
-  .why-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
   .finder-cards-grid {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -5331,7 +5816,6 @@ body::before {
   .finder-section,
   .customize-section,
   .build-section,
-  .why-section,
   .tech-section,
   .community-section,
   .reviews-section,
@@ -5342,11 +5826,17 @@ body::before {
   .bs-grid,
   .setup-grid,
   .fresh-grid,
-  .why-grid,
   .rev-grid {
     grid-template-columns: 1fr;
   }
 
+  .finder-cards-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+  }
+}
+
+@media (max-width:480px) {
   .finder-cards-grid {
     grid-template-columns: 1fr;
   }
@@ -5399,4 +5889,67 @@ body::before {
     width: 48px;
     height: 48px;
   }
+}
+
+/* =============================================================================
+   RACKET VIEWER — FPS Customization Interface
+   ============================================================================= */
+
+/* ── Loading placeholder ── */
+.rv-placeholder {
+  width: 100%;
+  height: 380px;
+  background: linear-gradient(160deg, #0F0F0D, #0A0A09);
+  border: 1px solid #2A2620;
+  border-radius: 4px;
+  margin: 28px 0 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.rv-placeholder::after {
+  content: '[ LOADING 3D SHOWCASE ]';
+  font-family: var(--font-display);
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  color: #2A2620;
+}
+
+/* ── Racket Viewer: Seamless Minimalist Showcase ── */
+.rv-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 520px;
+  min-width: 0;
+  margin: 8px auto 20px;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  overflow: visible;
+  box-shadow: none;
+  box-sizing: border-box;
+}
+
+/* ── Canvas wrap ── */
+.rv-canvas-wrap {
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  height: 380px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  overflow: visible;
+  box-sizing: border-box;
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  .rv-canvas-wrap { height: 280px; }
+}
+
+@media (max-width: 480px) {
+  .rv-canvas-wrap { height: 240px; }
 }

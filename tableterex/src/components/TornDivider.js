@@ -27,7 +27,7 @@ export default function TornDivider({
   fiberColor,
   variantIndex = 0,
   height = 80,
-  shadow = true,
+  shadow = false,
   style = {},
   className = '',
 }) {
