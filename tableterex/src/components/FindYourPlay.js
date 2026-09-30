@@ -13,6 +13,9 @@ import {
   DefensiveSetupIsometricIcon,
 } from '@/components/icons';
 
+import CircularRacketCarousel, { CATEGORY_RACKETS } from './CircularRacketCarousel';
+import CircularRubberCarousel, { CATEGORY_RUBBERS } from './CircularRubberCarousel';
+
 // Lazy-load the heavy 3D viewers (Three.js) only on client
 const RacketViewer = dynamic(
   () => import('@/components/RacketViewer'),
@@ -102,29 +105,45 @@ const RUBBER_CARDS = [
 ];
 
 const RACKET_PICKS = {
-  BEGINNER:     { name:'Stiga Clipper Wood',    brand:'STIGA',      price:'₹3,499',  desc:'PERFECT FIRST BLADE. FULL WOOD, GREAT FEEL.' },
-  INTERMEDIATE: { name:'Donic Waldner Senso',   brand:'DONIC',      price:'₹5,999',  desc:'UPGRADE READY. CARBON ASSIST FOR MORE PACE.' },
-  ADVANCED:     { name:'Butterfly TB-ALC',      brand:'BUTTERFLY',  price:'₹12,499', desc:'ARYLATE-CARBON. WORLD-CLASS PERFORMANCE.' },
-  OFFENSIVE:    { name:'DHS Hurricane Long 5',  brand:'DHS',        price:'₹4,299',  desc:'POWER AND SPEED. MADE FOR ATTACKERS.' },
-  DEFENSIVE:    { name:'Tibhar Stratus Power',  brand:'TIBHAR',     price:'₹4,899',  desc:'CONTROL-FOCUSED. EXCELLENT FOR CHOPPERS.' },
-  'ALL-ROUND':  { name:'Cornilleau Vari 400',   brand:'CORNILLEAU', price:'₹3,200',  desc:'BALANCED FOR EVERY STYLE OF PLAY.' },
+  BEGINNER: { name: 'Stiga Clipper Wood', brand: 'STIGA', price: '₹3,499', desc: 'PERFECT FIRST BLADE. FULL WOOD, GREAT FEEL.' },
+  INTERMEDIATE: { name: 'Donic Waldner Senso', brand: 'DONIC', price: '₹5,999', desc: 'UPGRADE READY. CARBON ASSIST FOR MORE PACE.' },
+  ADVANCED: { name: 'Butterfly TB-ALC', brand: 'BUTTERFLY', price: '₹12,499', desc: 'ARYLATE-CARBON. WORLD-CLASS PERFORMANCE.' },
+  OFFENSIVE: { name: 'DHS Hurricane Long 5', brand: 'DHS', price: '₹4,299', desc: 'POWER AND SPEED. MADE FOR ATTACKERS.' },
+  DEFENSIVE: { name: 'Tibhar Stratus Power', brand: 'TIBHAR', price: '₹4,899', desc: 'CONTROL-FOCUSED. EXCELLENT FOR CHOPPERS.' },
+  'ALL-ROUND': { name: 'Cornilleau Vari 400', brand: 'CORNILLEAU', price: '₹3,200', desc: 'BALANCED FOR EVERY STYLE OF PLAY.' },
 };
 
 const RUBBER_PICKS = {
-  SPIN:         { name:'DHS Hurricane 3',       brand:'DHS',        price:'₹1,299', desc:'KING OF SPIN. CHINESE TACKY SHEET.' },
-  SPEED:        { name:'Butterfly Tenergy 64',  brand:'BUTTERFLY',  price:'₹3,850', desc:'FASTEST TENSOR ON THE MARKET.' },
-  CONTROL:      { name:'Yasaka Rakza 7 Soft',   brand:'YASAKA',     price:'₹1,699', desc:'FORGIVING, CONSISTENT, RELIABLE.' },
-  OFFENSIVE:    { name:'Butterfly Tenergy 05',  brand:'BUTTERFLY',  price:'₹3,850', desc:'SPIN + SPEED COMBO. #1 WORLDWIDE.' },
-  DEFENSIVE:    { name:'Donic Slice 40',        brand:'DONIC',      price:'₹1,400', desc:'EXCELLENT CHOP CONTROL AND PLACEMENT.' },
-  'ALL-ROUND':  { name:'Xiom Vega Asia',        brand:'XIOM',       price:'₹2,100', desc:'TENSOR TECH. SPIN, SPEED, CONTROL BALANCED.' },
+  SPIN: { name: 'DHS Hurricane 3', brand: 'DHS', price: '₹1,299', desc: 'KING OF SPIN. CHINESE TACKY SHEET.' },
+  SPEED: { name: 'Butterfly Tenergy 64', brand: 'BUTTERFLY', price: '₹3,850', desc: 'FASTEST TENSOR ON THE MARKET.' },
+  CONTROL: { name: 'Yasaka Rakza 7 Soft', brand: 'YASAKA', price: '₹1,699', desc: 'FORGIVING, CONSISTENT, RELIABLE.' },
+  OFFENSIVE: { name: 'Butterfly Tenergy 05', brand: 'BUTTERFLY', price: '₹3,850', desc: 'SPIN + SPEED COMBO. #1 WORLDWIDE.' },
+  DEFENSIVE: { name: 'Donic Slice 40', brand: 'DONIC', price: '₹1,400', desc: 'EXCELLENT CHOP CONTROL AND PLACEMENT.' },
+  'ALL-ROUND': { name: 'Xiom Vega Asia', brand: 'XIOM', price: '₹2,100', desc: 'TENSOR TECH. SPIN, SPEED, CONTROL BALANCED.' },
 };
 
 export default function FindYourPlay() {
   const [racketStyle, setRacketStyle] = useState('BEGINNER');
   const [rubberStyle, setRubberStyle] = useState('SPIN');
+  const [selectedRacket, setSelectedRacket] = useState(CATEGORY_RACKETS.BEGINNER[0]);
+  const [selectedRubber, setSelectedRubber] = useState(CATEGORY_RUBBERS.SPIN[0]);
 
-  const rPick  = RACKET_PICKS[racketStyle];
-  const ruPick = RUBBER_PICKS[rubberStyle];
+  const activeRacket = selectedRacket || CATEGORY_RACKETS[racketStyle]?.[0] || RACKET_PICKS[racketStyle];
+  const activeRubber = selectedRubber || CATEGORY_RUBBERS[rubberStyle]?.[0] || RUBBER_PICKS[rubberStyle];
+
+  const handleCategoryChange = (newCategory) => {
+    setRacketStyle(newCategory);
+    if (CATEGORY_RACKETS[newCategory]) {
+      setSelectedRacket(CATEGORY_RACKETS[newCategory][0]);
+    }
+  };
+
+  const handleRubberCategoryChange = (newStyle) => {
+    setRubberStyle(newStyle);
+    if (CATEGORY_RUBBERS[newStyle]) {
+      setSelectedRubber(CATEGORY_RUBBERS[newStyle][0]);
+    }
+  };
 
   return (
     <section className="finder-section" id="find-your-play">
@@ -133,32 +152,34 @@ export default function FindYourPlay() {
       <div className="finder-grid">
         {/* ── 05: FIND YOUR RACKET ── */}
         <div className="finder-col" id="find-racket">
-          <div className="finder-col-header">
-            <span className="text-label">FIND YOUR RACKET</span>
-            <h2 className="finder-title text-display">FIND YOUR<br />RACKET</h2>
-            <p className="finder-sub">SELECT YOUR PLAYING LEVEL OR STYLE</p>
-          </div>
+
 
           {/* ── 3D Racket Viewer ── */}
-          <RacketViewer selectedLevel={racketStyle} />
+          <RacketViewer selectedLevel={racketStyle} selectedRacket={activeRacket} />
 
-          {/* ── Recommended Racket Result (below racket) ── */}
+          {/* ── Selected Racket Details (Dynamically updates with card & category) ── */}
           <div className="finder-result">
             <div className="finder-result-main">
               <div>
-                <span className="finder-result-label">{rPick.brand}</span>
-                <span className="finder-result-name">{rPick.name}</span>
+                <span className="finder-result-label">{activeRacket.brand}</span>
+                <span className="finder-result-name">{activeRacket.name}</span>
               </div>
-              <span className="finder-result-price">{rPick.price}</span>
+              <span className="finder-result-price">{activeRacket.price}</span>
             </div>
-            <p className="finder-result-desc">{rPick.desc}</p>
+            <p className="finder-result-desc">{activeRacket.desc}</p>
             <a href="/rackets" className="finder-cta" id="finder-racket-cta">
               EXPLORE THIS RACKET →
             </a>
           </div>
 
-          {/* ── 6 Selection Cards ── */}
-          <div className="finder-cards-grid" role="group" aria-label="Racket style selection">
+          {/* ── 3D Circular Racket Cards Carousel (Rackets within current category) ── */}
+          <CircularRacketCarousel
+            category={racketStyle}
+            onSelectRacket={setSelectedRacket}
+          />
+
+          {/* ── 6 Performance Cards (Racket Categories) ── */}
+          <div className="finder-cards-grid" role="group" aria-label="Racket style selection" style={{ marginTop: '14px' }}>
             {RACKET_CARDS.map((card) => {
               const IconComponent = card.icon;
               const isSelected = racketStyle === card.id;
@@ -167,7 +188,7 @@ export default function FindYourPlay() {
                   key={card.id}
                   type="button"
                   className={`finder-style-card${isSelected ? ' active' : ''}`}
-                  onClick={() => setRacketStyle(card.id)}
+                  onClick={() => handleCategoryChange(card.id)}
                   id={`racket-card-${card.id.toLowerCase()}`}
                   aria-pressed={isSelected}
                 >
@@ -179,7 +200,6 @@ export default function FindYourPlay() {
                     />
                   </div>
                   <span className="finder-card-title">{card.name}</span>
-                  <p className="finder-card-desc">{card.desc}</p>
                   <div className="finder-card-indicator" aria-hidden="true">
                     <span className="finder-card-dot" />
                   </div>
@@ -195,29 +215,31 @@ export default function FindYourPlay() {
 
         {/* ── 06: FIND YOUR RUBBER ── */}
         <div className="finder-col" id="find-rubber">
-          <div className="finder-col-header">
-            <span className="text-label">FIND YOUR RUBBER</span>
-            <h2 className="finder-title text-display">FIND YOUR<br />RUBBER</h2>
-            <p className="finder-sub">SELECT YOUR PREFERRED PERFORMANCE CHARACTERISTIC</p>
-          </div>
+
 
           {/* ── 3D Rubber Viewer ── */}
-          <RubberViewer selectedStyle={rubberStyle} />
+          <RubberViewer selectedStyle={rubberStyle} selectedRubber={activeRubber} />
 
-          {/* ── Recommended Rubber Result (below rubber) ── */}
+          {/* ── Selected Rubber Result (dynamically updates with carousel + category) ── */}
           <div className="finder-result">
             <div className="finder-result-main">
               <div>
-                <span className="finder-result-label">{ruPick.brand}</span>
-                <span className="finder-result-name">{ruPick.name}</span>
+                <span className="finder-result-label">{activeRubber.brand}</span>
+                <span className="finder-result-name">{activeRubber.name}</span>
               </div>
-              <span className="finder-result-price">{ruPick.price}</span>
+              <span className="finder-result-price">{activeRubber.price}</span>
             </div>
-            <p className="finder-result-desc">{ruPick.desc}</p>
+            <p className="finder-result-desc">{activeRubber.desc}</p>
             <a href="/rubber" className="finder-cta" id="finder-rubber-cta">
               EXPLORE THIS RUBBER →
             </a>
           </div>
+
+          {/* ── 3D Circular Rubber Cards Carousel ── */}
+          <CircularRubberCarousel
+            category={rubberStyle}
+            onSelectRubber={setSelectedRubber}
+          />
 
           {/* ── 6 Performance Cards ── */}
           <div className="finder-cards-grid" role="group" aria-label="Rubber performance selection">
@@ -229,7 +251,7 @@ export default function FindYourPlay() {
                   key={card.id}
                   type="button"
                   className={`finder-style-card${isSelected ? ' active' : ''}`}
-                  onClick={() => setRubberStyle(card.id)}
+                  onClick={() => handleRubberCategoryChange(card.id)}
                   id={`rubber-card-${card.id.toLowerCase()}`}
                   aria-pressed={isSelected}
                 >
@@ -241,7 +263,6 @@ export default function FindYourPlay() {
                     />
                   </div>
                   <span className="finder-card-title">{card.name}</span>
-                  <p className="finder-card-desc">{card.desc}</p>
                   <div className="finder-card-indicator" aria-hidden="true">
                     <span className="finder-card-dot" />
                   </div>

@@ -4,10 +4,12 @@ import { useEffect, useRef, useState } from 'react';
 // ── Callout Overlay ───────────────────────────────────────────────────────────
 // Minimalist, crisp vector callouts anchored to table tennis racket parts.
 // Pure white aesthetic: all dots, lines, and typography in #FFFFFF.
-// Slower, cinematic sequence:
+// Each callout now includes an animated stat bar that fills to c.val (0–100).
+// Sequence per callout:
 //   1. Dot spawns on racket part (380ms)
 //   2. Line smoothly draws outward (550ms)
-//   3. Words blink once as they appear and settle in front of screen (380ms)
+//   3. Words + bar blink once as they appear (380ms)
+//   4. Bar animates from 0 → val width (600ms ease-out)
 // ─────────────────────────────────────────────────────────────────────────────
 
 const ANIM = {
@@ -17,6 +19,7 @@ const ANIM = {
   lineDelay:  240,   // pause after dot before line draws
   lineDraw:   550,   // line draw duration ms
   labelDelay: 80,    // wait after line finishes before word blinks in
+  barDelay:   120,   // wait after label before bar fills
 };
 
 function smoothstep(t) {
@@ -40,6 +43,40 @@ function useTypewriter(text, active, speed = 30) {
     return () => clearInterval(timer.current);
   }, [text, active, speed]);
   return out;
+}
+
+// Animated bar width hook — springs from 0 to target over duration
+function useBarFill(targetPct, active) {
+  const [width, setWidth] = useState(0);
+  const rafRef = useRef(null);
+  const timerRef = useRef(null);
+
+  useEffect(() => {
+    setWidth(0);
+    cancelAnimationFrame(rafRef.current);
+    clearTimeout(timerRef.current);
+    if (!active) return;
+
+    timerRef.current = setTimeout(() => {
+      const t0 = performance.now();
+      const dur = 680;
+      function step(now) {
+        const p = Math.min((now - t0) / dur, 1);
+        setWidth(smoothstep(p) * targetPct);
+        if (p < 1) {
+          rafRef.current = requestAnimationFrame(step);
+        }
+      }
+      rafRef.current = requestAnimationFrame(step);
+    }, ANIM.barDelay);
+
+    return () => {
+      cancelAnimationFrame(rafRef.current);
+      clearTimeout(timerRef.current);
+    };
+  }, [targetPct, active]);
+
+  return width;
 }
 
 function CalloutItem({ c, canvasW, canvasH, idx, visible }) {
@@ -86,6 +123,10 @@ function CalloutItem({ c, canvasW, canvasH, idx, visible }) {
   const mainTxt = useTypewriter(c.label, labelOn, 28);
   const subTxt  = useTypewriter(c.sub,   labelOn, 22);
 
+  // Stat bar — only animate when labelOn
+  const targetPct = typeof c.val === 'number' ? c.val : 0;
+  const barPct = useBarFill(targetPct, labelOn);
+
   // SVG coordinates on the canvas
   const dotX = c.xNorm * canvasW;
   const dotY = c.yNorm * canvasH;
@@ -102,8 +143,12 @@ function CalloutItem({ c, canvasW, canvasH, idx, visible }) {
   const midY = dotY + dY;
   let endX = isRight ? midX + horizLen : midX - horizLen;
 
+  // Bar dimensions — rendered in SVG foreignObject for clean rounded appearance
+  const BAR_W = 72;   // px in SVG units
+  const BAR_H = 4;    // px in SVG units
+
   // Approximate width of longest line in callout to ensure it NEVER clips
-  const estWidth = Math.max((c.label || '').length * 7.5, (c.sub || '').length * 5.8);
+  const estWidth = Math.max((c.label || '').length * 7.5, (c.sub || '').length * 5.8, BAR_W);
 
   let lx = isRight ? endX + 6 : endX - 6;
   const ta = isRight ? 'start' : 'end';
@@ -126,6 +171,13 @@ function CalloutItem({ c, canvasW, canvasH, idx, visible }) {
   const dashOff = pathLen * (1 - smoothstep(lineProg));
 
   const ds = dotOn ? 1 : 0;
+
+  // Bar x-start depends on text anchor
+  const barX = isRight ? lx : lx - BAR_W;
+  const barY = midY + 11;   // below the sub-label text
+
+  // Filled portion width
+  const fillW = (barPct / 100) * BAR_W;
 
   return (
     <g>
@@ -210,6 +262,46 @@ function CalloutItem({ c, canvasW, canvasH, idx, visible }) {
             }}
           >
             {subTxt}
+          </text>
+        </g>
+      )}
+
+      {/* ── 4. STAT BAR — animated fill track below label ── */}
+      {labelOn && (
+        <g style={{ pointerEvents: 'none' }}>
+          {/* Track (dim white background rail) */}
+          <rect
+            x={barX}
+            y={barY}
+            width={BAR_W}
+            height={BAR_H}
+            rx={BAR_H / 2}
+            fill="rgba(255,255,255,0.18)"
+          />
+          {/* Fill (bright white animated bar) */}
+          <rect
+            x={barX}
+            y={barY}
+            width={Math.max(0, fillW)}
+            height={BAR_H}
+            rx={BAR_H / 2}
+            fill="#FFFFFF"
+            style={{ opacity: 0.92 }}
+          />
+          {/* Value label at far right of bar */}
+          <text
+            x={barX + BAR_W + 5}
+            y={barY + BAR_H - 0.5}
+            textAnchor="start"
+            fill="#FFFFFF"
+            style={{
+              fontSize: '7px',
+              fontFamily: "'Inter', 'Helvetica', sans-serif",
+              letterSpacing: '0.04em',
+              opacity: 0.70,
+            }}
+          >
+            {Math.round(barPct)}
           </text>
         </g>
       )}

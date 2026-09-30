@@ -10,33 +10,65 @@ const RubberCanvas = dynamic(() => import('./RubberCanvas'), { ssr: false });
 const CANVAS_W = 520;
 const CANVAS_H = 380;
 
-export default function RubberViewer({ selectedStyle }) {
-  const [displayStyle, setDisplayStyle] = useState(selectedStyle);
-  const [phase,        setPhase]        = useState('enter');
-  const prevStyle = useRef(selectedStyle);
+// Merge per-rubber profile data into the base level callouts
+function buildCalloutsFromProfile(levelCallouts, profile) {
+  if (!profile) return levelCallouts;
+  return levelCallouts.map((c) => {
+    const p = profile[c.id]; // 'sponge' | 'topsheet' | 'pips' | 'ittf'
+    if (!p) return c;
+    return {
+      ...c,
+      label: p.label || c.label,
+      sub:   p.sub   || c.sub,
+      val:   p.val,   // 0–100 stat bar value
+    };
+  });
+}
+
+export default function RubberViewer({ selectedStyle, selectedRubber }) {
+  const [displayStyle,  setDisplayStyle]  = useState(selectedStyle);
+  const [displayRubber, setDisplayRubber] = useState(selectedRubber);
+  const [phase,         setPhase]         = useState('enter');
+  const prevStyle  = useRef(selectedStyle);
+  const prevRubber = useRef(selectedRubber?.id);
 
   useEffect(() => {
-    if (selectedStyle === prevStyle.current) return;
-    prevStyle.current = selectedStyle;
+    const styleChanged  = selectedStyle   !== prevStyle.current;
+    const rubberChanged = selectedRubber?.id !== prevRubber.current;
+
+    if (!styleChanged && !rubberChanged) return;
+
+    prevStyle.current  = selectedStyle;
+    prevRubber.current = selectedRubber?.id;
 
     setPhase('exit');
     const t = setTimeout(() => {
       setDisplayStyle(selectedStyle);
+      setDisplayRubber(selectedRubber);
       setPhase('enter');
     }, 150);
 
     return () => clearTimeout(t);
-  }, [selectedStyle]);
+  }, [selectedStyle, selectedRubber]);
 
   const cfg = RUBBER_CONFIGS[displayStyle] || RUBBER_CONFIGS['SPIN'];
+
+  // Merge per-rubber profile into the style's base callouts
+  const callouts = buildCalloutsFromProfile(
+    cfg.callouts,
+    displayRubber?.profile
+  );
+
+  // Key forces CalloutOverlay remount (re-animates) on every rubber change
+  const overlayKey = `${displayStyle}-${displayRubber?.id || 'default'}`;
 
   return (
     <div className="rv-wrapper">
       <div className="rv-canvas-wrap">
         <RubberCanvas config={cfg} />
         <CalloutOverlay
-          callouts={cfg.callouts}
-          activeKey={displayStyle}
+          callouts={callouts}
+          activeKey={overlayKey}
           visible={phase === 'enter'}
           canvasW={CANVAS_W}
           canvasH={CANVAS_H}

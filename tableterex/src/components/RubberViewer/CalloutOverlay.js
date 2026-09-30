@@ -1,22 +1,25 @@
 'use client';
 import { useEffect, useRef, useState } from 'react';
 
-// ── Rubber Callout Overlay ───────────────────────────────────────────────────
+// ── Rubber Callout Overlay ────────────────────────────────────────────────────
 // Minimalist, crisp vector callouts anchored to table tennis rubber parts.
 // Pure white aesthetic: all dots, lines, and typography in #FFFFFF.
-// Slower, cinematic sequence:
-//   1. Dot spawns on rubber component (380ms)
+// Each callout now includes an animated stat bar that fills to c.val (0–100).
+// Sequence per callout:
+//   1. Dot spawns on rubber part (380ms)
 //   2. Line smoothly draws outward (550ms)
-//   3. Words blink once as they appear and settle in front of screen (380ms)
+//   3. Words + bar blink once as they appear (380ms)
+//   4. Bar animates from 0 → val width (680ms ease-out)
 // ─────────────────────────────────────────────────────────────────────────────
 
 const ANIM = {
-  introDelay: 580,   // wait for 3D model entrance swoop to settle
-  dotDelay:   260,   // ms stagger between successive callouts
-  dotIn:      380,   // dot scale-in ms
-  lineDelay:  240,   // pause after dot before line draws
-  lineDraw:   550,   // line draw duration ms
-  labelDelay: 80,    // wait after line finishes before word blinks in
+  introDelay: 580,
+  dotDelay:   260,
+  dotIn:      380,
+  lineDelay:  240,
+  lineDraw:   550,
+  labelDelay: 80,
+  barDelay:   120,
 };
 
 function smoothstep(t) {
@@ -24,7 +27,6 @@ function smoothstep(t) {
   return c * c * (3 - 2 * c);
 }
 
-// Typewriter effect that types smoothly
 function useTypewriter(text, active, speed = 30) {
   const [out, setOut] = useState('');
   const timer = useRef(null);
@@ -40,6 +42,37 @@ function useTypewriter(text, active, speed = 30) {
     return () => clearInterval(timer.current);
   }, [text, active, speed]);
   return out;
+}
+
+function useBarFill(targetPct, active) {
+  const [width, setWidth] = useState(0);
+  const rafRef = useRef(null);
+  const timerRef = useRef(null);
+
+  useEffect(() => {
+    setWidth(0);
+    cancelAnimationFrame(rafRef.current);
+    clearTimeout(timerRef.current);
+    if (!active) return;
+
+    timerRef.current = setTimeout(() => {
+      const t0 = performance.now();
+      const dur = 680;
+      function step(now) {
+        const p = Math.min((now - t0) / dur, 1);
+        setWidth(smoothstep(p) * targetPct);
+        if (p < 1) rafRef.current = requestAnimationFrame(step);
+      }
+      rafRef.current = requestAnimationFrame(step);
+    }, ANIM.barDelay);
+
+    return () => {
+      cancelAnimationFrame(rafRef.current);
+      clearTimeout(timerRef.current);
+    };
+  }, [targetPct, active]);
+
+  return width;
 }
 
 function CalloutItem({ c, canvasW, canvasH, idx, visible }) {
@@ -86,13 +119,13 @@ function CalloutItem({ c, canvasW, canvasH, idx, visible }) {
   const mainTxt = useTypewriter(c.label, labelOn, 28);
   const subTxt  = useTypewriter(c.sub,   labelOn, 22);
 
-  // SVG coordinates on the canvas
+  const targetPct = typeof c.val === 'number' ? c.val : 0;
+  const barPct = useBarFill(targetPct, labelOn);
+
   const dotX = c.xNorm * canvasW;
   const dotY = c.yNorm * canvasH;
-
   const isRight = c.side === 'right';
 
-  // Crisp vector line: short diagonal then horizontal
   const diagLen  = isRight ? 40 : 26;
   const horizLen = isRight ? 28 : 16;
   const dX       = isRight ? diagLen * 0.70 : -diagLen * 0.70;
@@ -102,8 +135,10 @@ function CalloutItem({ c, canvasW, canvasH, idx, visible }) {
   const midY = dotY + dY;
   let endX = isRight ? midX + horizLen : midX - horizLen;
 
-  // Approximate width of longest line in callout to ensure it NEVER clips
-  const estWidth = Math.max((c.label || '').length * 7.5, (c.sub || '').length * 5.8);
+  const BAR_W = 72;
+  const BAR_H = 4;
+
+  const estWidth = Math.max((c.label || '').length * 7.5, (c.sub || '').length * 5.8, BAR_W);
 
   let lx = isRight ? endX + 6 : endX - 6;
   const ta = isRight ? 'start' : 'end';
@@ -124,17 +159,17 @@ function CalloutItem({ c, canvasW, canvasH, idx, visible }) {
 
   const pathLen = Math.hypot(midX - dotX, midY - dotY) + Math.abs(endX - midX) + 4;
   const dashOff = pathLen * (1 - smoothstep(lineProg));
-
   const ds = dotOn ? 1 : 0;
+
+  const barX = isRight ? lx : lx - BAR_W;
+  const barY = midY + 11;
+  const fillW = (barPct / 100) * BAR_W;
 
   return (
     <g>
-      {/* ── 1. SOLID WHITE DOT on part (no glow) ── */}
+      {/* ── 1. SOLID WHITE DOT ── */}
       <circle
-        cx={dotX}
-        cy={dotY}
-        r={2.4}
-        fill="#FFFFFF"
+        cx={dotX} cy={dotY} r={2.4} fill="#FFFFFF"
         style={{
           transform: `scale(${ds})`,
           transformOrigin: `${dotX}px ${dotY}px`,
@@ -143,14 +178,9 @@ function CalloutItem({ c, canvasW, canvasH, idx, visible }) {
         }}
       />
 
-      {/* ── Outer ping ring (clean white, no glow/shadow) ── */}
+      {/* ── Ping ring ── */}
       <circle
-        cx={dotX}
-        cy={dotY}
-        r={2.4}
-        fill="none"
-        stroke="#FFFFFF"
-        strokeWidth={0.75}
+        cx={dotX} cy={dotY} r={2.4} fill="none" stroke="#FFFFFF" strokeWidth={0.75}
         style={{
           opacity: dotOn ? 0.35 : 0,
           transform: dotOn ? 'scale(2.2)' : 'scale(1)',
@@ -159,57 +189,42 @@ function CalloutItem({ c, canvasW, canvasH, idx, visible }) {
         }}
       />
 
-      {/* ── 2. SOLID WHITE LINE (no glow) ── */}
+      {/* ── 2. WHITE LINE ── */}
       <path
         d={`M${dotX},${dotY} L${midX},${midY} L${endX},${midY}`}
-        fill="none"
-        stroke="#FFFFFF"
-        strokeWidth={1.1}
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeDasharray={pathLen}
-        strokeDashoffset={dashOff}
+        fill="none" stroke="#FFFFFF" strokeWidth={1.1}
+        strokeLinecap="round" strokeLinejoin="round"
+        strokeDasharray={pathLen} strokeDashoffset={dashOff}
       />
 
-      {/* ── 3. WHITE WORDS: Blinks once on appearance (no black box backing) ── */}
+      {/* ── 3. LABEL ── */}
       {labelOn && (
-        <g
-          className="rv-word-group"
-          style={{
-            animation: 'rv-word-blink 0.38s ease-out forwards',
-            pointerEvents: 'none',
-          }}
-        >
-          {/* Main Title (pure white, crisp display font) */}
+        <g className="rv-word-group" style={{ animation: 'rv-word-blink 0.38s ease-out forwards', pointerEvents: 'none' }}>
           <text
-            x={lx}
-            y={midY - 8}
-            textAnchor={ta}
-            fill="#FFFFFF"
-            style={{
-              fontSize: '10.5px',
-              fontFamily: "'Bebas Neue', 'Anton', sans-serif",
-              letterSpacing: '0.12em',
-              fontWeight: 400,
-            }}
+            x={lx} y={midY - 8} textAnchor={ta} fill="#FFFFFF"
+            style={{ fontSize: '10.5px', fontFamily: "'Bebas Neue', 'Anton', sans-serif", letterSpacing: '0.12em', fontWeight: 400 }}
           >
             {mainTxt}
           </text>
-
-          {/* Subtitle / Spec (crisp white, high readability) */}
           <text
-            x={lx}
-            y={midY + 5}
-            textAnchor={ta}
-            fill="#FFFFFF"
-            style={{
-              fontSize: '8px',
-              fontFamily: "'Inter', sans-serif",
-              letterSpacing: '0.08em',
-              opacity: 0.85,
-            }}
+            x={lx} y={midY + 5} textAnchor={ta} fill="#FFFFFF"
+            style={{ fontSize: '8px', fontFamily: "'Inter', sans-serif", letterSpacing: '0.08em', opacity: 0.85 }}
           >
             {subTxt}
+          </text>
+        </g>
+      )}
+
+      {/* ── 4. STAT BAR ── */}
+      {labelOn && (
+        <g style={{ pointerEvents: 'none' }}>
+          <rect x={barX} y={barY} width={BAR_W} height={BAR_H} rx={BAR_H / 2} fill="rgba(255,255,255,0.18)" />
+          <rect x={barX} y={barY} width={Math.max(0, fillW)} height={BAR_H} rx={BAR_H / 2} fill="#FFFFFF" style={{ opacity: 0.92 }} />
+          <text
+            x={barX + BAR_W + 5} y={barY + BAR_H - 0.5} textAnchor="start" fill="#FFFFFF"
+            style={{ fontSize: '7px', fontFamily: "'Inter', 'Helvetica', sans-serif", letterSpacing: '0.04em', opacity: 0.70 }}
+          >
+            {Math.round(barPct)}
           </text>
         </g>
       )}
@@ -221,7 +236,6 @@ export default function CalloutOverlay({ callouts, activeKey = 'default', visibl
   return (
     <>
       <style>{`
-        /* One-time word blink animation on entry */
         @keyframes rv-word-blink {
           0%   { opacity: 0; }
           22%  { opacity: 1; }
@@ -236,26 +250,14 @@ export default function CalloutOverlay({ callouts, activeKey = 'default', visibl
         }
       `}</style>
       <svg
-        style={{
-          position: 'absolute',
-          inset: 0,
-          width: '100%',
-          height: '100%',
-          pointerEvents: 'none',
-          overflow: 'visible',
-          zIndex: 6,
-        }}
+        style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', pointerEvents: 'none', overflow: 'visible', zIndex: 6 }}
         viewBox={`0 0 ${canvasW} ${canvasH}`}
         preserveAspectRatio="xMidYMid meet"
       >
         {callouts.map((c, i) => (
           <CalloutItem
             key={`${activeKey}-${c.id}-${i}`}
-            c={c}
-            canvasW={canvasW}
-            canvasH={canvasH}
-            idx={i}
-            visible={visible}
+            c={c} canvasW={canvasW} canvasH={canvasH} idx={i} visible={visible}
           />
         ))}
       </svg>

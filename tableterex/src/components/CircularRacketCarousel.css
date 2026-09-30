@@ -1,0 +1,203 @@
+/* ==========================================================================
+   3D CIRCULAR RACKET CAROUSEL
+   Panoramic Cylindrical Arc of Racket Image Cards
+   ========================================================================== */
+
+.crc-container {
+  position: relative;
+  width: 100%;
+  margin: 14px 0 0 0;
+  padding: 4px 0 10px;
+  box-sizing: border-box;
+  user-select: none;
+}
+
+
+
+/* 3D Circular Ring Viewport */
+.crc-viewport {
+  position: relative;
+  width: 100%;
+  height: 155px;
+  perspective: 900px;
+  perspective-origin: 50% 48%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: visible;
+  touch-action: pan-y;
+  margin: 4px 0 0;
+}
+
+.crc-stage {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Individual Square Racket Image Card (Clean, compact, no text) */
+.crc-card {
+  position: absolute;
+  width: 95px;
+  height: 95px;
+  aspect-ratio: 1 / 1;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #111110;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow:
+    0 8px 20px -3px rgba(0, 0, 0, 0.8),
+    0 2px 6px rgba(0, 0, 0, 0.35);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  transition:
+    transform 0.55s cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 0.5s ease,
+    filter 0.4s ease,
+    box-shadow 0.4s ease,
+    border-color 0.4s ease;
+  will-change: transform, opacity;
+  transform-style: preserve-3d;
+  user-select: none;
+}
+
+/* Back Cards Peeking Out - subtle depth separation */
+.crc-card.is-back {
+  filter: brightness(0.8);
+  box-shadow:
+    0 6px 14px -3px rgba(0, 0, 0, 0.85);
+}
+
+.crc-card.is-back:hover {
+  filter: brightness(1.12);
+  border-color: rgba(255, 255, 255, 0.35);
+}
+
+/* Active Highlight Card */
+.crc-card.active {
+  border: 2px solid var(--orange, #C9561E);
+  box-shadow:
+    0 12px 28px -4px rgba(0, 0, 0, 0.95),
+    0 0 18px rgba(201, 86, 30, 0.6),
+    0 0 0 1px var(--orange, #C9561E) inset;
+}
+
+.crc-card:hover:not(.active) {
+  filter: brightness(1.12);
+  border-color: rgba(255, 255, 255, 0.35);
+}
+
+.crc-card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 11px;
+  display: block;
+  transition: transform 0.5s ease;
+}
+
+.crc-card:hover .crc-card-img {
+  transform: scale(1.06);
+}
+
+/* Carousel Nav Buttons */
+.crc-nav-btn {
+  position: absolute;
+  top: calc(50% + 4px);
+  transform: translateY(-50%);
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: rgba(17, 17, 16, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: var(--cream, #E8E0D0);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 90;
+  transition: all 0.25s var(--ease-out, ease);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.6);
+}
+
+.crc-nav-btn svg {
+  width: 16px;
+  height: 16px;
+}
+
+.crc-nav-btn:hover {
+  background: var(--orange, #C9561E);
+  border-color: var(--orange, #C9561E);
+  color: #FFFFFF;
+  transform: translateY(-50%) scale(1.1);
+  box-shadow: 0 6px 18px rgba(201, 86, 30, 0.55);
+}
+
+.crc-nav-prev {
+  left: 2px;
+}
+
+.crc-nav-next {
+  right: 2px;
+}
+
+/* Bottom Dots */
+.crc-dots {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  margin-top: 4px;
+}
+
+.crc-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.15);
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: all 0.25s ease;
+}
+
+.crc-dot.active {
+  width: 16px;
+  border-radius: 999px;
+  background: var(--orange, #C9561E);
+  box-shadow: 0 0 10px rgba(201, 86, 30, 0.6);
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 640px) {
+  .crc-viewport {
+    height: 130px;
+    perspective: 700px;
+  }
+  .crc-card {
+    width: 72px;
+    height: 72px;
+    border-radius: 8px;
+  }
+  .crc-card-img {
+    border-radius: 7px;
+  }
+  .crc-nav-btn {
+    width: 25px;
+    height: 25px;
+  }
+  .crc-nav-btn svg {
+    width: 14px;
+    height: 14px;
+  }
+}
