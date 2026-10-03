@@ -12,22 +12,22 @@
 export const RUBBER_CONFIGS = {
   SPIN: {
     label: 'SPIN',
-    tag: 'DHS HURRICANE 3',
+    tag: 'HURRICANE 8-80',
     accent: '#C9561E',
     topsheetColor: '#0D0E11',
     topsheetRoughness: 0.16,
     topsheetMetalness: 0.06,
-    spongeColor: '#0055B3', // Iconic DHS Provincial Blue Sponge
+    spongeColor: '#D9480F', // Nittaku #80 High-Elastic Sponge
     spongeRoughness: 0.88,
     spongeThickness: 0.038,
     pipsColor: '#0D0E11',
     backAdhesiveColor: '#E8E0D0',
-    ittfCode: 'DHS 24-108',
+    ittfCode: 'NIT 54-028',
     callouts: [
-      { id: 'sponge',   label: 'SPONGE',        sub: '2.15mm DENSE BLUE',          side: 'left',  xNorm: 0.295, yNorm: 0.340 },
-      { id: 'topsheet', label: 'TOPSHEET',      sub: 'TACKY CHINESE GRIP',         side: 'right', xNorm: 0.520, yNorm: 0.360 },
-      { id: 'pips',     label: 'PIPS ARRAY',    sub: 'CONICAL HIGH-DWELL PIPS',    side: 'right', xNorm: 0.535, yNorm: 0.640 },
-      { id: 'ittf',     label: 'ITTF APPROVED', sub: 'REG 24-108 TOURNAMENT',      side: 'left',  xNorm: 0.420, yNorm: 0.775 },
+      { id: 'sponge', label: 'SPONGE', sub: '2.15mm #80 HIGH-ELASTIC', side: 'left', xNorm: 0.295, yNorm: 0.340 },
+      { id: 'topsheet', label: 'TOPSHEET', sub: 'TACKY HIGH-FRICTION', side: 'right', xNorm: 0.520, yNorm: 0.360 },
+      { id: 'pips', label: 'PIPS ARRAY', sub: 'DENSE SPIN ARRAY', side: 'right', xNorm: 0.535, yNorm: 0.640 },
+      { id: 'ittf', label: 'ITTF APPROVED', sub: 'REG 54-028 TOURNAMENT', side: 'left', xNorm: 0.420, yNorm: 0.775 },
     ],
   },
 
@@ -43,18 +43,18 @@ export const RUBBER_CONFIGS = {
     spongeThickness: 0.036,
     pipsColor: '#C91D1D',
     backAdhesiveColor: '#F5F0E8',
-    ittfCode: 'BTY 05-001',
+    ittfCode: 'BTY 14-002',
     callouts: [
-      { id: 'sponge',   label: 'SPONGE',        sub: '2.1mm SPRING FOAM',          side: 'left',  xNorm: 0.295, yNorm: 0.340 },
-      { id: 'topsheet', label: 'TOPSHEET',      sub: 'TENSOR SPEED SHEET',         side: 'right', xNorm: 0.520, yNorm: 0.360 },
-      { id: 'pips',     label: 'PIPS ARRAY',    sub: 'EXPANDED PIPS MATRIX',       side: 'right', xNorm: 0.535, yNorm: 0.640 },
-      { id: 'ittf',     label: 'ITTF APPROVED', sub: 'REG 05-001 PRO TENSOR',      side: 'left',  xNorm: 0.420, yNorm: 0.775 },
+      { id: 'sponge', label: 'SPONGE', sub: '2.1mm SPRING FOAM', side: 'left', xNorm: 0.295, yNorm: 0.340 },
+      { id: 'topsheet', label: 'TOPSHEET', sub: 'TENSOR SPEED SHEET', side: 'right', xNorm: 0.520, yNorm: 0.360 },
+      { id: 'pips', label: 'PIPS ARRAY', sub: 'EXPANDED PIPS MATRIX', side: 'right', xNorm: 0.535, yNorm: 0.640 },
+      { id: 'ittf', label: 'ITTF APPROVED', sub: 'REG 14-002 PRO TENSOR', side: 'left', xNorm: 0.420, yNorm: 0.775 },
     ],
   },
 
   CONTROL: {
     label: 'CONTROL',
-    tag: 'RAKZA 7 SOFT',
+    tag: 'DONIC LIGA',
     accent: '#E5A823',
     topsheetColor: '#121316', // Natural Gum Pitch Black
     topsheetRoughness: 0.34,
@@ -64,12 +64,12 @@ export const RUBBER_CONFIGS = {
     spongeThickness: 0.032,
     pipsColor: '#121316',
     backAdhesiveColor: '#E8E0D0',
-    ittfCode: 'YAS 12-003',
+    ittfCode: 'DON 21-002',
     callouts: [
-      { id: 'sponge',   label: 'SPONGE',        sub: '1.8mm SOFT ABSORB FOAM',     side: 'left',  xNorm: 0.295, yNorm: 0.340 },
-      { id: 'topsheet', label: 'TOPSHEET',      sub: 'HIGH-ELASTIC GUM SHEET',     side: 'right', xNorm: 0.520, yNorm: 0.360 },
-      { id: 'pips',     label: 'PIPS ARRAY',    sub: 'HIGH DWELL TIME PIPS',       side: 'right', xNorm: 0.535, yNorm: 0.640 },
-      { id: 'ittf',     label: 'ITTF APPROVED', sub: 'REG 12-003 PRECISION SPEC',   side: 'left',  xNorm: 0.420, yNorm: 0.775 },
+      { id: 'sponge', label: 'SPONGE', sub: '1.8mm ELASTIC CONTROL', side: 'left', xNorm: 0.295, yNorm: 0.340 },
+      { id: 'topsheet', label: 'TOPSHEET', sub: 'HIGH-GRIP NATURAL RUBBER', side: 'right', xNorm: 0.520, yNorm: 0.360 },
+      { id: 'pips', label: 'PIPS ARRAY', sub: 'SURGICAL DWELL PIPS', side: 'right', xNorm: 0.535, yNorm: 0.640 },
+      { id: 'ittf', label: 'ITTF APPROVED', sub: 'REG 21-002 TOURNAMENT', side: 'left', xNorm: 0.420, yNorm: 0.775 },
     ],
   },
 
@@ -85,18 +85,18 @@ export const RUBBER_CONFIGS = {
     spongeThickness: 0.040,
     pipsColor: '#B71C1C',
     backAdhesiveColor: '#F5F0E8',
-    ittfCode: 'BTY 05-002',
+    ittfCode: 'BTY 14-001',
     callouts: [
-      { id: 'sponge',   label: 'SPONGE',        sub: '2.1mm ATTACK MATRIX',        side: 'left',  xNorm: 0.295, yNorm: 0.340 },
-      { id: 'topsheet', label: 'TOPSHEET',      sub: 'MAX-ENERGY SPIN SHEET',      side: 'right', xNorm: 0.520, yNorm: 0.360 },
-      { id: 'pips',     label: 'PIPS ARRAY',    sub: 'DIRECT-IMPACT PIPS MATRIX',  side: 'right', xNorm: 0.535, yNorm: 0.640 },
-      { id: 'ittf',     label: 'ITTF APPROVED', sub: 'REG 05-002 WORLD CLASS',      side: 'left',  xNorm: 0.420, yNorm: 0.775 },
+      { id: 'sponge', label: 'SPONGE', sub: '2.1mm SPRING SPONGE', side: 'left', xNorm: 0.295, yNorm: 0.340 },
+      { id: 'topsheet', label: 'TOPSHEET', sub: 'MAX ROTATION TENSION', side: 'right', xNorm: 0.520, yNorm: 0.360 },
+      { id: 'pips', label: 'PIPS ARRAY', sub: 'CODE 05 VERTICAL ARRAY', side: 'right', xNorm: 0.535, yNorm: 0.640 },
+      { id: 'ittf', label: 'ITTF APPROVED', sub: 'REG 14-001 WORLD CLASS', side: 'left', xNorm: 0.420, yNorm: 0.775 },
     ],
   },
 
   DEFENSIVE: {
     label: 'DEFENSIVE',
-    tag: 'SLICE 40',
+    tag: 'SPIKE P2',
     accent: '#4ECDC4',
     topsheetColor: '#16181B', // Graphite Matte Black
     topsheetRoughness: 0.42,
@@ -106,33 +106,33 @@ export const RUBBER_CONFIGS = {
     spongeThickness: 0.026,
     pipsColor: '#16181B',
     backAdhesiveColor: '#E8E0D0',
-    ittfCode: 'DON 33-014',
+    ittfCode: 'DON 21-032',
     callouts: [
-      { id: 'sponge',   label: 'SPONGE',        sub: '1.5mm DAMPENING FOAM',       side: 'left',  xNorm: 0.295, yNorm: 0.340 },
-      { id: 'topsheet', label: 'TOPSHEET',      sub: 'MICRO-TEXTURE CHOP SHEET',   side: 'right', xNorm: 0.520, yNorm: 0.360 },
-      { id: 'pips',     label: 'PIPS ARRAY',    sub: 'DECELERATION PIPS MATRIX',   side: 'right', xNorm: 0.535, yNorm: 0.640 },
-      { id: 'ittf',     label: 'ITTF APPROVED', sub: 'REG 33-014 CHOP CONTROL',    side: 'left',  xNorm: 0.420, yNorm: 0.775 },
+      { id: 'sponge', label: 'SPONGE', sub: '1.0mm SOFT DEF SPONGE', side: 'left', xNorm: 0.295, yNorm: 0.340 },
+      { id: 'topsheet', label: 'TOPSHEET', sub: 'LONG PIPS REVERSAL', side: 'right', xNorm: 0.520, yNorm: 0.360 },
+      { id: 'pips', label: 'PIPS ARRAY', sub: 'EXTENDED DEFENSIVE PIPS', side: 'right', xNorm: 0.535, yNorm: 0.640 },
+      { id: 'ittf', label: 'ITTF APPROVED', sub: 'REG 21-032 CHOP CONTROL', side: 'left', xNorm: 0.420, yNorm: 0.775 },
     ],
   },
 
   'ALL-ROUND': {
     label: 'ALL-ROUND',
-    tag: 'VEGA ASIA',
+    tag: 'TWINGO PLUS',
     accent: '#9B51E0',
     topsheetColor: '#A01B1B', // Deep Carbon Red
     topsheetRoughness: 0.28,
     topsheetMetalness: 0.04,
-    spongeColor: '#1A1A1A', // Signature Xiom Carbo Black Sponge
+    spongeColor: '#F59F00',
     spongeRoughness: 0.90,
     spongeThickness: 0.035,
     pipsColor: '#A01B1B',
     backAdhesiveColor: '#F5F0E8',
-    ittfCode: 'XIO 79-011',
+    ittfCode: 'DON 21-001',
     callouts: [
-      { id: 'sponge',   label: 'SPONGE',        sub: '2.0mm CARBO BLACK FOAM',     side: 'left',  xNorm: 0.295, yNorm: 0.340 },
-      { id: 'topsheet', label: 'TOPSHEET',      sub: 'HYPER-ELASTIC TENSOR SHEET', side: 'right', xNorm: 0.520, yNorm: 0.360 },
-      { id: 'pips',     label: 'PIPS ARRAY',    sub: 'HARMONIC ALL-ROUND GRID',    side: 'right', xNorm: 0.535, yNorm: 0.640 },
-      { id: 'ittf',     label: 'ITTF APPROVED', sub: 'REG 79-011 BALANCED PLAY',   side: 'left',  xNorm: 0.420, yNorm: 0.775 },
+      { id: 'sponge', label: 'SPONGE', sub: '1.8mm TWINGO PLUS FOAM', side: 'left', xNorm: 0.295, yNorm: 0.340 },
+      { id: 'topsheet', label: 'TOPSHEET', sub: 'CONTROL SHEET MATRIX', side: 'right', xNorm: 0.520, yNorm: 0.360 },
+      { id: 'pips', label: 'PIPS ARRAY', sub: 'WIDE DWELL SPACING', side: 'right', xNorm: 0.535, yNorm: 0.640 },
+      { id: 'ittf', label: 'ITTF APPROVED', sub: 'REG 21-001 BALANCED PLAY', side: 'left', xNorm: 0.420, yNorm: 0.775 },
     ],
   },
 };

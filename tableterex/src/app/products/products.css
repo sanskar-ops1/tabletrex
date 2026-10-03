@@ -98,6 +98,26 @@
 
 .nl-logo {
   text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  cursor: default;
+  user-select: none;
+  pointer-events: none;
+}
+
+.nl-logo-img {
+  height: 44px;
+  width: auto;
+  object-fit: contain;
+  display: block;
+  filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.35));
+  pointer-events: none;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+.nl-logo-text {
   display: flex;
   flex-direction: column;
 }
@@ -437,9 +457,8 @@
 
 /* 4. VALUE PROPS STRIP (Continuous Marquee right-to-left) */
 .nl-value-props {
-  background: var(--cream-dark);
-  border-top: 1px solid rgba(17, 17, 16, 0.12);
-  border-bottom: 1px solid rgba(17, 17, 16, 0.08);
+  background: transparent;
+  border: none;
   padding: 18px 0;
   overflow: hidden;
   position: relative;
@@ -682,6 +701,236 @@
 
 .nl-promo-card:hover .nl-promo-bg {
   transform: scale(1.05);
+}
+
+/* ─── Brand Filter Buttons with Dropdowns (Orange Styling, No Black Border) ─── */
+.nl-brand-pills-bar {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.nl-brand-dropdown-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.nl-brand-pill {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 20px;
+  border-radius: 999px;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  background: #C9561E;
+  color: #ffffff;
+  border: 2px solid #E06830;
+  cursor: pointer;
+  outline: none;
+  text-decoration: none;
+  overflow: hidden;
+  isolation: isolate;
+  user-select: none;
+  box-shadow: 0 4px 14px rgba(201, 86, 30, 0.28);
+  transition: box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+/* Water / Liquid Reaction on Hover (Hydrostatic surface tension wobble) */
+.nl-brand-pill:hover {
+  border-color: #FFA570;
+  box-shadow: 0 8px 24px rgba(201, 86, 30, 0.45), 0 0 16px rgba(255, 122, 56, 0.3);
+  transform: translateY(-2px);
+}
+
+/* High-performance Interactive Shallow Water Canvas */
+.nl-water-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 999px;
+  pointer-events: none;
+  z-index: 1;
+  display: block;
+}
+
+/* Text and Elements float crisply on top of the liquid */
+.nl-brand-pill .nl-brand-name {
+  color: #ffffff;
+  font-weight: 700;
+  position: relative;
+  z-index: 3;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
+}
+
+.nl-brand-pill .nl-brand-subtag {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.95);
+  background: rgba(0, 0, 0, 0.22);
+  padding: 1px 7px;
+  border-radius: 8px;
+  position: relative;
+  z-index: 3;
+  backdrop-filter: blur(4px);
+}
+
+.nl-brand-chevron {
+  color: #ffffff;
+  transition: transform 0.22s ease;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 3;
+  filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.4));
+}
+
+.nl-brand-chevron.open {
+  transform: rotate(180deg);
+}
+
+/* Active State: Warm orange glow with clean border, water reacts on hover */
+.nl-brand-pill.active {
+  border-color: #FFA570;
+  box-shadow: 0 4px 18px rgba(201, 86, 30, 0.45);
+  transform: translateY(-1px);
+}
+
+/* Inactive State: Clean, reacts when hovered */
+.nl-brand-pill.inactive {
+  opacity: 0.88;
+  box-shadow: none;
+  border-color: rgba(201, 86, 30, 0.45);
+}
+
+.nl-brand-pill.inactive:hover {
+  opacity: 1;
+  border-color: #FFA570;
+}
+
+/* Dropdown Menu Panel */
+.nl-brand-dropdown-menu {
+  position: absolute;
+  top: calc(100% + 10px);
+  left: 0;
+  width: 340px;
+  background: #ffffff;
+  border: 1.5px solid rgba(201, 86, 30, 0.3);
+  border-radius: 14px;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.14), 0 4px 14px rgba(201, 86, 30, 0.08);
+  padding: 12px;
+  z-index: 500;
+  animation: nlDropdownPop 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.nl-brand-dropdown-menu.align-right {
+  left: auto;
+  right: 0;
+}
+
+@keyframes nlDropdownPop {
+  from {
+    opacity: 0;
+    transform: translateY(-6px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.nl-bdd-cats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  max-height: 300px;
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
+.nl-bdd-cats::-webkit-scrollbar {
+  width: 5px;
+}
+
+.nl-bdd-cats::-webkit-scrollbar-thumb {
+  background: rgba(201, 86, 30, 0.3);
+  border-radius: 4px;
+}
+
+.nl-bdd-cat-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 8px;
+  border: 1px solid rgba(17, 17, 16, 0.12);
+  background: #F9F7F4;
+  color: var(--black);
+  font-size: 0.74rem;
+  font-family: var(--font-mono);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.18s ease;
+  outline: none;
+}
+
+.nl-bdd-cat-count {
+  font-size: 0.65rem;
+  color: rgba(17, 17, 16, 0.5);
+  font-weight: 700;
+}
+
+.nl-bdd-cat-btn:hover {
+  background: #FFF4ED;
+  border-color: var(--orange);
+  color: var(--orange);
+}
+
+.nl-bdd-cat-btn:hover .nl-bdd-cat-count {
+  color: var(--orange);
+}
+
+.nl-bdd-cat-btn.active {
+  background: var(--orange);
+  border-color: var(--orange);
+  color: #ffffff;
+  font-weight: 700;
+}
+
+.nl-bdd-cat-btn.active .nl-bdd-cat-count {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.nl-reset-filters-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  margin-left: 8px;
+  font-size: 0.75rem;
+  font-family: var(--font-mono);
+  color: var(--orange);
+  font-weight: 700;
+  padding: 6px 10px;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+}
+
+.nl-reset-filters-btn:hover {
+  background: rgba(201, 86, 30, 0.1);
+  color: var(--orange-light);
+  text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+  .nl-brand-dropdown-menu {
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    width: min(340px, calc(100vw - 32px));
+  }
 }
 
 /* 7. BESTSELLERS PRODUCT GRID */

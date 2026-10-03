@@ -1,8 +1,9 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { ALL_PRODUCTS } from '@/data/allProducts';
+import WaterCanvas from '@/components/WaterCanvas';
 import './products.css';
 
 /* ─── 4 Value Props for the Continuous Right-to-Left Marquee ─── */
@@ -264,9 +265,143 @@ const INSTA_POSTS = [
   '/images/hero-athlete.jpg',
 ];
 
+/* ─── Iconic Brand Sub-Groups by Product Name / Series ─── */
+const BRAND_SUBGROUPS = {
+  Butterfly: [
+    { label: 'Timo Boll', keywords: ['timo boll', 'timoboll', 'tb5'] },
+    { label: 'Dignics', keywords: ['dignics'] },
+    { label: 'Tenergy', keywords: ['tenergy'] },
+    { label: 'Viscaria', keywords: ['viscaria'] },
+    { label: 'Fan Zhendong', keywords: ['fan zhendong'] },
+    { label: 'Innerforce & Harimoto', keywords: ['innerforce', 'innerforace', 'harimoto', 'franziska'] },
+    { label: 'Primorac & Korbel', keywords: ['primorac', 'korbel', 'konglin'] },
+    { label: 'Mizutani Jun', keywords: ['mizutani'] },
+    { label: 'RDJ & Addoy Bats', keywords: ['rdj', 'addoy', 'wakaba', 'stayer', 'logo racket', 'outdoor racket'] },
+    { label: 'Sriver & Flextra', keywords: ['sriver', 'flextra', 'tackiness', 'tackness', 'fient', 'super anti'] },
+    { label: 'Rozena & Glayzer', keywords: ['rozena', 'glayzer', 'bryce', 'impartial', 'bugler', 'challenger', 'zyre'] },
+    { label: 'Lezoline Footwear', keywords: ['lezoline', 'sneaker', 'shoe'] },
+    { label: 'Pro Carbon Blades', keywords: ['outerforce', 'outerfforce', 'sardius', 'hadraw', 'diode', 'divode', 'ovtcharov', 'tiago apolonia', 'zhang jike', 'lin yun-ju', 'revolida', 'freitas'] },
+    { label: 'Apparel & Care Gear', keywords: ['ball', 'chack', 'cleaner', 'protector', 'case', 'sheet', 'bag', 'robot', 'shirt', 'short', 'suit', 'cure water', 'glue free'] },
+  ],
+  Nittaku: [
+    { label: 'Acoustic Series', keywords: ['acoustic'] },
+    { label: 'Fastarc Series', keywords: ['fastarc'] },
+    { label: 'Hurricane Series', keywords: ['hurricane'] },
+    { label: 'Violin Series', keywords: ['violin'] },
+    { label: 'Genextion & Hammond', keywords: ['genextion', 'hammond'] },
+    { label: 'Moristo Pips', keywords: ['moristo'] },
+    { label: 'Flyatt & Septear', keywords: ['flyatt', 'magic carbon', 'septear'] },
+    { label: '3-Star Premium Balls', keywords: ['3-star', '3 star', 'ball'] },
+    { label: 'Accessories & Care', keywords: ['tape', 'protect'] },
+  ],
+  Donic: [
+    { label: 'Waldner Series', keywords: ['waldner'] },
+    { label: 'Bluestorm & Bluestar', keywords: ['bluestorm', 'bluestrorm', 'bluestar'] },
+    { label: 'Bluegrip & Bluefire', keywords: ['bluegrip', 'blue fire'] },
+    { label: 'Carbotec Carbon Bats', keywords: ['carbotec'] },
+    { label: 'Acuda Series', keywords: ['acuda'] },
+    { label: 'Baracuda Series', keywords: ['barracudda', 'baracuda'] },
+    { label: 'Persson & Appelgren', keywords: ['persson', 'person', 'appelgreen', 'appelgren'] },
+    { label: 'Coppa & Desto', keywords: ['coppa', 'desto', 'spike', 'piranja', 'sonex', 'vario', 'liga', 'twingo'] },
+    { label: 'Original Carbon Blades', keywords: ['zhang jike', 'original', 'balsa', 'testra', 'anders lind', 'defplay', 'whiper'] },
+    { label: 'Legend & Sensation Bats', keywords: ['legend', 'top team', 'sensation', 'young champ'] },
+    { label: 'Tables (909 / Team / Champ)', keywords: ['table', '909', '707', '505', '303', '202', '101'] },
+    { label: 'Balls, Cleaners & Care', keywords: ['schildkrot', '40+', 'elite', 'clean', 'formula', 'tape', 'case'] },
+  ],
+  Tibhar: [
+    { label: 'Hybrid Series', keywords: ['hybrid'] },
+    { label: 'Evolution Series', keywords: ['evolution'] },
+    { label: 'Lebrun Series', keywords: ['lebrun'] },
+    { label: 'Samsonov Series', keywords: ['samsonov'] },
+    { label: 'Grass & Speedy Soft', keywords: ['grass', 'speedy'] },
+    { label: 'Quantum & Aurus', keywords: ['quantum', 'aurus', 'genius'] },
+    { label: 'Gravity & Carbon Blades', keywords: ['gravity', 'carbon shot', 'velociti', 'kratos', 'cca', 'krypto', 'libra', 'champ', 'game'] },
+    { label: 'Ready Match Bats', keywords: ['samsonov powergrip', 'xxx'] },
+    { label: 'Apparel & Footwear', keywords: ['socks', 'shirt', 'short', 'tracksuit', 't-shirt', 'towel'] },
+    { label: 'Covers & Bat Cases', keywords: ['cover', 'bat case', 'backpack', 'bag', 'box'] },
+    { label: 'Balls & Table Tennis Care', keywords: ['pack of', 'clean', 'glue', 'cleaner', 'tape', 'spin', 'blade', 'ball', 'net', 'surrounds', 'rolling pin'] },
+  ],
+  Looop: [
+    { label: '3-Star H40+ Balls', keywords: ['3 star', '3-star'] },
+    { label: '1-Star 40+ Balls', keywords: ['1 star', '1-star'] },
+    { label: 'Ripple 9C Blade', keywords: ['ripple'] },
+  ]
+};
+ 
+function BrandPillButton({
+  brand,
+  isSelected,
+  hasActiveBrand,
+  isOpen,
+  activeSubGroup,
+  onClick,
+}) {
+  const [isHovered, setIsHovered] = useState(false);
+  const [mousePos, setMousePos] = useState({ x: 0, y: 0, vx: 0, vy: 0 });
+  const lastMouseRef = useRef({ x: 0, y: 0, t: 0 });
+
+  const handleMouseEnter = (e) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    lastMouseRef.current = { x, y, t: performance.now() };
+    setMousePos({ x, y, vx: 0, vy: 0 });
+    setIsHovered(true);
+  };
+
+  const handleMouseMove = (e) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    const now = performance.now();
+    const dt = Math.max(1, now - lastMouseRef.current.t);
+    const vx = ((x - lastMouseRef.current.x) / dt) * 16;
+    const vy = ((y - lastMouseRef.current.y) / dt) * 16;
+    lastMouseRef.current = { x, y, t: now };
+    setMousePos({ x, y, vx, vy });
+  };
+
+  const handleMouseLeave = () => {
+    setIsHovered(false);
+  };
+
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      onMouseEnter={handleMouseEnter}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      className={`nl-brand-pill ${isSelected ? 'active' : ''} ${hasActiveBrand && !isSelected ? 'inactive' : ''}`}
+      aria-expanded={isOpen}
+      aria-haspopup="true"
+      id={`brand-btn-${brand.toLowerCase()}`}
+    >
+      <WaterCanvas isHovered={isHovered} mousePos={mousePos} />
+
+      <span className="nl-brand-name">{brand}</span>
+      {isSelected && activeSubGroup && (
+        <span className="nl-brand-subtag">· {activeSubGroup}</span>
+      )}
+      <svg
+        className={`nl-brand-chevron ${isOpen ? 'open' : ''}`}
+        width="12"
+        height="12"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2.5"
+      >
+        <polyline points="6 9 12 15 18 9" />
+      </svg>
+    </button>
+  );
+}
+
 export default function ProductsPage() {
   const [activeCategory, setActiveCategory] = useState(null);
   const [activeBrand, setActiveBrand] = useState(null);
+  const [activeSubGroup, setActiveSubGroup] = useState(null);
   const [searchQuery, setSearchQuery] = useState('');
   const [visibleCount, setVisibleCount] = useState(24);
   const [wishlist, setWishlist] = useState([]);
@@ -276,6 +411,17 @@ export default function ProductsPage() {
   const [email, setEmail] = useState('');
   const [subscribed, setSubscribed] = useState(false);
   const [reviewIdx, setReviewIdx] = useState(0);
+  const [openBrandDropdown, setOpenBrandDropdown] = useState(null);
+
+  useEffect(() => {
+    const handleOutsideClick = (e) => {
+      if (!e.target.closest('.nl-brand-dropdown-wrapper')) {
+        setOpenBrandDropdown(null);
+      }
+    };
+    document.addEventListener('click', handleOutsideClick);
+    return () => document.removeEventListener('click', handleOutsideClick);
+  }, []);
 
   const toggleWishlist = (id, e) => {
     e.stopPropagation();
@@ -323,28 +469,47 @@ export default function ProductsPage() {
   const filteredProducts = ALL_PRODUCTS.filter((p) => {
     const matchCat = activeCategory ? p.category === activeCategory : true;
     const matchBrand = activeBrand ? p.brand === activeBrand : true;
+
+    // Sub-group filter by name / series keywords
+    let matchSubGroup = true;
+    if (activeBrand && activeSubGroup) {
+      const groups = BRAND_SUBGROUPS[activeBrand] || [];
+      const current = groups.find((g) => g.label === activeSubGroup);
+      if (current) {
+        matchSubGroup = current.keywords.some((k) =>
+          p.name.toLowerCase().includes(k.toLowerCase())
+        );
+      }
+    }
+
     const matchSearch = searchQuery
       ? p.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
         p.specs.toLowerCase().includes(searchQuery.toLowerCase()) ||
         p.brand.toLowerCase().includes(searchQuery.toLowerCase()) ||
         p.category.toLowerCase().includes(searchQuery.toLowerCase())
       : true;
-    return matchCat && matchBrand && matchSearch;
+    return matchCat && matchBrand && matchSubGroup && matchSearch;
   });
 
   const displayedProducts = filteredProducts.slice(0, visibleCount);
-
-  const currentPromo = PROMO_DATA[activeCategory] || PROMO_DATA['All'];
 
   return (
     <div className="nl-page-container">
       {/* ── 2. STORE HEADER & NAVIGATION ── */}
       <header className="nl-navbar">
         <div className="nl-navbar-inner">
-          <Link href="/products" className="nl-logo">
-            <span className="nl-logo-main">TABLETEREX</span>
-            <span className="nl-logo-sub">OFFICIAL STORE · PRO GEAR</span>
-          </Link>
+          <div className="nl-logo">
+            <img
+              src="/images/tableterex-logo.png"
+              alt="TableTerex Logo"
+              className="nl-logo-img"
+              draggable={false}
+            />
+            <div className="nl-logo-text">
+              <span className="nl-logo-main">TABLETEREX</span>
+              <span className="nl-logo-sub">OFFICIAL STORE · PRO GEAR</span>
+            </div>
+          </div>
 
           <nav className="nl-nav-desktop">
             <ul className="nl-nav-links">
@@ -455,7 +620,7 @@ export default function ProductsPage() {
           </div>
 
           <p className="hero-tagline">
-            Fresh batches arrive every week. Custom-assembled rackets and pro rubber engineered for your game.
+            Shop table tennis rackets and performance-focused rubber from fresh weekly batches. Build your setup around the way you play.
           </p>
 
           <div className="hero-cta-group">
@@ -547,88 +712,33 @@ export default function ProductsPage() {
         </div>
       </section>
 
-      {/* ── 6. DUAL FEATURED PROMO BANNERS (Moves & Updates dynamically with Categories) ── */}
-      <section className="nl-promo-section" id="collections">
-        <div className="nl-promo-grid">
-          {/* Card 1 */}
-          <div className="nl-promo-card">
-            <img
-              src={currentPromo.card1.bg}
-              alt={currentPromo.card1.title}
-              className="nl-promo-bg"
-            />
-            <div className="nl-promo-overlay" />
-            <div className="nl-promo-content">
-              <span className="nl-mono-label" style={{ color: 'rgba(255,255,255,0.8)' }}>
-                {currentPromo.card1.tag}
-              </span>
-              <h3 className="nl-promo-title nl-serif">
-                {currentPromo.card1.title}
-              </h3>
-              <p className="nl-promo-desc">
-                {currentPromo.card1.desc}
-              </p>
-              <button
-                className="nl-btn-secondary"
-                style={{ color: '#fff', borderColor: 'rgba(255,255,255,0.5)', background: 'transparent' }}
-                onClick={() => {
-                  setActiveCategory(currentPromo.card1.target);
-                  const el = document.getElementById('bestsellers');
-                  if (el) el.scrollIntoView({ behavior: 'smooth' });
-                }}
-              >
-                {currentPromo.card1.cta}
-              </button>
-            </div>
-          </div>
-
-          {/* Card 2 */}
-          <div className="nl-promo-card">
-            <img
-              src={currentPromo.card2.bg}
-              alt={currentPromo.card2.title}
-              className="nl-promo-bg"
-            />
-            <div className="nl-promo-overlay" />
-            <div className="nl-promo-content">
-              <span className="nl-mono-label" style={{ color: 'rgba(255,255,255,0.8)' }}>
-                {currentPromo.card2.tag}
-              </span>
-              <h3 className="nl-promo-title nl-serif">
-                {currentPromo.card2.title}
-              </h3>
-              <p className="nl-promo-desc">
-                {currentPromo.card2.desc}
-              </p>
-              <button
-                className="nl-btn-secondary"
-                style={{ color: '#fff', borderColor: 'rgba(255,255,255,0.5)', background: 'transparent' }}
-                onClick={() => {
-                  setActiveCategory(currentPromo.card2.target);
-                  const el = document.getElementById('bestsellers');
-                  if (el) el.scrollIntoView({ behavior: 'smooth' });
-                }}
-              >
-                {currentPromo.card2.cta}
-              </button>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* ── 7. BESTSELLERS / PRODUCT CATALOG GRID (Moves & Filters dynamically with Categories) ── */}
       <section className="nl-bestsellers-section" id="bestsellers">
         <div className="nl-section-header" style={{ flexDirection: 'column', alignItems: 'stretch', gap: '20px' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', flexWrap: 'wrap', gap: '16px' }}>
             <div>
               <span className="nl-mono-label">
-                {activeCategory ? `CATEGORY: ${activeCategory.toUpperCase()}` : 'OFFICIAL MANUFACTURER CATALOG'}
+                {activeSubGroup
+                  ? `${activeBrand?.toUpperCase()} · ${activeSubGroup.toUpperCase()}`
+                  : activeBrand
+                  ? `BRAND: ${activeBrand.toUpperCase()}`
+                  : activeCategory
+                  ? `CATEGORY: ${activeCategory.toUpperCase()}`
+                  : 'OFFICIAL MANUFACTURER CATALOG'}
               </span>
               <h2 className="nl-section-title nl-serif">
-                {activeCategory ? `${activeCategory} Collection` : 'All 343 Competition Equipment Items'}
+                {activeSubGroup
+                  ? `${activeBrand} ${activeSubGroup}`
+                  : activeBrand
+                  ? `${activeBrand} Collection`
+                  : activeCategory
+                  ? `${activeCategory} Collection`
+                  : 'All 343 Competition Equipment Items'}
               </h2>
               <p style={{ margin: '6px 0 0', fontSize: '0.82rem', color: 'rgba(17, 17, 16, 0.65)', fontFamily: 'var(--font-mono)' }}>
-                Showing {displayedProducts.length} of {filteredProducts.length} products from Butterfly, Nittaku, Donic, Tibhar & Looop
+                Showing {displayedProducts.length} of {filteredProducts.length} products
+                {activeBrand ? ` in ${activeBrand}` : ' from Butterfly, Nittaku, Donic, Tibhar & Looop'}
+                {activeSubGroup ? ` (${activeSubGroup})` : ''}
               </p>
             </div>
 
@@ -642,6 +752,8 @@ export default function ProductsPage() {
                   setSearchQuery(e.target.value);
                   setVisibleCount(24);
                 }}
+                autoComplete="off"
+                suppressHydrationWarning
                 style={{
                   width: '100%',
                   padding: '10px 36px 10px 36px',
@@ -687,50 +799,94 @@ export default function ProductsPage() {
             </div>
           </div>
 
-          {/* Brand Filter Pills */}
-          <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap', alignItems: 'center' }}>
-            <span style={{ fontSize: '0.72rem', fontFamily: 'var(--font-mono)', color: 'rgba(17,17,16,0.5)', fontWeight: 600, marginRight: '4px' }}>
-              BRAND:
-            </span>
+          {/* Brand Filter Buttons with Name-based Sub-Groups (No Products in Dropdown) */}
+          <div className="nl-brand-pills-bar">
             {['Butterfly', 'Nittaku', 'Donic', 'Tibhar', 'Looop'].map((b) => {
               const isSelected = activeBrand === b;
-              const count = ALL_PRODUCTS.filter((p) => p.brand === b && (!activeCategory || p.category === activeCategory)).length;
+              const isOpen = openBrandDropdown === b;
+              const hasActiveBrand = activeBrand !== null;
+              const brandProducts = ALL_PRODUCTS.filter((p) => p.brand === b);
+              const brandGroups = BRAND_SUBGROUPS[b] || [];
+
               return (
-                <button
-                  key={b}
-                  onClick={() => {
-                    setActiveBrand(isSelected ? null : b);
-                    setVisibleCount(24);
-                  }}
-                  style={{
-                    padding: '6px 14px',
-                    borderRadius: '20px',
-                    border: isSelected ? '1px solid var(--black)' : '1px solid rgba(17, 17, 16, 0.15)',
-                    background: isSelected ? 'var(--black)' : 'transparent',
-                    color: isSelected ? 'var(--white)' : 'var(--black)',
-                    fontSize: '0.72rem',
-                    fontFamily: 'var(--font-mono)',
-                    fontWeight: 600,
-                    cursor: 'pointer',
-                    transition: 'all 0.2s',
-                    display: 'inline-flex',
-                    alignItems: 'center',
-                    gap: '6px',
-                  }}
-                >
-                  <span>{b}</span>
-                  <span style={{ opacity: 0.65, fontSize: '0.65rem' }}>({count})</span>
-                </button>
+                <div key={b} className="nl-brand-dropdown-wrapper">
+                  <BrandPillButton
+                    brand={b}
+                    isSelected={isSelected}
+                    hasActiveBrand={hasActiveBrand}
+                    isOpen={isOpen}
+                    activeSubGroup={activeSubGroup}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      if (isOpen) {
+                        setOpenBrandDropdown(null);
+                      } else {
+                        setOpenBrandDropdown(b);
+                        setActiveBrand(b);
+                        setActiveSubGroup(null);
+                        setVisibleCount(24);
+                      }
+                    }}
+                  />
+
+                  {/* Dropdown Menu for this Brand (Only Name-based Sub-groups) */}
+                  {isOpen && (
+                    <div
+                      className={`nl-brand-dropdown-menu ${b === 'Tibhar' || b === 'Looop' ? 'align-right' : ''}`}
+                      onClick={(e) => e.stopPropagation()}
+                    >
+                      <div className="nl-bdd-cats">
+                        <button
+                          type="button"
+                          className={`nl-bdd-cat-btn ${isSelected && !activeSubGroup ? 'active' : ''}`}
+                          onClick={() => {
+                            setActiveBrand(b);
+                            setActiveSubGroup(null);
+                            setVisibleCount(24);
+                            setOpenBrandDropdown(null);
+                          }}
+                        >
+                          <span>All {b} Gear</span>
+                          <span className="nl-bdd-cat-count">{brandProducts.length}</span>
+                        </button>
+                        {brandGroups.map((g) => {
+                          const isGroupActive = isSelected && activeSubGroup === g.label;
+                          const gCount = brandProducts.filter((p) =>
+                            g.keywords.some((k) => p.name.toLowerCase().includes(k.toLowerCase()))
+                          ).length;
+
+                          return (
+                            <button
+                              key={g.label}
+                              type="button"
+                              className={`nl-bdd-cat-btn ${isGroupActive ? 'active' : ''}`}
+                              onClick={() => {
+                                setActiveBrand(b);
+                                setActiveSubGroup(g.label);
+                                setVisibleCount(24);
+                                setOpenBrandDropdown(null);
+                              }}
+                            >
+                              <span>{g.label}</span>
+                              <span className="nl-bdd-cat-count">{gCount}</span>
+                            </button>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  )}
+                </div>
               );
             })}
 
-            {(activeCategory || activeBrand || searchQuery) && (
+            {(activeCategory || activeBrand || activeSubGroup || searchQuery) && (
               <button
-                className="nl-view-all-link"
-                style={{ background: 'none', border: 'none', cursor: 'pointer', marginLeft: '8px', fontSize: '0.72rem', fontFamily: 'var(--font-mono)', color: 'var(--orange)', fontWeight: 600 }}
+                className="nl-reset-filters-btn"
                 onClick={() => {
                   setActiveCategory(null);
                   setActiveBrand(null);
+                  setActiveSubGroup(null);
+                  setOpenBrandDropdown(null);
                   setSearchQuery('');
                   setVisibleCount(24);
                 }}
@@ -1085,6 +1241,7 @@ export default function ProductsPage() {
                   e.preventDefault();
                   if (email) setSubscribed(true);
                 }}
+                suppressHydrationWarning
               >
                 <input
                   type="email"
@@ -1093,8 +1250,11 @@ export default function ProductsPage() {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required
+                  autoComplete="off"
+                  data-lpignore="true"
+                  suppressHydrationWarning
                 />
-                <button type="submit" className="nl-btn-primary">
+                <button type="submit" className="nl-btn-primary" suppressHydrationWarning>
                   SUBSCRIBE
                 </button>
               </form>
@@ -1120,7 +1280,14 @@ export default function ProductsPage() {
       <footer className="nl-footer">
         <div className="nl-footer-grid">
           <div className="nl-footer-col">
-            <span className="nl-logo-main">TABLETEREX</span>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '8px' }}>
+              <img
+                src="/images/tableterex-logo.png"
+                alt="TableTerex Logo"
+                style={{ height: '38px', width: 'auto', objectFit: 'contain' }}
+              />
+              <span className="nl-logo-main">TABLETEREX</span>
+            </div>
             <span className="nl-logo-sub" style={{ display: 'block', marginBottom: '14px' }}>
               OFFICIAL EQUIPMENT STORE
             </span>

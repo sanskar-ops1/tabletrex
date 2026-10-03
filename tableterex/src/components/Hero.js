@@ -43,7 +43,7 @@ export default function Hero() {
         </div>
 
         <p className="hero-tagline">
-          Fresh batches arrive every week. Custom-assembled rackets and pro rubber engineered for your game.
+          Shop table tennis rackets and performance-focused rubber from fresh weekly batches. Build your setup around the way you play.
         </p>
 
         <div className="hero-cta-group">

@@ -6,13 +6,14 @@ import Hero from '@/components/Hero';
 import Marquee from '@/components/Marquee';
 import ShopByCategory from '@/components/ShopByCategory';
 import FreshThisWeek from '@/components/FreshThisWeek';
+import ShopByBudget from '@/components/ShopByBudget';
+import BuildYourSetup from '@/components/BuildYourSetup';
 import BestSellers from '@/components/BestSellers';
 import FindYourPlay from '@/components/FindYourPlay';
-import CustomizeSetup from '@/components/CustomizeSetup';
-import BuildYourSetup from '@/components/BuildYourSetup';
-import PhilosophySection from '@/components/PhilosophySection';
-import TechPerformance from '@/components/TechPerformance';
+import ShopByBrand from '@/components/ShopByBrand';
+import ReadyMadeBats from '@/components/ReadyMadeBats';
 import WhyTableTrex from '@/components/WhyTableTrex';
+import TechPerformance from '@/components/TechPerformance';
 import Reviews from '@/components/Testimonials';
 import FinalCTA from '@/components/FinalCTA';
 import Footer from '@/components/Footer';
@@ -56,15 +57,25 @@ export default function HomePage() {
         {/* cream → dark */}
         <C2D seed={1} />
 
-        {/* 3 ── FRESH THIS WEEK ── dark */}
+        {/* 3 ── FRESH STOCK ── dark */}
         <div style={{ background: 'var(--black)' }}>
           <FreshThisWeek />
+        </div>
+
+        {/* 4 ── SHOP BY BUDGET ── dark */}
+        <div style={{ background: 'var(--black)' }}>
+          <ShopByBudget />
+        </div>
+
+        {/* 5 ── BUILD YOUR GAME (RECOMMENDED COMBINATIONS) ── dark */}
+        <div style={{ background: 'var(--black)' }}>
+          <BuildYourSetup />
         </div>
 
         {/* dark → cream */}
         <D2C seed={2} />
 
-        {/* 4 ── BEST SELLERS ── cream */}
+        {/* 6 ── BEST SELLERS / PLAYERS' CHOICE ── cream */}
         <div style={{ background: 'var(--cream)' }}>
           <BestSellers onProductClick={setProduct} />
         </div>
@@ -72,7 +83,7 @@ export default function HomePage() {
         {/* cream → dark */}
         <C2D seed={0} />
 
-        {/* 5 ── FIND YOUR RACKET + RUBBER ── dark */}
+        {/* 7 ── BUILD YOUR SETUP / FIND YOUR SETUP ── dark */}
         <div style={{ background: 'var(--black)' }}>
           <FindYourPlay />
         </div>
@@ -80,35 +91,34 @@ export default function HomePage() {
         {/* dark → cream */}
         <D2C seed={1} />
 
-        {/* 6 ── CUSTOMIZE YOUR SETUP ── cream */}
+        {/* 8 ── SHOP BY BRAND ── cream */}
         <div style={{ background: 'var(--cream)' }}>
-          <CustomizeSetup />
+          <ShopByBrand />
         </div>
 
         {/* cream → dark */}
         <C2D seed={2} />
 
-        {/* 7 ── BUILD YOUR SETUP ── dark */}
+        {/* 9 ── READY-MADE BATS (FIND YOUR FIRST BAT) ── dark */}
         <div style={{ background: 'var(--black)' }}>
-          <BuildYourSetup />
+          <ReadyMadeBats />
         </div>
 
         {/* dark → cream */}
         <D2C seed={0} />
 
-        {/* 9 ── WHY TABLETREX ── cream */}
+        {/* 10 ── WHY TABLETREX ── cream */}
         <div style={{ background: 'var(--cream)' }}>
           <WhyTableTrex />
         </div>
 
         {/* cream → dark */}
-        <C2D seed={2} />
+        <C2D seed={1} />
 
-        {/* 10 ── TECHNOLOGY & PERFORMANCE ── dark */}
+        {/* 11 ── GEAR GUIDE (TECHNOLOGY & PERFORMANCE) ── dark */}
         <div style={{ background: 'var(--black)' }}>
           <TechPerformance />
         </div>
-
 
         {/* 12 ── REVIEWS & TESTIMONIALS ── dark */}
         <div style={{ background: 'var(--black)' }}>
@@ -119,7 +129,7 @@ export default function HomePage() {
         <FinalCTA />
       </main>
 
-      {/* 15 ── FOOTER & CONTACT ── dark with TABLETEREX giant watermark */}
+      {/* 14 ── FOOTER & CONTACT ── dark with TABLETEREX giant watermark */}
       <div style={{ background: 'var(--black)' }}>
         <Footer />
       </div>

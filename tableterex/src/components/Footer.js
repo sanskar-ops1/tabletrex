@@ -87,7 +87,12 @@ export default function Footer() {
               ✓ YOU&apos;RE SUBSCRIBED!
             </p>
           ) : (
-            <form className="footer-newsletter-form" onSubmit={handleSubscribe} id="newsletter-form">
+            <form
+              className="footer-newsletter-form"
+              onSubmit={handleSubscribe}
+              id="newsletter-form"
+              suppressHydrationWarning
+            >
               <input
                 type="email"
                 className="footer-newsletter-input"
@@ -96,12 +101,16 @@ export default function Footer() {
                 onChange={(e) => setEmail(e.target.value)}
                 required
                 id="newsletter-email-input"
+                autoComplete="off"
+                data-lpignore="true"
+                suppressHydrationWarning
               />
               <button
                 type="submit"
                 className="footer-newsletter-btn"
                 id="newsletter-submit-btn"
                 aria-label="Subscribe"
+                suppressHydrationWarning
               >
                 →
               </button>

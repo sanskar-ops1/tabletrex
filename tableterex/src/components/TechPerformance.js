@@ -18,36 +18,33 @@ const RACKET_TECH = [
     id: 'blade-construction',
     label: 'BLADE CONSTRUCTION',
     icon: BladeConstructionIsometricIcon,
-    desc: 'Outer veneer plies, carbon damping layers, and selected core wood.',
     values: ['ALL-WOOD', 'CARBON', 'ARYLATE-CARBON', 'ZYLON-CARBON'],
   },
   {
     id: 'weight',
     label: 'WEIGHT & BALANCE',
     icon: WeightBalanceIsometricIcon,
-    desc: 'Center-of-gravity tuning for swing weight and recovery velocity.',
-    values: ['72G (LIGHT)', '85G (BALANCED)', '95G (POWER)'],
+    values: ['LIGHT', 'BALANCED', 'POWER'],
   },
   {
     id: 'speed',
     label: 'SPEED RATING',
     icon: SpeedRatingIsometricIcon,
-    desc: 'Catapult rebound velocity off the wood/carbon matrix.',
+    desc: 'Measured rebound response across different blade constructions.',
     bar: 86,
   },
   {
     id: 'control',
     label: 'CONTROL INDEX',
     icon: ControlIndexIsometricIcon,
-    desc: 'Vibration damping and linear dwell feedback on ball contact.',
+    desc: 'Dwell, vibration feedback, and response at ball contact.',
     bar: 80,
   },
   {
     id: 'blade-composition',
     label: 'BLADE COMPOSITION',
     icon: BladeCompositionIsometricIcon,
-    desc: 'Laminated ply count and microscopic carbon weave orientation.',
-    values: ['5-PLY WOOD', '7-PLY OFF', '3+2 ARYLATE', '5+2 ZLC'],
+    values: ['5-PLY WOOD', '7-PLY', 'ARYLATE COMPOSITES', 'ZLC'],
   },
 ];
 
@@ -56,42 +53,39 @@ const RUBBER_TECH = [
     id: 'spin',
     label: 'SPIN COEFFICIENT',
     icon: SpinCoefficientIsometricIcon,
-    desc: 'Frictional mechanical grip and topspin arc generation.',
+    desc: 'Surface grip and topsheet characteristics for generating spin.',
     bar: 94,
   },
   {
     id: 'rubber-speed',
     label: 'SPEED DYNAMICS',
     icon: SpeedDynamicsIsometricIcon,
-    desc: 'Tensor pore tension rebound on flat strokes and counter-drives.',
+    desc: 'Tensor response and rebound behaviour on attacking strokes.',
     bar: 88,
   },
   {
     id: 'rubber-control',
     label: 'PRECISION CONTROL',
     icon: PrecisionControlIsometricIcon,
-    desc: 'Linear response in short push play, drops, and service reception.',
+    desc: 'Response during pushes, blocks, drops, and short play.',
     bar: 78,
   },
   {
     id: 'sponge-thickness',
     label: 'SPONGE THICKNESS',
     icon: SpongeThicknessIsometricIcon,
-    desc: 'Spring depth gauge controlling dwell time and trajectory height.',
-    values: ['1.8 MM (TOUCH)', '2.0 MM (ALL-ROUND)', '2.15 MM (MAX POWER)'],
+    values: ['1.8 MM', '2.0 MM', '2.15 MM'],
   },
   {
     id: 'hardness',
     label: 'SPONGE HARDNESS',
     icon: SpongeHardnessIsometricIcon,
-    desc: 'Shore durometer density rating for explosive vs soft feel.',
-    values: ['37° (SOFT/CONTROL)', '42° (MEDIUM TENSOR)', '50° (HARD/TACKY)'],
+    values: ['SOFT', 'MEDIUM', 'HARD'],
   },
   {
     id: 'grip',
     label: 'SURFACE GRIP',
     icon: SurfaceGripIsometricIcon,
-    desc: 'High-tack contact surface tension preventing ball slip in humid conditions.',
     values: ['EURO-JAPANESE TENSION', 'CHINESE TACKY GRIP', 'MICRO-TEXTURE'],
   },
 ];
@@ -109,7 +103,7 @@ function TechRow({ item }) {
       <div className="tech-spec-content">
         <div className="tech-spec-head">
           <span className="tech-spec-label text-label">{item.label}</span>
-          <p className="tech-spec-desc">{item.desc}</p>
+          {item.desc && <p className="tech-spec-desc">{item.desc}</p>}
         </div>
 
         {item.bar !== undefined ? (
@@ -139,13 +133,15 @@ export default function TechPerformance() {
       <div className="tech-watermark" aria-hidden="true">TECH</div>
 
       <div className="tech-header">
-        <span className="text-label">TECHNOLOGY &amp; PERFORMANCE</span>
+        <span className="text-label" style={{ color: 'var(--orange)', letterSpacing: '0.2em' }}>
+          TECHNOLOGY &amp; PERFORMANCE
+        </span>
         <h2 className="tech-title text-display">
           WHAT MAKES<br />
           <span className="tech-accent">THE DIFFERENCE</span>
         </h2>
-        <p className="tech-sub-banner text-label">
-          STANDARDIZED TECHNICAL SPECIFICATIONS ACROSS RACKET BLADES AND RUBBER SHEETS
+        <p className="tech-sub-banner">
+          Technical specifications that help you understand the gear before you play it.
         </p>
       </div>
 
@@ -156,7 +152,7 @@ export default function TechPerformance() {
             <span className="tech-col-num">01</span>
             <h3 className="tech-col-title text-display">RACKET /<br />BLADE TECH</h3>
             <p className="tech-col-sub">
-              THE BLADE IS THE SKELETON OF YOUR SHOT. COMPOSITION, PLY COUNT, AND WEIGHT DISTRIBUTION DICTATE POWER, REACTION, AND DWELL FEEL.
+              The foundation of your setup. Blade construction, ply composition, materials, weight, and balance all influence speed, control, feel, and playing response.
             </p>
           </div>
           <div className="tech-specs">
@@ -174,7 +170,7 @@ export default function TechPerformance() {
             <span className="tech-col-num">02</span>
             <h3 className="tech-col-title text-display">RUBBER /<br />SHEET TECH</h3>
             <p className="tech-col-sub">
-              THE RUBBER DETERMINES SPIN, TRAJECTORY, AND BALL RETENTION. SPONGE THICKNESS, SHORE DENSITY, AND SURFACE TENSION SHAPE YOUR GAME.
+              Where spin, speed, and touch come together. Sponge thickness, hardness, surface grip, and rubber construction influence how the ball reacts on contact.
             </p>
           </div>
           <div className="tech-specs">
@@ -186,8 +182,8 @@ export default function TechPerformance() {
       </div>
 
       <div className="tech-cta-row">
-        <a href="/guide" className="btn-outline-cream" id="tech-guide-btn">
-          EXPLORE COMPLETE TECHNICAL GUIDE →
+        <a href="/products" className="btn-outline-cream" id="tech-guide-btn">
+          EXPLORE THE COMPLETE TECHNICAL GUIDE →
         </a>
       </div>
     </section>

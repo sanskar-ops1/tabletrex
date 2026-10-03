@@ -4,466 +4,1134 @@ import React, { useState, useEffect, useRef, useCallback } from 'react';
 import './CircularRacketCarousel.css'; // Re-use same CSS — same layout
 
 export const CATEGORY_RUBBERS = {
-  SPIN: [
+  "SPIN": [
     {
-      id: 'dhs-hurricane-3',
-      name: 'DHS Hurricane 3',
-      brand: 'DHS',
-      price: '₹1,899',
-      image: '/images/red-rubber.jpg',
-      desc: 'Tacky Chinese topsheet engineered for devastating heavy topspin loops.',
-      summary: 'The benchmark Chinese rubber for looping and spin dominance.',
-      profile: {
-        sponge:   { label: 'SPONGE',   sub: '2.15mm DENSE BLUE',      val: 88 },
-        topsheet: { label: 'TOPSHEET', sub: 'TACKY CHINESE GRIP',     val: 95 },
-        pips:     { label: 'PIPS',     sub: 'CONICAL HIGH-DWELL',      val: 91 },
-        ittf:     { label: 'ITTF',     sub: 'REG 24-108 TOURNAMENT',   val: 100 },
-      },
+      "id": "nittaku-h8-80",
+      "name": "Nittaku Hurricane 8-80 Power",
+      "brand": "NITTAKU",
+      "price": "₹6,129 MRP",
+      "image": "/images/black-rubber.jpg",
+      "desc": "Engineered specifically for the 40+ poly ball. The high-elastic #80 sponge gives fast speed recovery while the sticky topsheet generates lethal arc rotation.",
+      "summary": "Sticky high-elastic #80 sponge generating lethal arc rotation.",
+      "profile": {
+        "sponge": {
+          "label": "SPONGE",
+          "sub": "2.15mm #80 HIGH-ELASTIC",
+          "val": 88
+        },
+        "topsheet": {
+          "label": "TOPSHEET",
+          "sub": "TACKY HIGH-FRICTION",
+          "val": 99
+        },
+        "pips": {
+          "label": "PIPS",
+          "sub": "DENSE SPIN ARRAY",
+          "val": 92
+        },
+        "ittf": {
+          "label": "ITTF",
+          "sub": "REG 54-028 APPROVED",
+          "val": 100
+        }
+      }
     },
     {
-      id: 'yasaka-rakza-z',
-      name: 'Yasaka Rakza Z',
-      brand: 'YASAKA',
-      price: '₹2,499',
-      image: '/images/black-rubber.jpg',
-      desc: 'Hybrid ZAP sponge with extreme topspin grip for mid-distance looping.',
-      summary: 'ZAP tensor sponge — maximum rotational velocity at contact.',
-      profile: {
-        sponge:   { label: 'SPONGE',   sub: '2.0mm ZAP TENSOR',       val: 84 },
-        topsheet: { label: 'TOPSHEET', sub: 'MAX SPIN FRICTION',       val: 92 },
-        pips:     { label: 'PIPS',     sub: 'HIGH-DWELL ARRAY',        val: 88 },
-        ittf:     { label: 'ITTF',     sub: 'REG 14-022 APPROVED',     val: 100 },
-      },
+      "id": "butterfly-t05-spin",
+      "name": "Butterfly Tenergy 05",
+      "brand": "BUTTERFLY",
+      "price": "₹10,600 MRP",
+      "image": "/images/red-rubber.jpg",
+      "desc": "Spring Sponge technology combined with high-tension rubber produces heavy rotation on looping drives and serve returns.",
+      "summary": "The global benchmark for heavy rotation topspin loops.",
+      "profile": {
+        "sponge": {
+          "label": "SPONGE",
+          "sub": "2.1mm SPRING SPONGE",
+          "val": 92
+        },
+        "topsheet": {
+          "label": "TOPSHEET",
+          "sub": "HIGH-TENSION GRIP",
+          "val": 98
+        },
+        "pips": {
+          "label": "PIPS",
+          "sub": "CODE 05 VERTICAL ARRAY",
+          "val": 96
+        },
+        "ittf": {
+          "label": "ITTF",
+          "sub": "REG 14-001 TOURNAMENT",
+          "val": 100
+        }
+      }
     },
     {
-      id: 'tibhar-evolution-mxp',
-      name: 'Tibhar Evolution MX-P',
-      brand: 'TIBHAR',
-      price: '₹3,199',
-      image: '/images/tibhar-rubber.jpg',
-      desc: 'Max Power Energy Cell sponge for explosive spin-speed looping.',
-      summary: 'Energy Cell tensor for ferocious close-table loop attacks.',
-      profile: {
-        sponge:   { label: 'SPONGE',   sub: '2.1mm ENERGY CELL',      val: 87 },
-        topsheet: { label: 'TOPSHEET', sub: 'POWER SPIN SHEET',        val: 90 },
-        pips:     { label: 'PIPS',     sub: 'EXPANDED PIPS MATRIX',    val: 85 },
-        ittf:     { label: 'ITTF',     sub: 'REG TIB-09 CERTIFIED',    val: 100 },
-      },
+      "id": "donic-bluegrip-s2-spin",
+      "name": "Donic Bluegrip S2",
+      "brand": "DONIC",
+      "price": "₹5,729 MRP",
+      "image": "/images/black-rubber.jpg",
+      "desc": "Chinese-style tacky topsheet paired with medium-soft European tensor sponge for surgical control and heavy backspin chops.",
+      "summary": "Tacky European hybrid with surgical spin touch.",
+      "profile": {
+        "sponge": {
+          "label": "SPONGE",
+          "sub": "2.0mm MEDIUM-SOFT TENSOR",
+          "val": 84
+        },
+        "topsheet": {
+          "label": "TOPSHEET",
+          "sub": "CHINESE TACKY SURFACE",
+          "val": 96
+        },
+        "pips": {
+          "label": "PIPS",
+          "sub": "HIGH-DWELL CONICAL",
+          "val": 90
+        },
+        "ittf": {
+          "label": "ITTF",
+          "sub": "REG 21-042 CERTIFIED",
+          "val": 100
+        }
+      }
     },
     {
-      id: 'xiom-vega-china',
-      name: 'Xiom Vega China',
-      brand: 'XIOM',
-      price: '₹2,799',
-      image: '/images/red-rubber.jpg',
-      desc: 'Carbo-Black sponge fused with Chinese topsheet for tacky spin power.',
-      summary: 'Chinese-style tacky grip with European tensor sponge.',
-      profile: {
-        sponge:   { label: 'SPONGE',   sub: '2.0mm CARBO-BLACK',      val: 82 },
-        topsheet: { label: 'TOPSHEET', sub: 'TACKY HYBRID GRIP',       val: 89 },
-        pips:     { label: 'PIPS',     sub: 'HEAVY LOOP PIPS',         val: 86 },
-        ittf:     { label: 'ITTF',     sub: 'REG XIO-79 APPROVED',     val: 100 },
-      },
+      "id": "nittaku-fastarc-g1-spin",
+      "name": "Nittaku Fastarc G-1",
+      "brand": "NITTAKU",
+      "price": "₹5,849 MRP",
+      "image": "/images/red-rubber.jpg",
+      "desc": "Japan #1 best-selling tensor rubber. Grip sheet generates extreme mechanical friction on high-arc looping topspins.",
+      "summary": "Japan #1 power tensor rubber for aggressive loop arcs.",
+      "profile": {
+        "sponge": {
+          "label": "SPONGE",
+          "sub": "2.0mm POWER SPONGE",
+          "val": 88
+        },
+        "topsheet": {
+          "label": "TOPSHEET",
+          "sub": "GRIP TOPSHEET MATRIX",
+          "val": 97
+        },
+        "pips": {
+          "label": "PIPS",
+          "sub": "DENSE POWER ARRAY",
+          "val": 90
+        },
+        "ittf": {
+          "label": "ITTF",
+          "sub": "REG 54-012 TOURNAMENT",
+          "val": 100
+        }
+      }
     },
     {
-      id: 'donic-baracuda',
-      name: 'Donic Baracuda',
-      brand: 'DONIC',
-      price: '₹2,199',
-      image: '/images/black-rubber.jpg',
-      desc: 'Hard, rough topsheet producing extreme rotation and looping bite.',
-      summary: 'European spin benchmark — heavy arc and high friction.',
-      profile: {
-        sponge:   { label: 'SPONGE',   sub: '2.0mm HARD TENSOR',      val: 80 },
-        topsheet: { label: 'TOPSHEET', sub: 'ROUGH HIGH-FRICTION',     val: 91 },
-        pips:     { label: 'PIPS',     sub: 'GRIP PIPS ARRAY',         val: 87 },
-        ittf:     { label: 'ITTF',     sub: 'REG DON-41 APPROVED',     val: 100 },
-      },
+      "id": "tibhar-evolution-mxp-spin",
+      "name": "Tibhar Evolution MX-P",
+      "brand": "TIBHAR",
+      "price": "₹7,215 MRP",
+      "image": "/images/tibhar-rubber.jpg",
+      "desc": "Dynamic Red Power Sponge delivering maximum catapult velocity and extreme rotation on heavy forward loop drives.",
+      "summary": "Red Power Sponge tensor for relentless offensive topspins.",
+      "profile": {
+        "sponge": {
+          "label": "SPONGE",
+          "sub": "2.1mm RED POWER SPONGE",
+          "val": 94
+        },
+        "topsheet": {
+          "label": "TOPSHEET",
+          "sub": "HIGH-CATAPULT ELASTIC",
+          "val": 95
+        },
+        "pips": {
+          "label": "PIPS",
+          "sub": "POWER TENSOR PIPS",
+          "val": 92
+        },
+        "ittf": {
+          "label": "ITTF",
+          "sub": "REG TIB-09 APPROVED",
+          "val": 100
+        }
+      }
     },
     {
-      id: 'nittaku-fastarc-g1',
-      name: 'Nittaku Fastarc G-1',
-      brand: 'NITTAKU',
-      price: '₹2,999',
-      image: '/images/tibhar-rubber.jpg',
-      desc: 'High-tension tensor rubber offering outstanding spin and linear speed.',
-      summary: 'Fastarc spinforce technology — clean arcing loop flight.',
-      profile: {
-        sponge:   { label: 'SPONGE',   sub: '2.0mm SPINFORCE FOAM',   val: 83 },
-        topsheet: { label: 'TOPSHEET', sub: 'HIGH-TENSION GRIP',       val: 93 },
-        pips:     { label: 'PIPS',     sub: 'INVERTED SPIN PIPS',      val: 89 },
-        ittf:     { label: 'ITTF',     sub: 'REG NIT-G1 TOURNAMENT',   val: 100 },
-      },
-    },
+      "id": "donic-baracuda-spin",
+      "name": "Donic Baracuda",
+      "brand": "DONIC",
+      "price": "₹5,129 MRP",
+      "image": "/images/red-rubber.jpg",
+      "desc": "Noticeably higher ball flight curve and vicious top-spin trajectory giving exceptional safety over the net.",
+      "summary": "High-arc trajectory specialist for safe topspin consistency.",
+      "profile": {
+        "sponge": {
+          "label": "SPONGE",
+          "sub": "2.0mm DYNAMIC SPONGE",
+          "val": 86
+        },
+        "topsheet": {
+          "label": "TOPSHEET",
+          "sub": "HIGH-ARC TOPSHEET",
+          "val": 94
+        },
+        "pips": {
+          "label": "PIPS",
+          "sub": "FLEXIBLE DWELL PIPS",
+          "val": 88
+        },
+        "ittf": {
+          "label": "ITTF",
+          "sub": "REG 21-026 APPROVED",
+          "val": 100
+        }
+      }
+    }
   ],
-  SPEED: [
+  "SPEED": [
     {
-      id: 'butterfly-tenergy-64',
-      name: 'Butterfly Tenergy 64',
-      brand: 'BUTTERFLY',
-      price: '₹5,499',
-      image: '/images/red-rubber.jpg',
-      desc: 'Explosive spring sponge delivering blistering flat speed and velocity.',
-      summary: 'The fastest Tenergy variant — flat counters at lethal pace.',
-      profile: {
-        sponge:   { label: 'SPONGE',   sub: '2.1mm SPRING FOAM',      val: 98 },
-        topsheet: { label: 'TOPSHEET', sub: 'TENSOR SPEED SHEET',      val: 96 },
-        pips:     { label: 'PIPS',     sub: 'EXPANDED SPEED PIPS',     val: 94 },
-        ittf:     { label: 'ITTF',     sub: 'REG 05-001 PRO TENSOR',   val: 100 },
-      },
+      "id": "butterfly-t64-speed",
+      "name": "Butterfly Tenergy 64",
+      "brand": "BUTTERFLY",
+      "price": "₹10,600 MRP",
+      "image": "/images/red-rubber.jpg",
+      "desc": "Code 64 pimples produce the fastest catapult and flat drive speed within the Tenergy series from mid-distance.",
+      "summary": "Fastest catapult Tenergy sheet for aggressive drives.",
+      "profile": {
+        "sponge": {
+          "label": "SPONGE",
+          "sub": "2.1mm SPRING SPONGE",
+          "val": 95
+        },
+        "topsheet": {
+          "label": "TOPSHEET",
+          "sub": "SPEED HIGH-TENSION",
+          "val": 92
+        },
+        "pips": {
+          "label": "PIPS",
+          "sub": "CODE 64 WIDE ARRAY",
+          "val": 96
+        },
+        "ittf": {
+          "label": "ITTF",
+          "sub": "REG 14-002 TOURNAMENT",
+          "val": 100
+        }
+      }
     },
     {
-      id: 'stiga-mantra-m',
-      name: 'Stiga Mantra M',
-      brand: 'STIGA',
-      price: '₹2,699',
-      image: '/images/black-rubber.jpg',
-      desc: 'Dynamic Energy Cell III sponge for mid-weight fast drives and counters.',
-      summary: 'Mantra M — balanced speed and dwell for modern attackers.',
-      profile: {
-        sponge:   { label: 'SPONGE',   sub: '2.0mm DEC-III FOAM',     val: 86 },
-        topsheet: { label: 'TOPSHEET', sub: 'DRIVE SPEED SHEET',       val: 88 },
-        pips:     { label: 'PIPS',     sub: 'OFFENSIVE PIPS ARRAY',    val: 84 },
-        ittf:     { label: 'ITTF',     sub: 'REG STG-21 APPROVED',     val: 100 },
-      },
+      "id": "donic-bluestorm-z1-speed",
+      "name": "Donic Bluestorm Z1",
+      "brand": "DONIC",
+      "price": "₹6,169 MRP",
+      "image": "/images/tibhar-rubber.jpg",
+      "desc": "Noticeably thinner top sheet under high tension creates room for thicker sponge and unprecedented explosive power on contact.",
+      "summary": "Explosive thin topsheet tensor for maximum velocity.",
+      "profile": {
+        "sponge": {
+          "label": "SPONGE",
+          "sub": "2.3mm MAX+ SPONGE",
+          "val": 96
+        },
+        "topsheet": {
+          "label": "TOPSHEET",
+          "sub": "ULTRA-THIN TENSION",
+          "val": 91
+        },
+        "pips": {
+          "label": "PIPS",
+          "sub": "SHORT CATAPULT PIPS",
+          "val": 94
+        },
+        "ittf": {
+          "label": "ITTF",
+          "sub": "REG 21-039 CERTIFIED",
+          "val": 100
+        }
+      }
     },
     {
-      id: 'victas-v15-extra',
-      name: 'Victas V>15 Extra',
-      brand: 'VICTAS',
-      price: '₹3,899',
-      image: '/images/tibhar-rubber.jpg',
-      desc: 'Extra-hard tensor sponge maximising direct energy for smash finishers.',
-      summary: 'Hard sponge catapult — lethal smash and drive finisher.',
-      profile: {
-        sponge:   { label: 'SPONGE',   sub: '2.0mm EXTRA-HARD',       val: 90 },
-        topsheet: { label: 'TOPSHEET', sub: 'CATAPULT TOPSHEET',       val: 92 },
-        pips:     { label: 'PIPS',     sub: 'DIRECT-IMPACT PIPS',      val: 89 },
-        ittf:     { label: 'ITTF',     sub: 'REG VIC-15 CERTIFIED',    val: 100 },
-      },
+      "id": "tibhar-mxp-speed",
+      "name": "Tibhar Evolution MX-P",
+      "brand": "TIBHAR",
+      "price": "₹7,215 MRP",
+      "image": "/images/tibhar-rubber.jpg",
+      "desc": "Hard 47.5° sponge catapulting flat hits and forward drives with blistering speed.",
+      "summary": "Maximum European catapult acceleration on forward strokes.",
+      "profile": {
+        "sponge": {
+          "label": "SPONGE",
+          "sub": "2.1mm 47.5° POWER CELL",
+          "val": 94
+        },
+        "topsheet": {
+          "label": "TOPSHEET",
+          "sub": "FORWARD CATAPULT",
+          "val": 93
+        },
+        "pips": {
+          "label": "PIPS",
+          "sub": "DIRECT IMPACT PIPS",
+          "val": 91
+        },
+        "ittf": {
+          "label": "ITTF",
+          "sub": "REG TIB-09 APPROVED",
+          "val": 100
+        }
+      }
     },
     {
-      id: 'tibhar-hybrid-k1',
-      name: 'Tibhar Hybrid K1',
-      brand: 'TIBHAR',
-      price: '₹3,499',
-      image: '/images/red-rubber.jpg',
-      desc: 'Hybrid boosted sponge combining speed and light spin for drives.',
-      summary: 'K1 hybrid tensor — fast and clean for offensive counters.',
-      profile: {
-        sponge:   { label: 'SPONGE',   sub: '2.1mm HYBRID BOOST',     val: 88 },
-        topsheet: { label: 'TOPSHEET', sub: 'SPEED HYBRID GRIP',       val: 90 },
-        pips:     { label: 'PIPS',     sub: 'SPEED ARC PIPS',          val: 86 },
-        ittf:     { label: 'ITTF',     sub: 'REG TIB-K1 APPROVED',     val: 100 },
-      },
+      "id": "nittaku-fastarc-s1-speed",
+      "name": "Nittaku Fastarc S1",
+      "brand": "NITTAKU",
+      "price": "₹4,629 MRP",
+      "image": "/images/black-rubber.jpg",
+      "desc": "Soft tension sponge producing explosive speed and high ball arc with crisp sound on counter-drives.",
+      "summary": "Soft-touch tensor delivering high speed and crisp acoustic pop.",
+      "profile": {
+        "sponge": {
+          "label": "SPONGE",
+          "sub": "2.0mm SOFT TENSION",
+          "val": 89
+        },
+        "topsheet": {
+          "label": "TOPSHEET",
+          "sub": "SPEED GRIP SHEET",
+          "val": 88
+        },
+        "pips": {
+          "label": "PIPS",
+          "sub": "QUICK REBOUND PIPS",
+          "val": 90
+        },
+        "ittf": {
+          "label": "ITTF",
+          "sub": "REG 54-013 APPROVED",
+          "val": 100
+        }
+      }
     },
     {
-      id: 'dhs-hurricane-neo-3',
-      name: 'DHS Hurricane Neo III',
-      brand: 'DHS',
-      price: '₹2,299',
-      image: '/images/black-rubber.jpg',
-      desc: 'Neo blue sponge pre-boosted for high rebound and fast drive returns.',
-      summary: 'Neo III — factory-boosted for explosive flat hitting.',
-      profile: {
-        sponge:   { label: 'SPONGE',   sub: '2.15mm NEO BLUE',        val: 85 },
-        topsheet: { label: 'TOPSHEET', sub: 'BOOSTED FLAT DRIVE',      val: 87 },
-        pips:     { label: 'PIPS',     sub: 'NEO REBOUND PIPS',        val: 83 },
-        ittf:     { label: 'ITTF',     sub: 'REG DHS-NEO APPROVED',    val: 100 },
-      },
+      "id": "donic-acuda-s2-speed",
+      "name": "Donic Acuda S2",
+      "brand": "DONIC",
+      "price": "₹5,679 MRP",
+      "image": "/images/red-rubber.jpg",
+      "desc": "Fast, soft, and easy to control. Delivers explosive speed even during difficult passive match situations.",
+      "summary": "Medium-soft tensor with outstanding forward energy transfer.",
+      "profile": {
+        "sponge": {
+          "label": "SPONGE",
+          "sub": "2.0mm MEDIUM-SOFT ELASTIC",
+          "val": 88
+        },
+        "topsheet": {
+          "label": "TOPSHEET",
+          "sub": "ACUDA POWER SURFACE",
+          "val": 90
+        },
+        "pips": {
+          "label": "PIPS",
+          "sub": "HIGH-SPEED CONICAL",
+          "val": 89
+        },
+        "ittf": {
+          "label": "ITTF",
+          "sub": "REG 21-019 APPROVED",
+          "val": 100
+        }
+      }
     },
     {
-      id: 'xiom-omega-vii-euro',
-      name: 'Xiom Omega VII Euro',
-      brand: 'XIOM',
-      price: '₹4,199',
-      image: '/images/tibhar-rubber.jpg',
-      desc: 'Carbo-Black VII sponge with catapult speed for European style attackers.',
-      summary: 'Omega VII Euro — fast and linear for attacking loops.',
-      profile: {
-        sponge:   { label: 'SPONGE',   sub: '2.0mm CARBO-VII',        val: 91 },
-        topsheet: { label: 'TOPSHEET', sub: 'LINEAR SPEED SHEET',      val: 93 },
-        pips:     { label: 'PIPS',     sub: 'EURO SPEED GRID',         val: 88 },
-        ittf:     { label: 'ITTF',     sub: 'REG XIO-07 CERTIFIED',    val: 100 },
-      },
-    },
+      "id": "butterfly-rozena-speed",
+      "name": "Butterfly Rozena",
+      "brand": "BUTTERFLY",
+      "price": "₹5,490 MRP",
+      "image": "/images/red-rubber.jpg",
+      "desc": "Spring Sponge technology combined with High Tension topsheet forgives minor stroke imperfections while sustaining fast pace.",
+      "summary": "High-tolerance Spring Sponge speed with forgiving trajectory.",
+      "profile": {
+        "sponge": {
+          "label": "SPONGE",
+          "sub": "2.1mm ROSE SPRING FOAM",
+          "val": 87
+        },
+        "topsheet": {
+          "label": "TOPSHEET",
+          "sub": "TOLERANCE TENSION",
+          "val": 89
+        },
+        "pips": {
+          "label": "PIPS",
+          "sub": "ROZENA DWELL ARRAY",
+          "val": 88
+        },
+        "ittf": {
+          "label": "ITTF",
+          "sub": "REG 14-025 CERTIFIED",
+          "val": 100
+        }
+      }
+    }
   ],
-  CONTROL: [
+  "CONTROL": [
     {
-      id: 'yasaka-rakza-7-soft',
-      name: 'Yasaka Rakza 7 Soft',
-      brand: 'YASAKA',
-      price: '₹2,099',
-      image: '/images/red-rubber.jpg',
-      desc: 'Soft sponge with generous dwell time for precision placement control.',
-      summary: 'Rakza 7 Soft — maximum contact time for short-game mastery.',
-      profile: {
-        sponge:   { label: 'SPONGE',   sub: '1.8mm SOFT ABSORB',      val: 45 },
-        topsheet: { label: 'TOPSHEET', sub: 'HIGH-ELASTIC GUM',        val: 82 },
-        pips:     { label: 'PIPS',     sub: 'HIGH DWELL PIPS',         val: 80 },
-        ittf:     { label: 'ITTF',     sub: 'REG 12-003 PRECISION',    val: 100 },
-      },
+      "id": "donic-liga-ctrl",
+      "name": "Donic Liga",
+      "brand": "DONIC",
+      "price": "₹2,275 MRP",
+      "image": "/images/red-rubber.jpg",
+      "desc": "High-grip elastic surface engineered for spin development, steady rally control, and pinpoint placement.",
+      "summary": "All-round high-grip rubber for fundamental precision and touch.",
+      "profile": {
+        "sponge": {
+          "label": "SPONGE",
+          "sub": "1.8mm ELASTIC CONTROL",
+          "val": 68
+        },
+        "topsheet": {
+          "label": "TOPSHEET",
+          "sub": "HIGH-GRIP NATURAL RUBBER",
+          "val": 82
+        },
+        "pips": {
+          "label": "PIPS",
+          "sub": "SURGICAL DWELL PIPS",
+          "val": 78
+        },
+        "ittf": {
+          "label": "ITTF",
+          "sub": "REG 21-002 TOURNAMENT",
+          "val": 100
+        }
+      }
     },
     {
-      id: 'butterfly-rozena',
-      name: 'Butterfly Rozena',
-      brand: 'BUTTERFLY',
-      price: '₹3,499',
-      image: '/images/black-rubber.jpg',
-      desc: 'Spring Sponge X with Tenergy performance for precision return players.',
-      summary: 'Rozena — Tenergy feel at an accessible control level.',
-      profile: {
-        sponge:   { label: 'SPONGE',   sub: '2.0mm SPRING SPX',       val: 60 },
-        topsheet: { label: 'TOPSHEET', sub: 'TENERGY CONTROL',         val: 80 },
-        pips:     { label: 'PIPS',     sub: 'MEDIUM DWELL PIPS',       val: 76 },
-        ittf:     { label: 'ITTF',     sub: 'REG BTY-ROZ APPROVED',    val: 100 },
-      },
+      "id": "donic-twingo-plus-ctrl",
+      "name": "Donic Twingo Plus",
+      "brand": "DONIC",
+      "price": "₹2,239 MRP",
+      "image": "/images/black-rubber.jpg",
+      "desc": "Maximum ball contact time and forgiving bounce for learning spins, active blocks, and steady pushes.",
+      "summary": "Forgiving all-round sheet for absolute table control.",
+      "profile": {
+        "sponge": {
+          "label": "SPONGE",
+          "sub": "1.8mm TWINGO PLUS FOAM",
+          "val": 65
+        },
+        "topsheet": {
+          "label": "TOPSHEET",
+          "sub": "CONTROL SHEET MATRIX",
+          "val": 80
+        },
+        "pips": {
+          "label": "PIPS",
+          "sub": "WIDE DWELL SPACING",
+          "val": 76
+        },
+        "ittf": {
+          "label": "ITTF",
+          "sub": "REG 21-001 APPROVED",
+          "val": 100
+        }
+      }
     },
     {
-      id: 'donic-coppa-x2',
-      name: 'Donic Coppa X2',
-      brand: 'DONIC',
-      price: '₹1,899',
-      image: '/images/tibhar-rubber.jpg',
-      desc: 'Soft flex sponge for clean arc placement and consistent return play.',
-      summary: 'Coppa X2 — German-engineered for reliable placement control.',
-      profile: {
-        sponge:   { label: 'SPONGE',   sub: '1.8mm FLEX SOFT',        val: 42 },
-        topsheet: { label: 'TOPSHEET', sub: 'CONTROL GUM SHEET',       val: 83 },
-        pips:     { label: 'PIPS',     sub: 'TOUCH-DWELL PIPS',        val: 78 },
-        ittf:     { label: 'ITTF',     sub: 'REG DON-X2 CERTIFIED',    val: 100 },
-      },
+      "id": "nittaku-fastarc-s1-ctrl",
+      "name": "Nittaku Fastarc S1",
+      "brand": "NITTAKU",
+      "price": "₹4,629 MRP",
+      "image": "/images/black-rubber.jpg",
+      "desc": "Soft sponge feel creates deep ball absorption for controlled returns against heavy aggressive topspins.",
+      "summary": "Deep ball dwell time for counter-spin and placement control.",
+      "profile": {
+        "sponge": {
+          "label": "SPONGE",
+          "sub": "2.0mm SOFT ABSORB SPONGE",
+          "val": 75
+        },
+        "topsheet": {
+          "label": "TOPSHEET",
+          "sub": "PRECISION GRIP",
+          "val": 86
+        },
+        "pips": {
+          "label": "PIPS",
+          "sub": "BALANCED RETURN ARRAY",
+          "val": 82
+        },
+        "ittf": {
+          "label": "ITTF",
+          "sub": "REG 54-013 APPROVED",
+          "val": 100
+        }
+      }
     },
     {
-      id: 'tibhar- 1q',
-      name: 'Tibhar 1Q',
-      brand: 'TIBHAR',
-      price: '₹1,699',
-      image: '/images/red-rubber.jpg',
-      desc: 'Reliable all-round rubber for training and consistent placement.',
-      summary: '1Q — forgiving training rubber with clean ball contact.',
-      profile: {
-        sponge:   { label: 'SPONGE',   sub: '1.8mm TRAINING FOAM',    val: 40 },
-        topsheet: { label: 'TOPSHEET', sub: 'TRAINING CONTROL',        val: 78 },
-        pips:     { label: 'PIPS',     sub: 'STANDARD PIPS ARRAY',     val: 72 },
-        ittf:     { label: 'ITTF',     sub: 'REG TIB-1Q APPROVED',     val: 100 },
-      },
+      "id": "donic-bluegrip-s2-ctrl",
+      "name": "Donic Bluegrip S2",
+      "brand": "DONIC",
+      "price": "₹5,729 MRP",
+      "image": "/images/black-rubber.jpg",
+      "desc": "Tacky Chinese surface with soft European sponge enables surgical short-game touch and tight drop-shots.",
+      "summary": "Sticky top sheet providing surgical short-table precision.",
+      "profile": {
+        "sponge": {
+          "label": "SPONGE",
+          "sub": "2.0mm SOFT TENSOR",
+          "val": 78
+        },
+        "topsheet": {
+          "label": "TOPSHEET",
+          "sub": "TACKY SHORT GAME",
+          "val": 92
+        },
+        "pips": {
+          "label": "PIPS",
+          "sub": "PINPOINT PLACEMENT PIPS",
+          "val": 85
+        },
+        "ittf": {
+          "label": "ITTF",
+          "sub": "REG 21-042 CERTIFIED",
+          "val": 100
+        }
+      }
     },
     {
-      id: 'nittaku-moristo-sp-ax',
-      name: 'Nittaku Moristo SP AX',
-      brand: 'NITTAKU',
-      price: '₹2,399',
-      image: '/images/black-rubber.jpg',
-      desc: 'Medium sponge with consistent arc and excellent rally placement.',
-      summary: 'Moristo SP AX — reliable all-position control rubber.',
-      profile: {
-        sponge:   { label: 'SPONGE',   sub: '1.9mm MEDIUM FOAM',      val: 50 },
-        topsheet: { label: 'TOPSHEET', sub: 'CONSISTENT ARC GRIP',     val: 79 },
-        pips:     { label: 'PIPS',     sub: 'PLACEMENT PIPS ARRAY',    val: 75 },
-        ittf:     { label: 'ITTF',     sub: 'REG NIT-SP APPROVED',     val: 100 },
-      },
+      "id": "butterfly-rozena-ctrl",
+      "name": "Butterfly Rozena",
+      "brand": "BUTTERFLY",
+      "price": "₹5,490 MRP",
+      "image": "/images/red-rubber.jpg",
+      "desc": "Engineered specifically for players needing high tolerance on active blocking and directional placement.",
+      "summary": "High-tolerance balance for consistent rally control.",
+      "profile": {
+        "sponge": {
+          "label": "SPONGE",
+          "sub": "1.9mm ROSE SPRING FOAM",
+          "val": 76
+        },
+        "topsheet": {
+          "label": "TOPSHEET",
+          "sub": "DIRECTIONAL TENSION",
+          "val": 88
+        },
+        "pips": {
+          "label": "PIPS",
+          "sub": "ROZENA STABILITY PIPS",
+          "val": 84
+        },
+        "ittf": {
+          "label": "ITTF",
+          "sub": "REG 14-025 APPROVED",
+          "val": 100
+        }
+      }
     },
     {
-      id: 'stiga-calibra-lt',
-      name: 'Stiga Calibra LT',
-      brand: 'STIGA',
-      price: '₹1,999',
-      image: '/images/tibhar-rubber.jpg',
-      desc: 'Light tensor for effortless clean placement and training consistency.',
-      summary: 'Calibra LT — light-tension training rubber for all levels.',
-      profile: {
-        sponge:   { label: 'SPONGE',   sub: '1.8mm LIGHT TENSOR',     val: 44 },
-        topsheet: { label: 'TOPSHEET', sub: 'LIGHT TOUCH SHEET',       val: 76 },
-        pips:     { label: 'PIPS',     sub: 'LIGHT TENSOR PIPS',       val: 70 },
-        ittf:     { label: 'ITTF',     sub: 'REG STG-LT APPROVED',     val: 100 },
-      },
-    },
+      "id": "tibhar-hybrid-k1-ctrl",
+      "name": "Tibhar Hybrid K1",
+      "brand": "TIBHAR",
+      "price": "₹5,400 MRP",
+      "image": "/images/tibhar-rubber.jpg",
+      "desc": "Sticky surface grip neutralizes incoming topspin velocity, giving control on serve-receives and block returns.",
+      "summary": "Sticky Euro-Hybrid surface for superior serve receive touch.",
+      "profile": {
+        "sponge": {
+          "label": "SPONGE",
+          "sub": "2.0mm CONTROL HYBRID",
+          "val": 77
+        },
+        "topsheet": {
+          "label": "TOPSHEET",
+          "sub": "TACKY EURO-CHINESE",
+          "val": 90
+        },
+        "pips": {
+          "label": "PIPS",
+          "sub": "RECEIVE CONTROL PIPS",
+          "val": 83
+        },
+        "ittf": {
+          "label": "ITTF",
+          "sub": "REG TIB-15 APPROVED",
+          "val": 100
+        }
+      }
+    }
   ],
-  OFFENSIVE: [
+  "OFFENSIVE": [
     {
-      id: 'butterfly-tenergy-05',
-      name: 'Butterfly Tenergy 05',
-      brand: 'BUTTERFLY',
-      price: '₹5,799',
-      image: '/images/red-rubber.jpg',
-      desc: 'World No.1 rubber — Spring Sponge for explosive spin-speed looping.',
-      summary: 'Tenergy 05 — the definitive offensive rubber worldwide.',
-      profile: {
-        sponge:   { label: 'SPONGE',   sub: '2.1mm SPRING SPONGE',    val: 96 },
-        topsheet: { label: 'TOPSHEET', sub: 'MAX-ENERGY SPIN SHEET',   val: 98 },
-        pips:     { label: 'PIPS',     sub: 'DIRECT-IMPACT MATRIX',    val: 95 },
-        ittf:     { label: 'ITTF',     sub: 'REG 05-002 WORLD CLASS',  val: 100 },
-      },
+      "id": "butterfly-t05-off",
+      "name": "Butterfly Tenergy 05",
+      "brand": "BUTTERFLY",
+      "price": "₹10,600 MRP",
+      "image": "/images/red-rubber.jpg",
+      "desc": "Spring Sponge technology powers high-impact loop drives with tremendous rotational energy.",
+      "summary": "The world tournament standard attacking tensor rubber.",
+      "profile": {
+        "sponge": {
+          "label": "SPONGE",
+          "sub": "2.1mm SPRING ATTACK",
+          "val": 95
+        },
+        "topsheet": {
+          "label": "TOPSHEET",
+          "sub": "MAX ROTATION TENSION",
+          "val": 98
+        },
+        "pips": {
+          "label": "PIPS",
+          "sub": "CODE 05 VERTICAL",
+          "val": 95
+        },
+        "ittf": {
+          "label": "ITTF",
+          "sub": "REG 14-001 TOURNAMENT",
+          "val": 100
+        }
+      }
     },
     {
-      id: 'dhs-hurricane-8',
-      name: 'DHS Hurricane 8',
-      brand: 'DHS',
-      price: '₹2,699',
-      image: '/images/black-rubber.jpg',
-      desc: 'Hard black sponge delivering maximum attacking power and speed.',
-      summary: 'Hurricane 8 — fast and lethal for decisive offensive play.',
-      profile: {
-        sponge:   { label: 'SPONGE',   sub: '2.1mm HARD BLACK',       val: 90 },
-        topsheet: { label: 'TOPSHEET', sub: 'ATTACK POWER SHEET',      val: 92 },
-        pips:     { label: 'PIPS',     sub: 'POWER PIPS ARRAY',        val: 88 },
-        ittf:     { label: 'ITTF',     sub: 'REG DHS-8 APPROVED',      val: 100 },
-      },
+      "id": "tibhar-evolution-mxp-off",
+      "name": "Tibhar Evolution MX-P",
+      "brand": "TIBHAR",
+      "price": "₹7,215 MRP",
+      "image": "/images/tibhar-rubber.jpg",
+      "desc": "Maximum catapult acceleration and heavy topspin bite for aggressive power loopers.",
+      "summary": "High-performance tensor engineered for explosive loop attacks.",
+      "profile": {
+        "sponge": {
+          "label": "SPONGE",
+          "sub": "2.1mm POWER CELL RED",
+          "val": 94
+        },
+        "topsheet": {
+          "label": "TOPSHEET",
+          "sub": "EXPLOSIVE CATAPULT",
+          "val": 94
+        },
+        "pips": {
+          "label": "PIPS",
+          "sub": "FORWARD MOMENTUM PIPS",
+          "val": 92
+        },
+        "ittf": {
+          "label": "ITTF",
+          "sub": "REG TIB-09 APPROVED",
+          "val": 100
+        }
+      }
     },
     {
-      id: 'xiom-omega-vii-asia',
-      name: 'Xiom Omega VII Asia',
-      brand: 'XIOM',
-      price: '₹4,499',
-      image: '/images/tibhar-rubber.jpg',
-      desc: 'Carbo-Black VII sponge with tacky topsheet for Chinese-style attack.',
-      summary: 'Omega VII Asia — tacky spin power meets tensor catapult.',
-      profile: {
-        sponge:   { label: 'SPONGE',   sub: '2.0mm CARBO-TACKY',      val: 93 },
-        topsheet: { label: 'TOPSHEET', sub: 'TACKY ATTACK GRIP',       val: 95 },
-        pips:     { label: 'PIPS',     sub: 'ASIA LOOP PIPS',          val: 92 },
-        ittf:     { label: 'ITTF',     sub: 'REG XIO-07A CERTIFIED',   val: 100 },
-      },
+      "id": "nittaku-fastarc-g1-off",
+      "name": "Nittaku Fastarc G-1",
+      "brand": "NITTAKU",
+      "price": "₹5,849 MRP",
+      "image": "/images/red-rubber.jpg",
+      "desc": "Japan #1 offensive rubber delivering high arc stability on aggressive counter-loop rallies.",
+      "summary": "Maximum grip topsheet for dominant offensive loop drives.",
+      "profile": {
+        "sponge": {
+          "label": "SPONGE",
+          "sub": "2.0mm STRONG SPONGE",
+          "val": 91
+        },
+        "topsheet": {
+          "label": "TOPSHEET",
+          "sub": "GRIP POWER SHEET",
+          "val": 96
+        },
+        "pips": {
+          "label": "PIPS",
+          "sub": "HIGH-ARC PIPS ARRAY",
+          "val": 91
+        },
+        "ittf": {
+          "label": "ITTF",
+          "sub": "REG 54-012 TOURNAMENT",
+          "val": 100
+        }
+      }
     },
     {
-      id: 'victas-v20-double-extra',
-      name: 'Victas V>20 Double Extra',
-      brand: 'VICTAS',
-      price: '₹4,199',
-      image: '/images/red-rubber.jpg',
-      desc: 'Double extra hard tensor for ferocious loop-drive offensive play.',
-      summary: 'V>20 DE — maximum catapult for modern offensive dominance.',
-      profile: {
-        sponge:   { label: 'SPONGE',   sub: '2.0mm DOUBLE-HARD',      val: 94 },
-        topsheet: { label: 'TOPSHEET', sub: 'FEROCIOUS LOOP SHEET',    val: 96 },
-        pips:     { label: 'PIPS',     sub: 'CATAPULT PIPS MATRIX',    val: 91 },
-        ittf:     { label: 'ITTF',     sub: 'REG VIC-20 APPROVED',     val: 100 },
-      },
+      "id": "donic-bluestorm-z1-off",
+      "name": "Donic Bluestorm Z1",
+      "brand": "DONIC",
+      "price": "₹6,169 MRP",
+      "image": "/images/tibhar-rubber.jpg",
+      "desc": "Thinner topsheet under high tension accommodates max+ sponge for blistering flat power.",
+      "summary": "Noticeably explosive catapult on direct forward attacks.",
+      "profile": {
+        "sponge": {
+          "label": "SPONGE",
+          "sub": "2.3mm MAX+ BLUESTORM",
+          "val": 95
+        },
+        "topsheet": {
+          "label": "TOPSHEET",
+          "sub": "HIGH-TENSION ELASTIC",
+          "val": 91
+        },
+        "pips": {
+          "label": "PIPS",
+          "sub": "DIRECT DRIVE PIPS",
+          "val": 93
+        },
+        "ittf": {
+          "label": "ITTF",
+          "sub": "REG 21-039 CERTIFIED",
+          "val": 100
+        }
+      }
     },
     {
-      id: 'stiga-mantra-h',
-      name: 'Stiga Mantra H',
-      brand: 'STIGA',
-      price: '₹2,999',
-      image: '/images/black-rubber.jpg',
-      desc: 'Hard DEC-III sponge for offensive loop-drive power and flat smashes.',
-      summary: 'Mantra H — hard tension for relentless attack power.',
-      profile: {
-        sponge:   { label: 'SPONGE',   sub: '2.0mm DEC-III HARD',     val: 88 },
-        topsheet: { label: 'TOPSHEET', sub: 'OFFENSIVE HARD SHEET',    val: 89 },
-        pips:     { label: 'PIPS',     sub: 'HARD ATTACK PIPS',        val: 86 },
-        ittf:     { label: 'ITTF',     sub: 'REG STG-MH APPROVED',     val: 100 },
-      },
+      "id": "butterfly-t64-off",
+      "name": "Butterfly Tenergy 64",
+      "brand": "BUTTERFLY",
+      "price": "₹10,600 MRP",
+      "image": "/images/red-rubber.jpg",
+      "desc": "Dynamic Spring Sponge creates blistering mid-distance velocity on forward counter attacks.",
+      "summary": "Extreme catapult velocity from all attacking zones.",
+      "profile": {
+        "sponge": {
+          "label": "SPONGE",
+          "sub": "2.1mm CATAPULT SPRING",
+          "val": 94
+        },
+        "topsheet": {
+          "label": "TOPSHEET",
+          "sub": "SPEED TENSION MATRIX",
+          "val": 92
+        },
+        "pips": {
+          "label": "PIPS",
+          "sub": "CODE 64 MID-DISTANCE",
+          "val": 94
+        },
+        "ittf": {
+          "label": "ITTF",
+          "sub": "REG 14-002 APPROVED",
+          "val": 100
+        }
+      }
     },
     {
-      id: 'nittaku-fastarc-c1',
-      name: 'Nittaku Fastarc C-1',
-      brand: 'NITTAKU',
-      price: '₹3,299',
-      image: '/images/tibhar-rubber.jpg',
-      desc: 'Spinforce offensive tensor for heavy attacking loops with high friction.',
-      summary: 'Fastarc C-1 — Japan-grade offensive friction for looping.',
-      profile: {
-        sponge:   { label: 'SPONGE',   sub: '2.0mm SPINFORCE-C',      val: 87 },
-        topsheet: { label: 'TOPSHEET', sub: 'OFFENSIVE FRICTION',      val: 91 },
-        pips:     { label: 'PIPS',     sub: 'HIGH-GRIP LOOP PIPS',     val: 89 },
-        ittf:     { label: 'ITTF',     sub: 'REG NIT-C1 APPROVED',     val: 100 },
-      },
-    },
+      "id": "nittaku-h8-80-off",
+      "name": "Nittaku Hurricane 8-80 Power",
+      "brand": "NITTAKU",
+      "price": "₹6,129 MRP",
+      "image": "/images/black-rubber.jpg",
+      "desc": "Tacky surface grips the 40+ ball with heavy arc rotation on loop-drives and decisive kills.",
+      "summary": "Sticky offensive power with rapid rebound response.",
+      "profile": {
+        "sponge": {
+          "label": "SPONGE",
+          "sub": "2.15mm #80 ELASTIC",
+          "val": 90
+        },
+        "topsheet": {
+          "label": "TOPSHEET",
+          "sub": "STICKY ARC SHEET",
+          "val": 97
+        },
+        "pips": {
+          "label": "PIPS",
+          "sub": "OFFENSIVE SPIN PIPS",
+          "val": 93
+        },
+        "ittf": {
+          "label": "ITTF",
+          "sub": "REG 54-028 CERTIFIED",
+          "val": 100
+        }
+      }
+    }
   ],
-  DEFENSIVE: [
+  "DEFENSIVE": [
     {
-      id: 'donic-slice-40',
-      name: 'Donic Slice 40',
-      brand: 'DONIC',
-      price: '₹1,399',
-      image: '/images/red-rubber.jpg',
-      desc: 'Thin dampening sponge for heavy backspin chops and controlled defense.',
-      summary: 'Slice 40 — excellent chop control and long defense placement.',
-      profile: {
-        sponge:   { label: 'SPONGE',   sub: '1.5mm DAMPENING FOAM',   val: 35 },
-        topsheet: { label: 'TOPSHEET', sub: 'MICRO CHOP TEXTURE',      val: 82 },
-        pips:     { label: 'PIPS',     sub: 'DECELERATION PIPS',       val: 70 },
-        ittf:     { label: 'ITTF',     sub: 'REG DON-33 APPROVED',     val: 100 },
-      },
+      "id": "donic-spike-p2-def",
+      "name": "Donic Spike P2",
+      "brand": "DONIC",
+      "price": "₹4,109 MRP",
+      "image": "/images/black-rubber.jpg",
+      "desc": "Soft-sponge long pimple rubber designed for modern defensive choppers demanding spin variation.",
+      "summary": "Soft-sponge long pimple rubber for heavy backspin reversal.",
+      "profile": {
+        "sponge": {
+          "label": "SPONGE",
+          "sub": "1.0mm SOFT DEF SPONGE",
+          "val": 38
+        },
+        "topsheet": {
+          "label": "TOPSHEET",
+          "sub": "LONG PIPS REVERSAL",
+          "val": 86
+        },
+        "pips": {
+          "label": "PIPS",
+          "sub": "EXTENDED DEFENSIVE PIPS",
+          "val": 94
+        },
+        "ittf": {
+          "label": "ITTF",
+          "sub": "REG 21-032 CERTIFIED",
+          "val": 100
+        }
+      }
     },
     {
-      id: 'butterfly-bryce-fx',
-      name: 'Butterfly Bryce FX',
-      brand: 'BUTTERFLY',
-      price: '₹4,199',
-      image: '/images/black-rubber.jpg',
-      desc: 'Soft spring sponge for deep dampening and consistent defensive reset.',
-      summary: 'Bryce FX — soft and precise for close-table defensive blocks.',
-      profile: {
-        sponge:   { label: 'SPONGE',   sub: '1.8mm FX SOFT SPRING',   val: 40 },
-        topsheet: { label: 'TOPSHEET', sub: 'BLOCK CONTROL SHEET',     val: 79 },
-        pips:     { label: 'PIPS',     sub: 'DAMPENING PIPS ARRAY',    val: 72 },
-        ittf:     { label: 'ITTF',     sub: 'REG BTY-FX APPROVED',     val: 100 },
-      },
+      "id": "donic-liga-def",
+      "name": "Donic Liga",
+      "brand": "DONIC",
+      "price": "₹2,275 MRP",
+      "image": "/images/red-rubber.jpg",
+      "desc": "High-grip classic surface allows clean baseline chops with controlled backspin rotation.",
+      "summary": "Controlled inverted sheet for reliable baseline chopping.",
+      "profile": {
+        "sponge": {
+          "label": "SPONGE",
+          "sub": "1.5mm CONTROL FOAM",
+          "val": 52
+        },
+        "topsheet": {
+          "label": "TOPSHEET",
+          "sub": "BACKSPIN GRIP SHEET",
+          "val": 80
+        },
+        "pips": {
+          "label": "PIPS",
+          "sub": "DAMPENED CHOP ARRAY",
+          "val": 78
+        },
+        "ittf": {
+          "label": "ITTF",
+          "sub": "REG 21-002 TOURNAMENT",
+          "val": 100
+        }
+      }
     },
     {
-      id: 'tibhar-grip-s-eu',
-      name: 'Tibhar Grip-S EU',
-      brand: 'TIBHAR',
-      price: '₹1,799',
-      image: '/images/tibhar-rubber.jpg',
-      desc: 'Medium-soft gripping sheet for consistent backspin and chop defense.',
-      summary: 'Grip-S EU — reliable chop and block rubber for defenders.',
-      profile: {
-        sponge:   { label: 'SPONGE',   sub: '1.6mm GRIP SOFT',        val: 38 },
-        topsheet: { label: 'TOPSHEET', sub: 'BACKSPIN GRIP SHEET',     val: 80 },
-        pips:     { label: 'PIPS',     sub: 'CHOP CONTROL PIPS',       val: 74 },
-        ittf:     { label: 'ITTF',     sub: 'REG TIB-GS APPROVED',     val: 100 },
-      },
+      "id": "nittaku-moristo-sp-def",
+      "name": "Nittaku Moristo SP AX",
+      "brand": "NITTAKU",
+      "price": "₹5,129 MRP",
+      "image": "/images/black-rubber.jpg",
+      "desc": "Tension short pimples enabling active defensive counter-blocks and flat trajectory returns.",
+      "summary": "Japanese short pimple sheet for active defensive counter-blocks.",
+      "profile": {
+        "sponge": {
+          "label": "SPONGE",
+          "sub": "1.8mm TENSION SPONGE",
+          "val": 68
+        },
+        "topsheet": {
+          "label": "TOPSHEET",
+          "sub": "SHORT PIPS FRICTION",
+          "val": 78
+        },
+        "pips": {
+          "label": "PIPS",
+          "sub": "AX SPEED PIPS MATRIX",
+          "val": 88
+        },
+        "ittf": {
+          "label": "ITTF",
+          "sub": "REG 54-024 APPROVED",
+          "val": 100
+        }
+      }
     },
     {
-      id: 'nittaku-hammond-fa',
-      name: 'Nittaku Hammond FA',
-      brand: 'NITTAKU',
-      price: '₹2,199',
-      image: '/images/red-rubber.jpg',
-      desc: 'Super soft absorbing sponge for maximum ball deceleration on chops.',
-      summary: 'Hammond FA — soft absorption for deep defensive chopping.',
-      profile: {
-        sponge:   { label: 'SPONGE',   sub: '1.5mm FA ABSORB',        val: 32 },
-        topsheet: { label: 'TOPSHEET', sub: 'CHOP ABSORB SHEET',       val: 84 },
-        pips:     { label: 'PIPS',     sub: 'ABSORBING PIPS ARRAY',    val: 68 },
-        ittf:     { label: 'ITTF',     sub: 'REG NIT-FA APPROVED',     val: 100 },
-      },
+      "id": "donic-twingo-plus-def",
+      "name": "Donic Twingo Plus",
+      "brand": "DONIC",
+      "price": "₹2,239 MRP",
+      "image": "/images/black-rubber.jpg",
+      "desc": "Gentle catapult absorption helps defensive players neutralize aggressive attacks with safety.",
+      "summary": "Low-rebound inverted rubber for safe table returns.",
+      "profile": {
+        "sponge": {
+          "label": "SPONGE",
+          "sub": "1.5mm SLOW FOAM",
+          "val": 48
+        },
+        "topsheet": {
+          "label": "TOPSHEET",
+          "sub": "DAMPENED CONTACT",
+          "val": 76
+        },
+        "pips": {
+          "label": "PIPS",
+          "sub": "ABSORPTION ARRAY",
+          "val": 75
+        },
+        "ittf": {
+          "label": "ITTF",
+          "sub": "REG 21-001 APPROVED",
+          "val": 100
+        }
+      }
     },
     {
-      id: 'yasaka-phantom-007',
-      name: 'Yasaka Phantom 007',
-      brand: 'YASAKA',
-      price: '₹1,599',
-      image: '/images/black-rubber.jpg',
-      desc: 'Long pips defensive rubber for unpredictable spin reversal returns.',
-      summary: 'Phantom 007 — spin-reversing long pips for tricky defense.',
-      profile: {
-        sponge:   { label: 'SPONGE',   sub: 'OX LONG PIPS',           val: 28 },
-        topsheet: { label: 'TOPSHEET', sub: 'SPIN REVERSAL SHEET',     val: 76 },
-        pips:     { label: 'PIPS',     sub: 'LONG-PIP DESTABILIZER',   val: 65 },
-        ittf:     { label: 'ITTF',     sub: 'REG YAS-007 APPROVED',    val: 100 },
-      },
+      "id": "butterfly-rozena-def",
+      "name": "Butterfly Rozena",
+      "brand": "BUTTERFLY",
+      "price": "₹5,490 MRP",
+      "image": "/images/red-rubber.jpg",
+      "desc": "Forgiving High Tension surface allows defensive players to launch sudden attacking counter-loops.",
+      "summary": "High-tolerance sheet for modern counter-choppers.",
+      "profile": {
+        "sponge": {
+          "label": "SPONGE",
+          "sub": "1.7mm ROSE SPRING SPONGE",
+          "val": 72
+        },
+        "topsheet": {
+          "label": "TOPSHEET",
+          "sub": "COUNTER-SPIN DWELL",
+          "val": 86
+        },
+        "pips": {
+          "label": "PIPS",
+          "sub": "STABLE CHOP PIPS",
+          "val": 82
+        },
+        "ittf": {
+          "label": "ITTF",
+          "sub": "REG 14-025 CERTIFIED",
+          "val": 100
+        }
+      }
     },
     {
-      id: 'victas-curl-p1r',
-      name: 'Victas Curl P1R',
-      brand: 'VICTAS',
-      price: '₹2,499',
-      image: '/images/tibhar-rubber.jpg',
-      desc: 'Long pips with super low friction for unpredictable lob and chop returns.',
-      summary: 'Curl P1R — low-friction long pips for tricky lob defense.',
-      profile: {
-        sponge:   { label: 'SPONGE',   sub: '0.5mm CURL FOAM',        val: 25 },
-        topsheet: { label: 'TOPSHEET', sub: 'CURL LOW FRICTION',       val: 72 },
-        pips:     { label: 'PIPS',     sub: 'CURL LONG PIPS',          val: 62 },
-        ittf:     { label: 'ITTF',     sub: 'REG VIC-P1 APPROVED',     val: 100 },
-      },
-    },
+      "id": "tibhar-hybrid-k1-def",
+      "name": "Tibhar Hybrid K1",
+      "brand": "TIBHAR",
+      "price": "₹5,400 MRP",
+      "image": "/images/tibhar-rubber.jpg",
+      "desc": "Tacky surface grips incoming ball rotation, generating extreme variation on chops from distance.",
+      "summary": "Sticky topsheet generating heavy backspin variation.",
+      "profile": {
+        "sponge": {
+          "label": "SPONGE",
+          "sub": "1.8mm DAMP HYBRID",
+          "val": 66
+        },
+        "topsheet": {
+          "label": "TOPSHEET",
+          "sub": "STICKY CHOP FRICTION",
+          "val": 91
+        },
+        "pips": {
+          "label": "PIPS",
+          "sub": "VARIATION MATRIX",
+          "val": 84
+        },
+        "ittf": {
+          "label": "ITTF",
+          "sub": "REG TIB-15 APPROVED",
+          "val": 100
+        }
+      }
+    }
   ],
+  "ALL-ROUND": [
+    {
+      "id": "donic-liga-all",
+      "name": "Donic Liga",
+      "brand": "DONIC",
+      "price": "₹2,275 MRP",
+      "image": "/images/red-rubber.jpg",
+      "desc": "The classic all-round training rubber. Grippy topsheet provides consistent touch on every stroke.",
+      "summary": "High-grip elastic surface giving great touch and spin development.",
+      "profile": {
+        "sponge": {
+          "label": "SPONGE",
+          "sub": "1.8mm ALL-ROUND FOAM",
+          "val": 72
+        },
+        "topsheet": {
+          "label": "TOPSHEET",
+          "sub": "NATURAL ELASTIC GRIP",
+          "val": 85
+        },
+        "pips": {
+          "label": "PIPS",
+          "sub": "BALANCED PIPS MATRIX",
+          "val": 80
+        },
+        "ittf": {
+          "label": "ITTF",
+          "sub": "REG 21-002 TOURNAMENT",
+          "val": 100
+        }
+      }
+    },
+    {
+      "id": "donic-twingo-plus-all",
+      "name": "Donic Twingo Plus",
+      "brand": "DONIC",
+      "price": "₹2,239 MRP",
+      "image": "/images/black-rubber.jpg",
+      "desc": "Forgiving response with steady dwell time for rally development and counter pushes.",
+      "summary": "High-control all-round rubber for versatile play.",
+      "profile": {
+        "sponge": {
+          "label": "SPONGE",
+          "sub": "1.8mm MEDIUM-SOFT",
+          "val": 70
+        },
+        "topsheet": {
+          "label": "TOPSHEET",
+          "sub": "STEADY TOUCH SHEET",
+          "val": 82
+        },
+        "pips": {
+          "label": "PIPS",
+          "sub": "VERSATILE PIPS ARRAY",
+          "val": 78
+        },
+        "ittf": {
+          "label": "ITTF",
+          "sub": "REG 21-001 APPROVED",
+          "val": 100
+        }
+      }
+    },
+    {
+      "id": "nittaku-fastarc-s1-all",
+      "name": "Nittaku Fastarc S1",
+      "brand": "NITTAKU",
+      "price": "₹4,629 MRP",
+      "image": "/images/black-rubber.jpg",
+      "desc": "Soft tension sponge giving comfortable dwell time and effortless rally speed on both wings.",
+      "summary": "Comfortable Japanese tensor for all-round versatility.",
+      "profile": {
+        "sponge": {
+          "label": "SPONGE",
+          "sub": "2.0mm SOFT TENSOR",
+          "val": 80
+        },
+        "topsheet": {
+          "label": "TOPSHEET",
+          "sub": "ELASTIC GRIP SHEET",
+          "val": 88
+        },
+        "pips": {
+          "label": "PIPS",
+          "sub": "HARMONIC PIPS MATRIX",
+          "val": 84
+        },
+        "ittf": {
+          "label": "ITTF",
+          "sub": "REG 54-013 APPROVED",
+          "val": 100
+        }
+      }
+    },
+    {
+      "id": "donic-acuda-s2-all",
+      "name": "Donic Acuda S2",
+      "brand": "DONIC",
+      "price": "₹5,679 MRP",
+      "image": "/images/red-rubber.jpg",
+      "desc": "Harmonious balance of speed, spin, and touch. Performs cleanly in both close-table and mid-court situations.",
+      "summary": "Medium-soft German tensor with well-rounded match dynamics.",
+      "profile": {
+        "sponge": {
+          "label": "SPONGE",
+          "sub": "2.0mm DYNAMIC SPONGE",
+          "val": 86
+        },
+        "topsheet": {
+          "label": "TOPSHEET",
+          "sub": "ACUDA TOUCH SURFACE",
+          "val": 91
+        },
+        "pips": {
+          "label": "PIPS",
+          "sub": "ALL-ZONE PIPS ARRAY",
+          "val": 87
+        },
+        "ittf": {
+          "label": "ITTF",
+          "sub": "REG 21-019 APPROVED",
+          "val": 100
+        }
+      }
+    },
+    {
+      "id": "butterfly-rozena-all",
+      "name": "Butterfly Rozena",
+      "brand": "BUTTERFLY",
+      "price": "₹5,490 MRP",
+      "image": "/images/red-rubber.jpg",
+      "desc": "Spring Sponge technology designed to absorb opponents aggressive spin while maintaining high offensive quality.",
+      "summary": "Forgiving tournament tensor for consistent all-round play.",
+      "profile": {
+        "sponge": {
+          "label": "SPONGE",
+          "sub": "1.9mm ROSE SPRING SPONGE",
+          "val": 84
+        },
+        "topsheet": {
+          "label": "TOPSHEET",
+          "sub": "TOLERANT TENSION",
+          "val": 89
+        },
+        "pips": {
+          "label": "PIPS",
+          "sub": "STABILITY PIPS MATRIX",
+          "val": 86
+        },
+        "ittf": {
+          "label": "ITTF",
+          "sub": "REG 14-025 CERTIFIED",
+          "val": 100
+        }
+      }
+    },
+    {
+      "id": "tibhar-hybrid-k1-all",
+      "name": "Tibhar Hybrid K1",
+      "brand": "TIBHAR",
+      "price": "₹5,400 MRP",
+      "image": "/images/tibhar-rubber.jpg",
+      "desc": "Sticky surface paired with responsive sponge allows quick transition from passive defense to offensive counter.",
+      "summary": "Tacky hybrid tensor for versatile attacking and control rallies.",
+      "profile": {
+        "sponge": {
+          "label": "SPONGE",
+          "sub": "2.0mm BALANCED HYBRID",
+          "val": 82
+        },
+        "topsheet": {
+          "label": "TOPSHEET",
+          "sub": "TACKY GRIP SURFACE",
+          "val": 91
+        },
+        "pips": {
+          "label": "PIPS",
+          "sub": "TRANSITION PIPS ARRAY",
+          "val": 85
+        },
+        "ittf": {
+          "label": "ITTF",
+          "sub": "REG TIB-15 APPROVED",
+          "val": 100
+        }
+      }
+    }
+  ]
 };
 
 export const CIRCULAR_POSITIONS = {

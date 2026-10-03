@@ -11,80 +11,104 @@ import {
 const SETUPS = [
   {
     id: 's1',
-    style: 'BEGINNER',
-    name: 'Beginner Setup',
+    intent: "I'M NEW",
+    range: 'UNDER ₹7K',
+    style: 'BEGINNER · ALL-ROUND',
+    name: 'All-Round Entry',
     icon: BeginnerSetupIsometricIcon,
-    blade: 'Stiga Clipper Wood',
-    rubber: 'DHS Hurricane 3',
-    price: '₹4,799',
-    bladePrice: '₹3,499',
-    rubberPrice: '₹1,299',
-    desc: 'Easy to control and forgiving on timing errors. The ideal foundation setup for mastering strokes.',
+    blade: 'Donic Waldner Allplay',
+    fhRubber: 'Donic Liga',
+    bhRubber: 'Donic Liga',
+    weight: '~170G',
+    bladePrice: '₹5,089 MRP',
+    rubberPrice: '₹2,275 MRP',
+    totalPrice: '₹9,639',
+    desc: 'A balanced combination built around control, feel and easy-to-manage speed for players developing their fundamentals.',
     color: 'cream',
   },
   {
     id: 's2',
-    style: 'SPIN',
-    name: 'Spin Setup',
-    icon: SpinSetupIsometricIcon,
-    blade: 'Donic Waldner Carbon',
-    rubber: 'DHS Hurricane 3 Blue',
-    price: '₹7,699',
-    bladePrice: '₹5,999',
-    rubberPrice: '₹1,699',
-    desc: 'Maximum topspin dip and looping power. Designed to dominate rallies from mid and deep table.',
-    color: 'orange',
-  },
-  {
-    id: 's3',
-    style: 'SPEED',
-    name: 'Speed Setup',
-    icon: SpeedSetupIsometricIcon,
-    blade: 'DHS Hurricane Long 5',
-    rubber: 'Butterfly Tenergy 64',
-    price: '₹8,149',
-    bladePrice: '₹4,299',
-    rubberPrice: '₹3,850',
-    desc: 'Blistering acceleration with a flat, direct trajectory for aggressive close-to-table attacks.',
+    intent: 'I WANT CONTROL',
+    range: 'ALL-ROUND · SOFTER SETUP',
+    style: 'CONTROL',
+    name: 'Pure Control',
+    icon: ControlSetupIsometricIcon,
+    blade: 'Donic Waldner Allplay',
+    fhRubber: 'Donic Twingo Plus',
+    bhRubber: 'Donic Twingo Plus',
+    weight: '~168G',
+    bladePrice: '₹5,089 MRP',
+    rubberPrice: '₹2,239 MRP',
+    totalPrice: '₹9,567',
+    desc: 'A softer all-round combination focused on control, touch and consistency in the short game.',
     color: 'cream',
   },
   {
+    id: 's3',
+    intent: 'I WANT MORE SPIN',
+    range: '₹7K–₹12K',
+    style: 'SPIN',
+    name: 'Heavy Spin Looper',
+    icon: SpinSetupIsometricIcon,
+    blade: 'Tibhar Gravity Offensive',
+    fhRubber: 'Nittaku Hurricane 8-80 Power',
+    bhRubber: 'Nittaku Hurricane 8-80 Power',
+    weight: '~180G',
+    bladePrice: '₹5,135 MRP',
+    rubberPrice: '₹6,129 MRP',
+    totalPrice: '₹17,393',
+    desc: 'A spin-focused combination pairing an offensive blade with a grippy hybrid rubber for aggressive topspin play.',
+    color: 'orange',
+  },
+  {
     id: 's4',
-    style: 'CONTROL',
-    name: 'Control Setup',
-    icon: ControlSetupIsometricIcon,
-    blade: 'Stiga Clipper Wood',
-    rubber: 'Yasaka Rakza 7 Soft',
-    price: '₹5,199',
-    bladePrice: '₹3,499',
-    rubberPrice: '₹1,699',
-    desc: 'Extended ball dwell time, pin-point placement, and dependable touch in pressure rallies.',
+    intent: 'I WANT MORE SPEED',
+    range: '₹10K–₹20K',
+    style: 'SPEED',
+    name: 'Carbospeed Attacker',
+    icon: SpeedSetupIsometricIcon,
+    blade: 'Donic Original Carbospeed',
+    fhRubber: 'Butterfly Tenergy 64',
+    bhRubber: 'Butterfly Tenergy 64',
+    weight: '~182G',
+    bladePrice: '₹8,639 MRP',
+    rubberPrice: '₹10,600 MRP',
+    totalPrice: '₹29,839',
+    desc: 'A fast carbon combination designed for players who want more pace and direct attacking response.',
     color: 'cream',
   },
   {
     id: 's5',
+    intent: 'I PLAY OFFENSIVE',
+    range: '₹15K+',
     style: 'OFFENSIVE',
-    name: 'Offensive Setup',
+    name: 'Timo Boll ALC Pro',
     icon: OffensiveSetupIsometricIcon,
     blade: 'Butterfly Timo Boll ALC',
-    rubber: 'Butterfly Tenergy 05',
-    price: '₹16,349',
-    bladePrice: '₹12,499',
-    rubberPrice: '₹3,850',
-    desc: 'Tour-proven offensive combination balancing explosive energy transfer with sharp spin feedback.',
+    fhRubber: 'Butterfly Tenergy 05',
+    bhRubber: 'Butterfly Tenergy 05',
+    weight: '~184G',
+    bladePrice: '₹24,200 MRP',
+    rubberPrice: '₹10,600 MRP',
+    totalPrice: '₹45,400',
+    desc: 'A premium offensive combination built around the Timo Boll ALC blade and Tenergy 05 on both sides.',
     color: 'orange',
   },
   {
     id: 's6',
+    intent: 'I PLAY DEFENSIVE',
+    range: 'LONG-PIPS / DEFENSIVE',
     style: 'DEFENSIVE',
-    name: 'Defensive Setup',
+    name: 'Modern Chopper',
     icon: DefensiveSetupIsometricIcon,
-    blade: 'Tibhar Stratus Power',
-    rubber: 'Donic Slice 40 CD',
-    price: '₹6,299',
-    bladePrice: '₹4,899',
-    rubberPrice: '₹1,400',
-    desc: 'High vibration absorption and maximum backspin reversal for modern defensive chopping.',
+    blade: 'Nittaku Flyatt Carbon',
+    fhRubber: 'Donic Spike P2',
+    bhRubber: 'Donic Spike P2',
+    weight: '~165G',
+    bladePrice: '₹6,129 MRP',
+    rubberPrice: '₹3,874 MRP',
+    totalPrice: '₹13,877',
+    desc: 'A defensive combination using a specialized blade and long-pimple rubber for controlled defensive play and spin variation.',
     color: 'cream',
   },
 ];
@@ -95,11 +119,10 @@ export default function BuildYourSetup() {
       <div className="build-watermark" aria-hidden="true">SETUP</div>
 
       <div className="build-header">
-        <span className="text-label">BUILD YOUR SETUP</span>
-        <h2 className="build-title text-display">RECOMMENDED<br />COMBINATIONS</h2>
+        <span className="text-label">RECOMMENDED COMBINATIONS</span>
+        <h2 className="build-title text-display">BUILD YOUR<br />GAME</h2>
         <p className="build-sub">
-          CURATED RACKET + RUBBER COMBINATIONS BUILT AROUND SPECIFIC PLAYING STYLES.<br />
-          WHOLESALE PRICING AT RETAIL QUANTITIES — READY TO PLAY OUT OF THE BOX.
+          Curated racket and rubber combinations built around specific playing styles, from controlled all-round setups to high-speed offensive builds.
         </p>
       </div>
 
@@ -108,13 +131,18 @@ export default function BuildYourSetup() {
           const IconComponent = s.icon;
           return (
             <div key={s.id} className={`setup-card setup-card--${s.color}`} id={`setup-${s.id}`}>
-              {/* Card Header with 48x48 setup icon */}
+              {/* Card Header with intent badge & icon */}
               <div className="setup-card-top">
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
+                  <span className="setup-intent-badge">{s.intent}</span>
+                  <span className="setup-range-tag">{s.range}</span>
+                </div>
                 <div className="setup-card-icon-title">
                   <div className="setup-icon-wrap" title={s.name}>
                     <IconComponent
-                      size={56}
+                      size={52}
                       className="setup-card-48-icon"
+                      variant="orange"
                     />
                   </div>
                   <div>
@@ -124,27 +152,39 @@ export default function BuildYourSetup() {
                 </div>
               </div>
 
-              {/* Recommended Racket + Rubber */}
+              {/* Exact Specs Breakdown */}
               <div className="setup-combo">
                 <div className="setup-combo-item">
-                  <span className="setup-combo-tag">RACKET</span>
+                  <span className="setup-combo-tag">BLADE</span>
                   <span className="setup-combo-name">{s.blade}</span>
                   <span className="setup-combo-price">{s.bladePrice}</span>
                 </div>
-                <span className="setup-plus">+</span>
                 <div className="setup-combo-item">
-                  <span className="setup-combo-tag">RUBBER</span>
-                  <span className="setup-combo-name">{s.rubber}</span>
+                  <span className="setup-combo-tag">FH RUBBER</span>
+                  <span className="setup-combo-name">{s.fhRubber}</span>
                   <span className="setup-combo-price">{s.rubberPrice}</span>
+                </div>
+                <div className="setup-combo-item">
+                  <span className="setup-combo-tag">BH RUBBER</span>
+                  <span className="setup-combo-name">{s.bhRubber}</span>
+                  <span className="setup-combo-price">{s.rubberPrice}</span>
+                </div>
+                <div className="setup-combo-item">
+                  <span className="setup-combo-tag">WEIGHT</span>
+                  <span className="setup-combo-name" style={{ color: 'var(--orange)' }}>{s.weight}</span>
+                  <span className="setup-combo-price">PRO BALANCE</span>
                 </div>
               </div>
 
               <p className="setup-desc">{s.desc}</p>
 
               <div className="setup-card-footer">
-                <span className="setup-total">{s.price}</span>
-                <a href={`/customize?setup=${s.id}`} className="setup-cta-btn" id={`setup-btn-${s.id}`}>
-                  Explore Setup →
+                <div>
+                  <span style={{ display: 'block', fontSize: '0.52rem', color: 'var(--gray-light)', letterSpacing: '0.15em', fontFamily: 'var(--font-mono)' }}>APPROX. TOTAL</span>
+                  <span className="setup-total">{s.totalPrice}</span>
+                </div>
+                <a href="/products" className="setup-cta-btn" id={`setup-btn-${s.id}`}>
+                  BUILD THIS SETUP →
                 </a>
               </div>
             </div>
@@ -153,7 +193,7 @@ export default function BuildYourSetup() {
       </div>
 
       <div className="build-footer-cta">
-        <a href="/customize" className="btn-primary" id="build-customize-btn">
+        <a href="/products" className="btn-primary" id="build-customize-btn">
           CUSTOMIZE YOUR OWN SETUP →
         </a>
       </div>
