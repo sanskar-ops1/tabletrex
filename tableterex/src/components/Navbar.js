@@ -5,8 +5,8 @@ import Link from 'next/link';
 const CENTER_MENU_LINKS = [
   { label: 'PRODUCTS', href: '/products' },
   { label: 'CATEGORIES', href: '/#categories' },
-  { label: 'READY BATS', href: '/#ready-made-bats' },
-  { label: 'CUSTOM SETUP', href: '/#find-your-play' },
+  { label: 'BLOG', href: '/blog' },
+  { label: 'ABOUT US', href: '/about' },
   { label: 'BRANDS', href: '/#shop-by-brand' },
   { label: 'WHY TABLETREX', href: '/#why-tableterex' },
 ];
@@ -52,8 +52,19 @@ export default function Navbar() {
         aria-hidden="true"
       />
 
-      {/* Left: Logo & Brand - stays fixed in position, never moves */}
-      <div className="nav-logo" style={{ display: 'inline-flex', alignItems: 'center', gap: '10px', cursor: 'default', userSelect: 'none' }}>
+      {/* Left: Logo & Brand - clickable link to home */}
+      <Link
+        href="/"
+        className="nav-logo"
+        style={{
+          display: 'inline-flex',
+          alignItems: 'center',
+          gap: '10px',
+          cursor: 'pointer',
+          userSelect: 'none',
+          textDecoration: 'none',
+        }}
+      >
         <img
           src="/images/tableterex-logo.png"
           alt="TableTerex Logo"
@@ -61,7 +72,7 @@ export default function Navbar() {
           style={{ height: '38px', width: 'auto', objectFit: 'contain', filter: 'drop-shadow(0 2px 6px rgba(0,0,0,0.25))', userSelect: 'none' }}
         />
         <span>TABLE<span>TEREX</span></span>
-      </div>
+      </Link>
 
       {/* Center Main Menu with Codrops Effect 5 - slides up on scroll down, drops down on scroll up */}
       <nav

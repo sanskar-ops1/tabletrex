@@ -4,6 +4,8 @@ import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { ALL_PRODUCTS } from '@/data/allProducts';
 import WaterCanvas from '@/components/WaterCanvas';
+import Footer from '@/components/Footer';
+import { getWhatsAppCartUrl } from '@/utils/whatsapp';
 import './products.css';
 
 /* ─── 4 Value Props for the Continuous Right-to-Left Marquee ─── */
@@ -52,16 +54,107 @@ const VALUE_PROPS = [
   },
 ];
 
-/* ─── 8 Circular Category Tiles (Authentic Table Tennis Equipment) ─── */
+/* ─── 4 Secondary Guarantees for Continuous Marquee (Matches Section 4) ─── */
+const SECONDARY_TRUST = [
+  {
+    icon: (
+      <svg className="nl-vp-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
+        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+      </svg>
+    ),
+    title: 'Genuine Import',
+    desc: 'Authorized Indian Stock',
+  },
+  {
+    icon: (
+      <svg className="nl-vp-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
+        <polygon points="12 2 2 7 12 12 22 7 12 2" />
+        <polyline points="2 17 12 22 22 17" />
+        <polyline points="2 12 12 17 22 12" />
+      </svg>
+    ),
+    title: 'Competition Grade',
+    desc: 'ITTF Tournament Approved',
+  },
+  {
+    icon: (
+      <svg className="nl-vp-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
+        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+        <polyline points="9 22 9 12 15 12 15 22" />
+      </svg>
+    ),
+    title: 'Pro Craftsmanship',
+    desc: 'Free Racket Assembly',
+  },
+  {
+    icon: (
+      <svg className="nl-vp-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
+        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+      </svg>
+    ),
+    title: 'Trusted by Pros',
+    desc: '10,000+ players nationwide',
+  },
+];
+
+/* ─── 8 Equipment Category Cards (Matches 1st Reference Image Design) ─── */
 const CATEGORIES = [
-  { name: 'Rubbers',       img: '/images/red-rubber.jpg' },
-  { name: 'Blades',        img: '/images/pro-blade.jpg' },
-  { name: 'Ready Bats',    img: '/images/custom-racket.jpg' },
-  { name: 'Plastic Balls', img: 'https://images.unsplash.com/photo-1534158914592-062992fbe900?w=400&q=80' },
-  { name: 'Tables',        img: 'https://images.unsplash.com/photo-1609710228159-0fa9bd7c0827?w=400&q=80' },
-  { name: 'Care & Glue',   img: 'https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=400&q=80' },
-  { name: 'Footwear',      img: 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400&q=80' },
-  { name: 'Cases & Robots',img: 'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=400&q=80' },
+  {
+    name: 'Rubbers',
+    titleBold: 'Tournament',
+    titleLight: 'Rubbers',
+    theme: 'orange',
+    img: '/images/categories/rubber.png',
+  },
+  {
+    name: 'Blades',
+    titleBold: 'Pro Carbon',
+    titleLight: 'Blades',
+    theme: 'white',
+    img: '/images/categories/blade.png',
+  },
+  {
+    name: 'Ready Bats',
+    titleBold: 'Pre-Assembled',
+    titleLight: 'Match Bats',
+    theme: 'black',
+    img: '/images/categories/racket.png',
+  },
+  {
+    name: 'Plastic Balls',
+    titleBold: '3-Star ITTF',
+    titleLight: 'Plastic Balls',
+    theme: 'white',
+    img: '/images/categories/balls.png',
+  },
+  {
+    name: 'Tables',
+    titleBold: 'Arena 25mm',
+    titleLight: 'Tables',
+    theme: 'black',
+    img: '/images/categories/table.png',
+  },
+  {
+    name: 'Care & Glue',
+    titleBold: 'VOC-Free Glue',
+    titleLight: '& Care',
+    theme: 'white',
+    img: '/images/categories/glue.png',
+  },
+  {
+    name: 'Footwear',
+    titleBold: 'Court Grip',
+    titleLight: 'Footwear',
+    theme: 'black',
+    img: '/images/categories/shoes.png',
+  },
+  {
+    name: 'Cases & Robots',
+    titleBold: 'Digital Robots',
+    titleLight: '& Hard Cases',
+    theme: 'white',
+    img: '/images/categories/robot.png',
+  },
 ];
 
 /* ─── Dynamic Promo Collections Map (Adapts according to activeCategory) ─── */
@@ -230,28 +323,39 @@ const PROMO_DATA = {
   },
 };
 
-/* ─── Customer Testimonials ─── */
+/* ─── 4 Verified Customer Testimonials (Auto-Rotates in 1 Clean Card) ─── */
 const REVIEWS = [
   {
     name: 'Coach Rajesh M.',
-    badge: 'National Level Coach',
+    badge: 'National Level Coach · Pune TT Academy',
+    setup: 'Butterfly Dignics 09C + Timo Boll ALC',
     rating: 5,
-    quote: '“Every rubber and blade arrived factory-sealed in mint condition. The Butterfly Dignics 09C and Timo Boll ALC pairing gave my state academy players extraordinary arc and counter-drive control.”',
-    avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=200&q=80',
+    quote: '“Every rubber and blade arrived factory-sealed in mint condition. The Butterfly Dignics 09C and Timo Boll ALC pairing gave my state academy players extraordinary arc, explosive spin, and counter-drive control.”',
+    avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=300&q=80',
   },
   {
     name: 'Vikram S.',
-    badge: 'Verified Tournament Player',
+    badge: 'Verified Tournament Player · Maharashtra State Ranking',
+    setup: 'Nittaku Fastarc G-1 + Donic Waldner 909',
     rating: 5,
-    quote: '“Authentic products directly from authorized importers. Nittaku Fastarc G-1 and Donic Waldner 909 are the real deal. Super fast dispatch and impeccable customer service.”',
-    avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&q=80',
+    quote: '“Authentic products directly from authorized importers. Nittaku Fastarc G-1 and Donic Waldner 909 are the real deal. Super fast dispatch, prompt WhatsApp tracking updates, and impeccable customer care.”',
+    avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&q=80',
   },
   {
     name: 'Ananya P.',
-    badge: 'State Cadet Champion',
+    badge: 'State Cadet Champion · All-India Junior Circuit',
+    setup: 'Tibhar Evolution MX-P + Free Chack II Assembly',
     rating: 5,
-    quote: '“The custom assembly was flawless — zero air bubbles, perfect edge-tape alignment, and genuine Free Chack II used. TableTerex is our team\'s go-to equipment store.”',
-    avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=200&q=80',
+    quote: '“The custom assembly was flawless — zero air bubbles, perfect edge-tape alignment, and genuine Free Chack II used. TableTerex is our entire team’s official go-to equipment store for tournament season.”',
+    avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=300&q=80',
+  },
+  {
+    name: 'Devendra K.',
+    badge: 'Club Captain · Mumbai Suburban TT League',
+    setup: 'Stiga Pro Carbon Blade + Butterfly Rozena',
+    rating: 5,
+    quote: '“Getting genuine ITTF tournament-grade gear delivered in 48 hours with batch codes matching official distributor imports gives complete peace of mind. Hands down India’s finest table tennis catalog.”',
+    avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300&q=80',
   },
 ];
 
@@ -408,10 +512,16 @@ export default function ProductsPage() {
   const [cart, setCart] = useState([]);
   const [cartOpen, setCartOpen] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState(null);
-  const [email, setEmail] = useState('');
-  const [subscribed, setSubscribed] = useState(false);
   const [reviewIdx, setReviewIdx] = useState(0);
   const [openBrandDropdown, setOpenBrandDropdown] = useState(null);
+
+  /* Auto-rotate testimonial card continuously every 4 seconds */
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setReviewIdx((prev) => (prev + 1) % REVIEWS.length);
+    }, 4000);
+    return () => clearInterval(interval);
+  }, []);
 
   useEffect(() => {
     const handleOutsideClick = (e) => {
@@ -681,31 +791,27 @@ export default function ProductsPage() {
             return (
               <button
                 key={cat.name}
-                className="nl-cat-card"
+                type="button"
+                className={`nl-cat-feature-card nl-theme-${cat.theme}${isSelected ? ' is-selected' : ''}`}
                 onClick={() => {
                   const nextCat = isSelected ? null : cat.name;
                   setActiveCategory(nextCat);
-                  // Smoothly scroll to the synced sections below
-                  const el = document.getElementById('collections');
+                  const el = document.getElementById('bestsellers');
                   if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 }}
               >
-                <div
-                  className="nl-cat-circle"
-                  style={
-                    isSelected
-                      ? { borderColor: 'var(--orange)', transform: 'scale(1.08)', boxShadow: '0 8px 24px rgba(201, 86, 30, 0.3)' }
-                      : {}
-                  }
-                >
-                  <img src={cat.img} alt={cat.name} className="nl-cat-img" />
+                {/* Left Content Area */}
+                <div className="nl-cat-content">
+                  <div className="nl-cat-titles">
+                    <span className="nl-cat-title-bold">{cat.titleBold}</span>
+                    <span className="nl-cat-title-light">{cat.titleLight}</span>
+                  </div>
                 </div>
-                <span
-                  className="nl-cat-name"
-                  style={isSelected ? { color: 'var(--orange)', fontWeight: 700 } : {}}
-                >
-                  {cat.name}
-                </span>
+
+                {/* Right 3D Cutout Image (Transparent Background) */}
+                <div className="nl-cat-img-wrapper">
+                  <img src={cat.img} alt={cat.name} className="nl-cat-hero-img" loading="lazy" />
+                </div>
               </button>
             );
           })}
@@ -919,73 +1025,104 @@ export default function ProductsPage() {
               {displayedProducts.map((prod) => {
                 const isFav = wishlist.includes(prod.id);
                 const inCart = cart.find((item) => item.id === prod.id);
+                const displayPrice = typeof prod.price === 'string' ? prod.price.replace(/\.00$/, '') : prod.price;
 
                 return (
-                  <div
+                  <Link
                     key={prod.id}
+                    href={`/products/${prod.id}`}
                     className="nl-product-card"
-                    onClick={() => setSelectedProduct(prod)}
-                    style={{ cursor: 'pointer' }}
+                    style={{ textDecoration: 'none', color: 'inherit' }}
                   >
-                    <div className="nl-product-img-wrap">
-                      <img src={prod.image} alt={prod.name} className="nl-product-img" loading="lazy" />
-                      
-                      {/* Brand Badge */}
-                      <span
-                        style={{
-                          position: 'absolute',
-                          top: '12px',
-                          left: '12px',
-                          background: 'rgba(17, 17, 16, 0.85)',
-                          color: 'var(--white)',
-                          padding: '4px 10px',
-                          borderRadius: '3px',
-                          fontSize: '0.62rem',
-                          fontFamily: 'var(--font-mono)',
-                          fontWeight: 700,
-                          letterSpacing: '0.08em',
-                          textTransform: 'uppercase',
-                          zIndex: 2,
+                    {/* Full-bleed product image background */}
+                    <img
+                      src={prod.image}
+                      alt={prod.name}
+                      className="nl-product-card-bg"
+                      loading="lazy"
+                    />
+
+                    {/* Gradient overlay for contrast */}
+                    <div className="nl-product-card-overlay" />
+
+                    {/* Circular Black Wishlist Button (Top Right) */}
+                    <button
+                      type="button"
+                      className={`nl-card-heart-btn${isFav ? ' active' : ''}`}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        toggleWishlist(prod.id, e);
+                      }}
+                      aria-label={isFav ? "Remove from Wishlist" : "Save to Wishlist"}
+                    >
+                      <svg
+                        width="18"
+                        height="18"
+                        viewBox="0 0 24 24"
+                        fill={isFav ? '#ff3b30' : 'none'}
+                        stroke={isFav ? '#ff3b30' : '#ffffff'}
+                        strokeWidth="1.9"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      >
+                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+                      </svg>
+                    </button>
+
+                    {/* Bottom Info & Cart Action */}
+                    <div className="nl-card-bottom">
+                      <div className="nl-card-text">
+                        <h3 className="nl-card-title">{prod.name}</h3>
+                        <div className="nl-card-subtitle">{prod.brand}</div>
+                        <div className="nl-card-price">{displayPrice}</div>
+                      </div>
+
+                      {/* White Squircle Add-To-Cart Button (Bottom Right) */}
+                      <button
+                        type="button"
+                        className={`nl-card-cart-btn${inCart ? ' added' : ''}`}
+                        onClick={(e) => {
+                          e.preventDefault();
+                          e.stopPropagation();
+                          addToCart(prod, e);
                         }}
+                        aria-label="Add to cart"
                       >
-                        {prod.brand}
-                      </span>
-
-                      <button
-                        className={`nl-wishlist-btn${isFav ? ' active' : ''}`}
-                        onClick={(e) => toggleWishlist(prod.id, e)}
-                        aria-label="Save to Wishlist"
-                      >
-                        <svg width="17" height="17" viewBox="0 0 24 24" fill={isFav ? 'var(--orange)' : 'none'} stroke="currentColor" strokeWidth="2">
-                          <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
-                        </svg>
+                        {inCart ? (
+                          <svg
+                            width="22"
+                            height="22"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="#000000"
+                            strokeWidth="2.4"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                          >
+                            <polyline points="20 6 9 17 4 12" />
+                          </svg>
+                        ) : (
+                          <svg
+                            width="24"
+                            height="24"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="#000000"
+                            strokeWidth="2.1"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                          >
+                            <path d="M3 4h2.5l2 10.5h9.5l2.2-7H6.8" />
+                            <circle cx="9" cy="18.5" r="1.3" fill="#000000" />
+                            <circle cx="16" cy="18.5" r="1.3" fill="#000000" />
+                            <path d="M14 14.5l5-5" />
+                            <path d="M15 9.5h4v4" />
+                          </svg>
+                        )}
                       </button>
                     </div>
-
-                    <div className="nl-product-info">
-                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: '8px' }}>
-                        <h3 className="nl-product-title">{prod.name}</h3>
-                      </div>
-
-                      <div style={{ fontSize: '0.7rem', color: 'var(--orange)', fontFamily: 'var(--font-mono)', fontWeight: 600, margin: '2px 0 6px', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
-                        {prod.specs}
-                      </div>
-
-                      <div className="nl-product-price">{prod.price}</div>
-                      
-                      <div className="nl-product-rating">
-                        <span className="nl-stars">★★★★★</span>
-                        <span className="nl-reviews-count">({prod.reviews})</span>
-                      </div>
-
-                      <button
-                        className={`nl-add-to-cart-btn${inCart ? ' added' : ''}`}
-                        onClick={(e) => addToCart(prod, e)}
-                      >
-                        {inCart ? `✓ ADDED (${inCart.qty})` : 'ADD TO CART'}
-                      </button>
-                    </div>
-                  </div>
+                  </Link>
                 );
               })}
             </div>
@@ -1088,256 +1225,99 @@ export default function ProductsPage() {
         </div>
       </section>
 
-      {/* ── 9. SECONDARY TRUST BADGES ── */}
-      <section className="nl-secondary-trust">
-        <div className="nl-secondary-trust-grid">
-          <div className="nl-trust-box">
-            <svg className="nl-trust-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
-              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-            </svg>
-            <div className="nl-trust-title">Genuine Import</div>
-            <div className="nl-trust-sub">Authorized Indian Stock</div>
-          </div>
-
-          <div className="nl-trust-box">
-            <svg className="nl-trust-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
-              <polygon points="12 2 2 7 12 12 22 7 12 2" />
-              <polyline points="2 17 12 22 22 17" />
-              <polyline points="2 12 12 17 22 12" />
-            </svg>
-            <div className="nl-trust-title">Competition Grade</div>
-            <div className="nl-trust-sub">ITTF Tournament Approved</div>
-          </div>
-
-          <div className="nl-trust-box">
-            <svg className="nl-trust-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
-              <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
-              <polyline points="9 22 9 12 15 12 15 22" />
-            </svg>
-            <div className="nl-trust-title">Pro Craftsmanship</div>
-            <div className="nl-trust-sub">Free Racket Assembly</div>
-          </div>
-
-          <div className="nl-trust-box">
-            <svg className="nl-trust-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
-              <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
-            </svg>
-            <div className="nl-trust-title">Trusted by Pros</div>
-            <div className="nl-trust-sub">10,000+ players nationwide</div>
+      {/* ── 9. SECONDARY TRUST MARQUEE (Continuous Ticker Bar like Section 4) ── */}
+      <section className="nl-secondary-trust" aria-label="Secondary Guarantees">
+        <div className="nl-vp-marquee">
+          <div className="nl-vp-track">
+            {[0, 1, 2, 3].map((copyIndex) => (
+              <div key={copyIndex} className="nl-vp-group" aria-hidden={copyIndex > 0 ? 'true' : undefined}>
+                {SECONDARY_TRUST.map((item, i) => (
+                  <div key={i} className="nl-vp-item">
+                    {item.icon}
+                    <div>
+                      <div className="nl-vp-title">{item.title}</div>
+                      <div className="nl-vp-desc">{item.desc}</div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* ── 10. CUSTOMER TESTIMONIALS ── */}
+      {/* ── 10. SINGLE CLEAN AUTO-ROTATING TESTIMONIAL CARD ── */}
       <section className="nl-reviews-section" id="reviews">
-        <div className="nl-section-header">
-          <div>
-            <span className="nl-mono-label">VERIFIED REVIEWS</span>
-            <h2 className="nl-section-title nl-serif">Trusted by Players & Academies</h2>
-          </div>
-          <div className="nl-reviews-ctrls">
-            <button
-              className="nl-review-arrow"
-              onClick={() =>
-                setReviewIdx((prev) => (prev === 0 ? REVIEWS.length - 1 : prev - 1))
-              }
-              aria-label="Previous Review"
-            >
-              ←
-            </button>
-            <button
-              className="nl-review-arrow"
-              onClick={() =>
-                setReviewIdx((prev) => (prev === REVIEWS.length - 1 ? 0 : prev + 1))
-              }
-              aria-label="Next Review"
-            >
-              →
-            </button>
-          </div>
+        <div className="nl-reviews-header">
+          <span className="nl-mono-label">VERIFIED COMMUNITY REVIEWS</span>
+          <h2 className="nl-section-title nl-serif">Trusted by Players & Academies</h2>
         </div>
 
-        <div className="nl-reviews-grid">
-          {REVIEWS.map((rev, idx) => (
-            <div
-              key={rev.name}
-              className={`nl-review-card${idx === reviewIdx ? ' active-card' : ''}`}
-            >
-              <div className="nl-review-header">
-                <img src={rev.avatar} alt={rev.name} className="nl-review-avatar" />
+        <div className="nl-single-review-card">
+          {/* Animated Review Body */}
+          <div key={reviewIdx} className="nl-single-review-body">
+            {/* Top Row: Rating, Verified Badge & Quote Mark */}
+            <div className="nl-single-review-top">
+              <div className="nl-single-rating-wrap">
+                <div className="nl-single-stars" aria-label="5 out of 5 stars">
+                  ★★★★★
+                </div>
+                <span className="nl-single-verified-pill">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                    <polyline points="20 6 9 17 4 12" />
+                  </svg>
+                  VERIFIED PURCHASE
+                </span>
+              </div>
+              <div className="nl-single-quote-mark" aria-hidden="true">
+                “
+              </div>
+            </div>
+
+            {/* Testimonial Quote */}
+            <p className="nl-single-quote-text">
+              {REVIEWS[reviewIdx].quote}
+            </p>
+
+            {/* Author Profile */}
+            <div className="nl-single-author-row">
+              <div className="nl-single-author-profile">
+                <div className="nl-single-avatar-box">
+                  <img
+                    src={REVIEWS[reviewIdx].avatar}
+                    alt={REVIEWS[reviewIdx].name}
+                    className="nl-single-avatar-img"
+                  />
+                  <span className="nl-single-avatar-check" title="Verified Customer">✓</span>
+                </div>
                 <div>
-                  <h4 className="nl-reviewer-name">{rev.name}</h4>
-                  <span className="nl-reviewer-badge">{rev.badge}</span>
+                  <h4 className="nl-single-author-name">{REVIEWS[reviewIdx].name}</h4>
+                  <span className="nl-single-author-role">{REVIEWS[reviewIdx].badge}</span>
                 </div>
               </div>
-              <div className="nl-review-stars">★★★★★</div>
-              <p className="nl-review-quote">{rev.quote}</p>
             </div>
-          ))}
-        </div>
-      </section>
-
-      {/* ── 11. INSTAGRAM COMMUNITY GRID ── */}
-      <section className="nl-social-section">
-        <div className="nl-section-header">
-          <div>
-            <span className="nl-mono-label">FOLLOW US @TABLETEREX</span>
-            <h2 className="nl-section-title nl-serif">Real Gear. Championship Action.</h2>
           </div>
-          <a
-            href="https://instagram.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="nl-view-all-link"
-          >
-            View on Instagram →
-          </a>
-        </div>
 
-        <div className="nl-social-grid">
-          {INSTA_POSTS.map((src, i) => (
-            <div key={i} className="nl-social-item">
-              <img src={src} alt={`Table tennis gear ${i + 1}`} className="nl-social-img" />
-              <div className="nl-social-hover-overlay">
-                <span>View Equipment</span>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* ── 12. NEWSLETTER COMMUNITY BANNER ── */}
-      <section className="nl-newsletter-section">
-        <div className="nl-newsletter-card">
-          <div className="nl-newsletter-left">
-            <span className="nl-mono-label" style={{ color: 'var(--orange)' }}>
-              TOURNAMENT VIP ACCESS
-            </span>
-            <h2 className="nl-newsletter-title nl-serif">
-              Join the TableTerex Community
-            </h2>
-            <p className="nl-newsletter-desc">
-              Receive fresh stock alerts for Butterfly Dignics, imported Japanese Nittaku blades, and wholesale discount announcements directly to your inbox.
-            </p>
-
-            {subscribed ? (
-              <div
-                style={{
-                  background: 'rgba(201, 86, 30, 0.12)',
-                  border: '1px solid var(--orange)',
-                  padding: '16px 20px',
-                  borderRadius: '4px',
-                  color: 'var(--orange)',
-                  fontWeight: 600,
-                  fontSize: '0.85rem',
-                }}
-              >
-                ✓ You are on the VIP stock notification list!
-              </div>
-            ) : (
-              <form
-                className="nl-newsletter-form"
-                onSubmit={(e) => {
-                  e.preventDefault();
-                  if (email) setSubscribed(true);
-                }}
-                suppressHydrationWarning
-              >
-                <input
-                  type="email"
-                  className="nl-email-input"
-                  placeholder="Enter your email address"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  required
-                  autoComplete="off"
-                  data-lpignore="true"
-                  suppressHydrationWarning
+          {/* Footer: Centered Progress Dots */}
+          <div className="nl-single-card-footer">
+            <div className="nl-single-dots">
+              {REVIEWS.map((_, i) => (
+                <button
+                  key={i}
+                  className={`nl-single-dot${i === reviewIdx ? ' active' : ''}`}
+                  onClick={() => setReviewIdx(i)}
+                  aria-label={`Show testimonial ${i + 1}`}
                 />
-                <button type="submit" className="nl-btn-primary" suppressHydrationWarning>
-                  SUBSCRIBE
-                </button>
-              </form>
-            )}
-          </div>
-
-          <div className="nl-newsletter-right">
-            <img
-              src="/images/custom-racket.jpg"
-              alt="Custom table tennis racket"
-              className="nl-newsletter-img"
-            />
-            <div className="nl-newsletter-script nl-script">
-              Play Beyond,
-              <br />
-              Never Settle ♡
+              ))}
             </div>
           </div>
         </div>
       </section>
 
-      {/* ── 13. 4-COLUMN FOOTER ── */}
-      <footer className="nl-footer">
-        <div className="nl-footer-grid">
-          <div className="nl-footer-col">
-            <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '8px' }}>
-              <img
-                src="/images/tableterex-logo.png"
-                alt="TableTerex Logo"
-                style={{ height: '38px', width: 'auto', objectFit: 'contain' }}
-              />
-              <span className="nl-logo-main">TABLETEREX</span>
-            </div>
-            <span className="nl-logo-sub" style={{ display: 'block', marginBottom: '14px' }}>
-              OFFICIAL EQUIPMENT STORE
-            </span>
-            <p className="nl-footer-desc">
-              India's premier authorized distributor of tournament table tennis equipment. Genuine Butterfly, Nittaku, Donic, and Tibhar.
-            </p>
-          </div>
 
-          <div className="nl-footer-col">
-            <h4 className="nl-footer-title">Equipment Categories</h4>
-            <ul className="nl-footer-links">
-              <li><button onClick={() => setActiveCategory('Rubbers')} className="nl-footer-btn">T.T. Rubbers</button></li>
-              <li><button onClick={() => setActiveCategory('Blades')} className="nl-footer-btn">Competition Blades</button></li>
-              <li><button onClick={() => setActiveCategory('Ready Bats')} className="nl-footer-btn">Ready-Made Bats</button></li>
-              <li><button onClick={() => setActiveCategory('Plastic Balls')} className="nl-footer-btn">ITTF 3-Star Balls</button></li>
-              <li><button onClick={() => setActiveCategory('Tables')} className="nl-footer-btn">Tournament Tables</button></li>
-              <li><button onClick={() => setActiveCategory('Care & Glue')} className="nl-footer-btn">Glues & Cleaners</button></li>
-            </ul>
-          </div>
 
-          <div className="nl-footer-col">
-            <h4 className="nl-footer-title">Company Brands</h4>
-            <ul className="nl-footer-links">
-              <li><button onClick={() => setActiveBrand('Butterfly')} className="nl-footer-btn">Butterfly (Baljit & Co.)</button></li>
-              <li><button onClick={() => setActiveBrand('Nittaku')} className="nl-footer-btn">Nittaku (Delux Sports)</button></li>
-              <li><button onClick={() => setActiveBrand('Donic')} className="nl-footer-btn">Donic (Delux Sports)</button></li>
-              <li><button onClick={() => setActiveBrand('Tibhar')} className="nl-footer-btn">Tibhar (DNM Sports)</button></li>
-              <li><Link href="/about">About TableTerex</Link></li>
-              <li><Link href="/contact">Wholesale Inquiries</Link></li>
-            </ul>
-          </div>
-
-          <div className="nl-footer-col">
-            <h4 className="nl-footer-title">Customer Care</h4>
-            <ul className="nl-footer-links">
-              <li><a href="#hero">Track Order</a></li>
-              <li><a href="#hero">Returns & Exchanges</a></li>
-              <li><a href="#hero">Shipping Rates</a></li>
-              <li><a href="#hero">Rubber Assembly Service</a></li>
-              <li><a href="#hero">Terms of Service</a></li>
-              <li><a href="#hero">Privacy Policy</a></li>
-            </ul>
-          </div>
-        </div>
-
-        <div className="nl-footer-bottom">
-          <span>© 2026 TableTerex. Authorized Indian Distributor. All rights reserved.</span>
-          <span className="nl-footer-tagline">Play Beyond Limits.</span>
-        </div>
-      </footer>
+      {/* ── 13. GLOBAL DARK FOOTER (Matches Home Page & Reference Design) ── */}
+      <Footer />
 
       {/* ── 14. QUICK VIEW MODAL ── */}
       {selectedProduct && (
@@ -1475,13 +1455,28 @@ export default function ProductsPage() {
                     ₹{cartTotal.toLocaleString('en-IN')}.00
                   </span>
                 </div>
-                <button
+                <a
+                  href={getWhatsAppCartUrl(cart, cartTotal)}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="nl-btn-primary"
-                  style={{ width: '100%', marginBottom: '10px' }}
-                  onClick={() => alert('Proceeding to Secure Checkout with Indian Distributor Stock!')}
+                  style={{
+                    width: '100%',
+                    marginBottom: '10px',
+                    background: '#25D366',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    gap: '10px',
+                    textDecoration: 'none',
+                    fontWeight: 700,
+                  }}
                 >
-                  PROCEED TO CHECKOUT →
-                </button>
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2zm5.78 14.12c-.24.68-1.39 1.31-1.92 1.39-.5.08-1.14.12-3.69-.93-3.26-1.35-5.36-4.66-5.52-4.88-.16-.22-1.32-1.76-1.32-3.36s.84-2.39 1.14-2.72c.3-.33.66-.41.88-.41.22 0 .44 0 .63.01.2.01.47-.08.74.56.27.66.93 2.27 1.01 2.44.08.16.14.36.03.58-.11.22-.16.36-.33.56-.16.2-.35.45-.5.6-.16.16-.33.34-.14.67.19.33.84 1.39 1.8 2.25 1.24 1.1 2.28 1.44 2.61 1.6.33.16.52.14.71-.08.19-.22.82-.96 1.04-1.29.22-.33.44-.27.74-.16.3.11 1.92.9 2.25 1.06.33.16.55.25.63.39.08.14.08.82-.16 1.5z" />
+                  </svg>
+                  <span>ORDER VIA WHATSAPP →</span>
+                </a>
                 <div style={{ textAlign: 'center', fontSize: '0.65rem', color: 'var(--gray)' }}>
                   100% Guaranteed Genuine Equipment with Free Assembly
                 </div>

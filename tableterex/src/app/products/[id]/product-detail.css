@@ -1,0 +1,1014 @@
+/* =============================================
+   TABLETEREX — PRODUCT INFORMATION PAGE STYLES
+   Harmonized with Design System:
+   Cream (#E8E0D0), Black (#111110), Orange (#C9561E), Off-White (#F5F0E8)
+   ============================================= */
+
+.pd-page {
+  background-color: var(--cream);
+  color: var(--black);
+  min-height: 100vh;
+  font-family: var(--font-mono);
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* 1. TOP ANNOUNCEMENT BAR */
+.pd-topbar {
+  background: var(--cream-dark);
+  border-bottom: 1px solid rgba(17, 17, 16, 0.12);
+  padding: 8px 32px;
+  font-size: 0.72rem;
+  letter-spacing: 0.04em;
+  color: var(--black);
+}
+
+.pd-topbar-inner {
+  max-width: 1440px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.pd-topbar-right {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.pd-topbar-link {
+  color: var(--black);
+  text-decoration: none;
+  font-size: 0.7rem;
+  font-weight: 600;
+  transition: color 0.2s;
+}
+
+.pd-topbar-link:hover {
+  color: var(--orange);
+}
+
+/* 2. MAIN HEADER */
+.pd-header {
+  background: var(--cream);
+  border-bottom: 1px solid rgba(17, 17, 16, 0.1);
+  padding: 16px 40px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  backdrop-filter: blur(12px);
+}
+
+.pd-header-inner {
+  max-width: 1440px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.pd-logo-wrap {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  color: var(--black);
+}
+
+.pd-logo-img {
+  height: 42px;
+  width: auto;
+  object-fit: contain;
+}
+
+.pd-logo-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.pd-logo-main {
+  font-family: var(--font-display);
+  font-size: 1.45rem;
+  letter-spacing: 0.08em;
+  line-height: 1;
+}
+
+.pd-logo-sub {
+  font-size: 0.58rem;
+  letter-spacing: 0.14em;
+  color: var(--gray);
+  margin-top: 2px;
+}
+
+.pd-nav-links {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.pd-nav-link {
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--black);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.pd-nav-link:hover {
+  color: var(--orange);
+}
+
+.pd-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.pd-cart-btn {
+  background: var(--black);
+  color: #ffffff;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 999px;
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: background 0.2s, transform 0.2s;
+}
+
+.pd-cart-btn:hover {
+  background: var(--orange);
+  transform: translateY(-1px);
+}
+
+.pd-cart-badge {
+  background: var(--orange);
+  color: #ffffff;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  font-size: 0.65rem;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 3. BREADCRUMBS */
+.pd-breadcrumbs-wrap {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 24px 40px 12px 40px;
+  font-size: 0.75rem;
+  color: var(--gray);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.pd-crumb-link {
+  color: var(--gray);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.pd-crumb-link:hover {
+  color: var(--black);
+}
+
+.pd-crumb-active {
+  color: var(--black);
+  font-weight: 700;
+}
+
+/* 4. MAIN PRODUCT SHOWCASE GRID */
+.pd-main-section {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 20px 40px 70px 40px;
+}
+
+.pd-showcase-grid {
+  display: grid;
+  grid-template-columns: 1.05fr 1fr;
+  gap: 56px;
+  align-items: start;
+}
+
+/* Left: Media Gallery */
+.pd-gallery-column {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  position: sticky;
+  top: 96px;
+}
+
+.pd-featured-image-box {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  background: #ffffff;
+  border-radius: 24px;
+  overflow: hidden;
+  border: 1px solid rgba(17, 17, 16, 0.1);
+  box-shadow: 0 16px 40px -10px rgba(0, 0, 0, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pd-featured-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.pd-featured-image-box:hover .pd-featured-img {
+  transform: scale(1.08);
+}
+
+/* Overlaid Badges */
+.pd-badge-floating {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  z-index: 10;
+}
+
+.pd-badge-pill {
+  background: rgba(17, 17, 16, 0.85);
+  backdrop-filter: blur(8px);
+  color: #ffffff;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 6px 14px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.pd-badge-pill.orange {
+  background: var(--orange);
+  border-color: var(--orange);
+}
+
+.pd-wishlist-toggle {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: #ffffff;
+  border: 1px solid rgba(17, 17, 16, 0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10;
+  transition: transform 0.2s, background 0.2s;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+}
+
+.pd-wishlist-toggle:hover {
+  transform: scale(1.1);
+}
+
+/* Thumbnail Selector Strip */
+.pd-thumbnails-strip {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+}
+
+.pd-thumbnail-item {
+  position: relative;
+  aspect-ratio: 1;
+  border-radius: 14px;
+  overflow: hidden;
+  background: #ffffff;
+  border: 2px solid rgba(17, 17, 16, 0.1);
+  cursor: pointer;
+  transition: all 0.25s ease;
+  padding: 4px;
+}
+
+.pd-thumbnail-item:hover {
+  border-color: var(--black);
+}
+
+.pd-thumbnail-item.active {
+  border-color: var(--orange);
+  box-shadow: 0 4px 14px rgba(201, 86, 30, 0.25);
+}
+
+.pd-thumb-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.pd-thumb-label {
+  position: absolute;
+  bottom: 6px;
+  left: 6px;
+  right: 6px;
+  background: rgba(0, 0, 0, 0.7);
+  color: #ffffff;
+  font-size: 0.55rem;
+  font-weight: 700;
+  text-align: center;
+  padding: 2px 4px;
+  border-radius: 4px;
+  text-transform: uppercase;
+}
+
+/* Right: Product Purchase Info Box */
+.pd-info-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.pd-brand-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.pd-brand-tag {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  color: var(--orange);
+  text-transform: uppercase;
+}
+
+.pd-origin-tag {
+  font-size: 0.68rem;
+  color: var(--gray);
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.pd-title {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(2rem, 2.8vw, 2.75rem);
+  font-weight: 700;
+  line-height: 1.15;
+  color: var(--black);
+  margin: 0 0 16px 0;
+  letter-spacing: -0.02em;
+}
+
+.pd-rating-strip {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 22px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid rgba(17, 17, 16, 0.08);
+}
+
+.pd-stars {
+  color: var(--orange);
+  font-size: 1.1rem;
+  letter-spacing: 2px;
+}
+
+.pd-rating-text {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--black);
+}
+
+.pd-reviews-link {
+  font-size: 0.74rem;
+  color: var(--gray);
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+/* Price Box */
+.pd-price-box {
+  background: #ffffff;
+  padding: 22px 26px;
+  border-radius: 18px;
+  border: 1px solid rgba(17, 17, 16, 0.08);
+  margin-bottom: 26px;
+}
+
+.pd-price-row {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.pd-current-price {
+  font-size: 2.1rem;
+  font-weight: 800;
+  color: var(--black);
+  letter-spacing: -0.02em;
+}
+
+.pd-mrp-price {
+  font-size: 1.1rem;
+  color: var(--gray);
+  text-decoration: line-through;
+}
+
+.pd-save-pill {
+  background: #25D366;
+  color: #ffffff;
+  font-size: 0.68rem;
+  font-weight: 800;
+  padding: 4px 10px;
+  border-radius: 6px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.pd-tax-note {
+  font-size: 0.7rem;
+  color: var(--gray);
+  margin-top: 6px;
+  display: block;
+}
+
+/* In-Stock Pulse */
+.pd-stock-status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px dashed rgba(17, 17, 16, 0.1);
+  font-size: 0.74rem;
+  font-weight: 700;
+  color: #1e7e34;
+}
+
+.pd-pulse-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: #25D366;
+  box-shadow: 0 0 0 3px rgba(37, 211, 102, 0.25);
+  animation: pulseGreen 2s infinite;
+}
+
+@keyframes pulseGreen {
+  0% {
+    box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.6);
+  }
+  70% {
+    box-shadow: 0 0 0 8px rgba(37, 211, 102, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(37, 211, 102, 0);
+  }
+}
+
+/* Short Description */
+.pd-short-desc {
+  font-size: 0.92rem;
+  line-height: 1.6;
+  color: rgba(17, 17, 16, 0.85);
+  margin-bottom: 26px;
+}
+
+/* Interactive Option Selectors */
+.pd-option-block {
+  margin-bottom: 22px;
+}
+
+.pd-option-label {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--black);
+  margin-bottom: 10px;
+}
+
+.pd-option-chosen {
+  color: var(--orange);
+  font-weight: 700;
+}
+
+.pd-pills-row {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.pd-pill-btn {
+  background: #ffffff;
+  border: 1px solid rgba(17, 17, 16, 0.15);
+  padding: 10px 18px;
+  border-radius: 10px;
+  font-size: 0.76rem;
+  font-weight: 600;
+  color: var(--black);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.pd-pill-btn:hover {
+  border-color: var(--black);
+}
+
+.pd-pill-btn.active {
+  background: var(--black);
+  color: #ffffff;
+  border-color: var(--black);
+}
+
+/* Color Circle Pills */
+.pd-color-pill {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #ffffff;
+  border: 1px solid rgba(17, 17, 16, 0.15);
+  padding: 8px 16px;
+  border-radius: 10px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.pd-color-pill.active {
+  border-color: var(--black);
+  background: #f8f6f0;
+}
+
+.pd-color-dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.pd-color-dot.black {
+  background: #111110;
+}
+
+.pd-color-dot.red {
+  background: #d62828;
+}
+
+/* Quantity & Buttons Row */
+.pd-cta-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-bottom: 28px;
+}
+
+.pd-qty-actions-row {
+  display: flex;
+  gap: 14px;
+}
+
+.pd-qty-picker {
+  display: flex;
+  align-items: center;
+  background: #ffffff;
+  border: 1px solid rgba(17, 17, 16, 0.15);
+  border-radius: 14px;
+  padding: 4px;
+  height: 52px;
+}
+
+.pd-qty-btn {
+  width: 42px;
+  height: 42px;
+  background: transparent;
+  border: none;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--black);
+  cursor: pointer;
+  border-radius: 10px;
+  transition: background 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pd-qty-btn:hover {
+  background: rgba(17, 17, 16, 0.06);
+}
+
+.pd-qty-display {
+  width: 36px;
+  text-align: center;
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: var(--black);
+}
+
+.pd-add-bag-btn {
+  flex: 1;
+  background: var(--black);
+  color: #ffffff;
+  border: none;
+  border-radius: 14px;
+  padding: 0 24px;
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  transition: all 0.25s ease;
+  height: 52px;
+}
+
+.pd-add-bag-btn:hover {
+  background: #252524;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.pd-add-bag-btn.added {
+  background: #25D366;
+}
+
+/* Prominent WhatsApp Buy / Inquire Button */
+.pd-whatsapp-buy-btn {
+  width: 100%;
+  background: #25D366;
+  color: #ffffff;
+  text-decoration: none;
+  border-radius: 14px;
+  padding: 16px 28px;
+  font-family: var(--font-mono);
+  font-size: 0.88rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  box-shadow: 0 8px 24px rgba(37, 211, 102, 0.3);
+  border: none;
+}
+
+.pd-whatsapp-buy-btn:hover {
+  background: #20ba59;
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px rgba(37, 211, 102, 0.4);
+}
+
+.pd-whatsapp-btn-sub {
+  font-size: 0.65rem;
+  opacity: 0.9;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  text-transform: none;
+}
+
+/* Trust Perks Strip */
+.pd-perks-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  background: #ffffff;
+  padding: 20px 22px;
+  border-radius: 16px;
+  border: 1px solid rgba(17, 17, 16, 0.08);
+}
+
+.pd-perk-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.pd-perk-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: rgba(201, 86, 30, 0.1);
+  color: var(--orange);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.pd-perk-title {
+  font-size: 0.74rem;
+  font-weight: 700;
+  color: var(--black);
+}
+
+.pd-perk-desc {
+  font-size: 0.65rem;
+  color: var(--gray);
+}
+
+/* 5. TABS SPECIFICATIONS SECTION */
+.pd-details-section {
+  max-width: 1440px;
+  margin: 0 auto 90px auto;
+  padding: 0 40px;
+}
+
+.pd-tabs-card {
+  background: #ffffff;
+  border-radius: 24px;
+  border: 1px solid rgba(17, 17, 16, 0.08);
+  box-shadow: 0 16px 40px -10px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+}
+
+.pd-tabs-nav {
+  display: flex;
+  border-bottom: 1px solid rgba(17, 17, 16, 0.1);
+  background: #fdfbf7;
+  overflow-x: auto;
+}
+
+.pd-tab-btn {
+  padding: 20px 32px;
+  background: transparent;
+  border: none;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--gray);
+  cursor: pointer;
+  white-space: nowrap;
+  position: relative;
+  transition: all 0.2s;
+}
+
+.pd-tab-btn:hover {
+  color: var(--black);
+}
+
+.pd-tab-btn.active {
+  color: var(--orange);
+  background: #ffffff;
+}
+
+.pd-tab-btn.active::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--orange);
+}
+
+.pd-tab-content {
+  padding: 44px 48px;
+}
+
+/* Overview tab */
+.pd-overview-layout {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 48px;
+}
+
+.pd-overview-text h3 {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 1.6rem;
+  margin-bottom: 14px;
+}
+
+.pd-overview-text p {
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: rgba(17, 17, 16, 0.8);
+  margin-bottom: 20px;
+}
+
+.pd-features-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.pd-feature-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.pd-feature-check {
+  color: var(--orange);
+  font-weight: 800;
+}
+
+.pd-performance-box {
+  background: var(--cream);
+  padding: 28px;
+  border-radius: 18px;
+  border: 1px solid rgba(17, 17, 16, 0.08);
+}
+
+.pd-performance-title {
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--black);
+  margin-bottom: 18px;
+}
+
+.pd-meter-row {
+  margin-bottom: 16px;
+}
+
+.pd-meter-header {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.74rem;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.pd-meter-bar {
+  height: 8px;
+  background: rgba(17, 17, 16, 0.1);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.pd-meter-fill {
+  height: 100%;
+  background: var(--orange);
+  border-radius: 999px;
+}
+
+/* Specs Tab Table */
+.pd-specs-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.pd-specs-table tr {
+  border-bottom: 1px solid rgba(17, 17, 16, 0.08);
+}
+
+.pd-specs-table td {
+  padding: 16px 20px;
+  font-size: 0.85rem;
+}
+
+.pd-specs-k {
+  width: 35%;
+  font-weight: 700;
+  color: var(--gray);
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  letter-spacing: 0.06em;
+}
+
+.pd-specs-v {
+  font-weight: 600;
+  color: var(--black);
+}
+
+/* 6. RELATED PRODUCTS SECTION */
+.pd-related-section {
+  max-width: 1440px;
+  margin: 0 auto 90px auto;
+  padding: 0 40px;
+}
+
+.pd-related-header {
+  margin-bottom: 32px;
+}
+
+.pd-related-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+
+/* Floating WhatsApp Badge (Bottom Right) */
+.pd-floating-wa {
+  position: fixed;
+  bottom: 28px;
+  right: 28px;
+  background: #25D366;
+  color: #ffffff;
+  padding: 12px 20px;
+  border-radius: 999px;
+  text-decoration: none;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  box-shadow: 0 10px 28px rgba(37, 211, 102, 0.4);
+  z-index: 999;
+  transition: all 0.25s ease;
+}
+
+.pd-floating-wa:hover {
+  background: #20ba59;
+  transform: translateY(-3px) scale(1.03);
+  box-shadow: 0 14px 36px rgba(37, 211, 102, 0.5);
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .pd-showcase-grid {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+
+  .pd-gallery-column {
+    position: static;
+  }
+
+  .pd-overview-layout {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+
+  .pd-related-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .pd-header,
+  .pd-main-section,
+  .pd-details-section,
+  .pd-related-section,
+  .pd-breadcrumbs-wrap {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .pd-nav-links {
+    display: none;
+  }
+
+  .pd-perks-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .pd-related-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .pd-tab-content {
+    padding: 28px 20px;
+  }
+}

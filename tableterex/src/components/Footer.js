@@ -5,9 +5,9 @@ import { useState } from 'react';
 const NAV_LINKS = [
   { label: 'Home', href: '/' },
   { label: 'About', href: '/about' },
-  { label: 'Store', href: '/store' },
-  { label: 'Brands', href: '/brands' },
-  { label: 'Contact', href: '/contact' },
+  { label: 'Blog', href: '/blog' },
+  { label: 'Store', href: '/products' },
+  { label: 'Brands', href: '/#shop-by-brand' },
 ];
 const SOCIAL_LINKS = [
   { label: 'INSTAGRAM', href: 'https://instagram.com' },
@@ -67,7 +67,7 @@ export default function Footer() {
           <span className="footer-col-title">[ CONTACT ]</span>
           <ul className="footer-links">
             <li><a href="mailto:hello@tableterex.in">hello@tableterex.in</a></li>
-            <li><a href="https://wa.me/919999999999">+91 99999 99999</a></li>
+            <li><a href="https://wa.me/919999899999">+91 99998 99999</a></li>
             <li><a href="#">Pune, Maharashtra</a></li>
           </ul>
         </div>
