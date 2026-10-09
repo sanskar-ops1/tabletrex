@@ -179,10 +179,10 @@ export default function BuildYourSetup() {
                         />
                       </div>
                       <div className="neo-card-title-col">
-                        <h3 className="neo-card-title">{s.name}</h3>
                         <div className="neo-style-badge">
                           <span className="neo-style-bracket">[{s.style}]</span>
                         </div>
+                        <h3 className="neo-card-title">{s.name}</h3>
                       </div>
                     </div>
                   </div>

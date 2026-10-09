@@ -5979,11 +5979,12 @@ body::before {
 }
 
 .neo-card-title {
-  font-family: var(--font-sans), 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-  font-size: 1.45rem;
-  font-weight: 800;
-  line-height: 1.05;
-  letter-spacing: -0.02em;
+  font-family: var(--font-display), 'Anton', 'Bebas Neue', sans-serif;
+  font-size: 1.85rem;
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
   color: #111110;
   margin: 0;
 }
@@ -6092,11 +6093,15 @@ body::before {
 
 .neo-style-badge {
   font-family: var(--font-mono);
-  font-size: 0.54rem;
-  letter-spacing: 0.16em;
+  font-size: 0.58rem;
+  letter-spacing: 0.18em;
   font-weight: 800;
-  color: #111110;
+  color: var(--orange);
   text-transform: uppercase;
+}
+
+.neo-card--orange .neo-style-badge {
+  color: #111110;
 }
 
 /* Specs Breakdown Table */
