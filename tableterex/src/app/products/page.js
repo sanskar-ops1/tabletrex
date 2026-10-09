@@ -2,10 +2,12 @@
 
 import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
+import Navbar from '@/components/Navbar';
 import { ALL_PRODUCTS } from '@/data/allProducts';
 import WaterCanvas from '@/components/WaterCanvas';
 import Footer from '@/components/Footer';
 import { getWhatsAppCartUrl } from '@/utils/whatsapp';
+import AnimatedCartButton from '@/components/AnimatedCartButton';
 import './products.css';
 
 /* ─── 4 Value Props for the Continuous Right-to-Left Marquee ─── */
@@ -540,7 +542,7 @@ export default function ProductsPage() {
     );
   };
 
-  const addToCart = (product, e) => {
+  const addToCart = (product, e, immediateDrawer = false) => {
     if (e) e.stopPropagation();
     setCart((prev) => {
       const existing = prev.find((item) => item.id === product.id);
@@ -551,7 +553,13 @@ export default function ProductsPage() {
       }
       return [...prev, { ...product, qty: 1 }];
     });
-    setCartOpen(true);
+    if (immediateDrawer) {
+      setCartOpen(true);
+    } else {
+      setTimeout(() => {
+        setCartOpen(true);
+      }, 1750);
+    }
   };
 
   const updateCartQty = (id, delta) => {
@@ -605,105 +613,60 @@ export default function ProductsPage() {
 
   return (
     <div className="nl-page-container">
-      {/* ── 2. STORE HEADER & NAVIGATION ── */}
-      <header className="nl-navbar">
-        <div className="nl-navbar-inner">
-          <div className="nl-logo">
-            <img
-              src="/images/tableterex-logo.png"
-              alt="TableTerex Logo"
-              className="nl-logo-img"
-              draggable={false}
-            />
-            <div className="nl-logo-text">
-              <span className="nl-logo-main">TABLETEREX</span>
-              <span className="nl-logo-sub">OFFICIAL STORE · PRO GEAR</span>
-            </div>
-          </div>
-
-          <nav className="nl-nav-desktop">
-            <ul className="nl-nav-links">
-              <li>
-                <Link href="/" className="nl-nav-link">
-                  Home
-                </Link>
-              </li>
-              <li>
-                <a
-                  href="#categories"
-                  className="nl-nav-link active"
-                  onClick={() => setActiveCategory(null)}
-                >
-                  Categories ▾
-                </a>
-              </li>
-              <li>
-                <a href="#bestsellers" className="nl-nav-link">
-                  All Products
-                </a>
-              </li>
-              <li>
-                <a href="#story" className="nl-nav-link">
-                  Brand Heritage
-                </a>
-              </li>
-              <li>
-                <a href="#reviews" className="nl-nav-link">
-                  Reviews
-                </a>
-              </li>
-            </ul>
-          </nav>
-
-          <div className="nl-nav-actions">
+      {/* ── 2. UNIFIED STORE NAVBAR ── */}
+      <Navbar
+        rightActions={
+          <>
             {/* Search Button */}
             <button
-              className="nl-action-icon"
+              className="nav-action-btn"
               aria-label="Search Catalog"
               onClick={() => {
                 const el = document.getElementById('bestsellers');
                 if (el) el.scrollIntoView({ behavior: 'smooth' });
               }}
+              title="Search Catalog"
             >
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2">
                 <circle cx="11" cy="11" r="8" />
                 <line x1="21" y1="21" x2="16.65" y2="16.65" />
               </svg>
             </button>
 
-            {/* Wishlist Button with Badge */}
+            {/* Wishlist Button */}
             <button
-              className="nl-action-icon"
+              className="nav-action-btn"
               aria-label="Wishlist"
               onClick={() => {
                 const el = document.getElementById('bestsellers');
                 if (el) el.scrollIntoView({ behavior: 'smooth' });
               }}
+              title="Saved Wishlist"
             >
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2">
                 <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
               </svg>
-              {wishlist.length > 0 && (
-                <span className="nl-badge">{wishlist.length}</span>
-              )}
+              {wishlist.length > 0 && <span className="nav-action-badge">{wishlist.length}</span>}
             </button>
 
             {/* Cart Trigger with Count */}
             <button
-              className="nl-action-icon"
+              className="nav-action-btn"
               onClick={() => setCartOpen(true)}
               aria-label="Shopping Cart"
+              title="View Shopping Bag"
             >
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2">
                 <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" />
                 <line x1="3" y1="6" x2="21" y2="6" />
                 <path d="M16 10a4 4 0 0 1-8 0" />
               </svg>
-              {cartCount > 0 && <span className="nl-badge">{cartCount}</span>}
+              <span>CART</span>
+              {cartCount > 0 && <span className="nav-action-badge">{cartCount}</span>}
             </button>
-          </div>
-        </div>
-      </header>
+          </>
+        }
+      />
 
       {/* ── 3. HERO SHOWCASE SECTION (Exact same code, spacing, length & breadth as Home Page Banner) ── */}
       <section className="hero" id="hero">
@@ -1078,49 +1041,13 @@ export default function ProductsPage() {
                         <div className="nl-card-price">{displayPrice}</div>
                       </div>
 
-                      {/* White Squircle Add-To-Cart Button (Bottom Right) */}
-                      <button
-                        type="button"
-                        className={`nl-card-cart-btn${inCart ? ' added' : ''}`}
-                        onClick={(e) => {
-                          e.preventDefault();
-                          e.stopPropagation();
-                          addToCart(prod, e);
-                        }}
-                        aria-label="Add to cart"
-                      >
-                        {inCart ? (
-                          <svg
-                            width="22"
-                            height="22"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="#000000"
-                            strokeWidth="2.4"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                          >
-                            <polyline points="20 6 9 17 4 12" />
-                          </svg>
-                        ) : (
-                          <svg
-                            width="24"
-                            height="24"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="#000000"
-                            strokeWidth="2.1"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                          >
-                            <path d="M3 4h2.5l2 10.5h9.5l2.2-7H6.8" />
-                            <circle cx="9" cy="18.5" r="1.3" fill="#000000" />
-                            <circle cx="16" cy="18.5" r="1.3" fill="#000000" />
-                            <path d="M14 14.5l5-5" />
-                            <path d="M15 9.5h4v4" />
-                          </svg>
-                        )}
-                      </button>
+                      {/* White Squircle Animated Add-To-Cart Button (Bottom Right) */}
+                      <AnimatedCartButton
+                        onAddToCart={(e) => addToCart(prod, e)}
+                        inCart={inCart}
+                        ariaLabel={`Add ${prod.name} to cart`}
+                        id={`nl-add-cart-${prod.id}`}
+                      />
                     </div>
                   </Link>
                 );

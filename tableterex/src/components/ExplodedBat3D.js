@@ -2,9 +2,11 @@
 import { useState, useEffect, useRef } from 'react';
 import dynamic from 'next/dynamic';
 import BatCalloutOverlay from './BatCalloutOverlay';
+import CanvasErrorBoundary from './CanvasErrorBoundary';
+import { dynamicWithRetry } from '@/utils/dynamicRetry';
 
 // Dynamically import the real 3D WebGL Canvas to prevent SSR issues
-const ExplodedBatCanvas = dynamic(() => import('./ExplodedBatCanvas'), {
+const ExplodedBatCanvas = dynamic(() => dynamicWithRetry(() => import('./ExplodedBatCanvas')), {
   ssr: false,
   loading: () => (
     <div className="diag-3d-loading">
@@ -64,10 +66,12 @@ export default function ExplodedBat3D({ selectedSetup }) {
       <div className="diag-center-stage">
         {/* Real 3D WebGL Canvas */}
         <div className="diag-canvas-container">
-          <ExplodedBatCanvas
-            isCombined={isCombined}
-            focusLayer={focusLayer}
-          />
+          <CanvasErrorBoundary>
+            <ExplodedBatCanvas
+              isCombined={isCombined}
+              focusLayer={focusLayer}
+            />
+          </CanvasErrorBoundary>
         </div>
 
         {/* Interactive Vector Callouts Anchored Directly to 3D Model Layers */}

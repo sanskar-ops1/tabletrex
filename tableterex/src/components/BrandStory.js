@@ -1,29 +1,27 @@
 'use client';
 import { useEffect } from 'react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import TornDivider from './TornDivider';
 
 export default function BrandStory() {
   useEffect(() => {
-    import('gsap').then(({ gsap }) => {
-      import('gsap/ScrollTrigger').then(({ ScrollTrigger }) => {
-        gsap.registerPlugin(ScrollTrigger);
-        gsap.fromTo('.brand-story-title',
-          { opacity: 0, x: -60 },
-          { opacity: 1, x: 0, duration: 1, ease: 'power3.out',
-            scrollTrigger: { trigger: '.brand-story', start: 'top 75%' } }
-        );
-        gsap.fromTo('.brand-story-body',
-          { opacity: 0, y: 30 },
-          { opacity: 1, y: 0, duration: 0.9, ease: 'power3.out',
-            scrollTrigger: { trigger: '.brand-story', start: 'top 70%' } }
-        );
-        gsap.fromTo('.brand-story-img-wrap',
-          { opacity: 0, scale: 0.94 },
-          { opacity: 1, scale: 1, duration: 1.1, ease: 'power3.out',
-            scrollTrigger: { trigger: '.brand-story', start: 'top 72%' } }
-        );
-      });
-    });
+    gsap.registerPlugin(ScrollTrigger);
+    gsap.fromTo('.brand-story-title',
+      { opacity: 0, x: -60 },
+      { opacity: 1, x: 0, duration: 1, ease: 'power3.out',
+        scrollTrigger: { trigger: '.brand-story', start: 'top 75%' } }
+    );
+    gsap.fromTo('.brand-story-body',
+      { opacity: 0, y: 30 },
+      { opacity: 1, y: 0, duration: 0.9, ease: 'power3.out',
+        scrollTrigger: { trigger: '.brand-story', start: 'top 70%' } }
+    );
+    gsap.fromTo('.brand-story-img-wrap',
+      { opacity: 0, scale: 0.94 },
+      { opacity: 1, scale: 1, duration: 1.1, ease: 'power3.out',
+        scrollTrigger: { trigger: '.brand-story', start: 'top 72%' } }
+    );
   }, []);
 
   return (

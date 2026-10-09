@@ -1,5 +1,7 @@
 'use client';
 import { useEffect } from 'react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import {
   ChooseRacketIsometricIcon,
   ChooseRubberIsometricIcon,
@@ -48,34 +50,30 @@ const PROCESS_STEPS = [
 
 export default function CustomizeSetup() {
   useEffect(() => {
-    import('gsap').then(({ gsap }) => {
-      import('gsap/ScrollTrigger').then(({ ScrollTrigger }) => {
-        gsap.registerPlugin(ScrollTrigger);
-        gsap.fromTo(
-          '.cust-step-card',
-          { opacity: 0, y: 40 },
-          {
-            opacity: 1,
-            y: 0,
-            duration: 0.8,
-            stagger: 0.12,
-            ease: 'power3.out',
-            scrollTrigger: { trigger: '.cust-process-flow', start: 'top 80%' },
-          }
-        );
-        gsap.fromTo(
-          '.cust-headline',
-          { opacity: 0, x: -60 },
-          {
-            opacity: 1,
-            x: 0,
-            duration: 1,
-            ease: 'power3.out',
-            scrollTrigger: { trigger: '.customize-section', start: 'top 75%' },
-          }
-        );
-      });
-    });
+    gsap.registerPlugin(ScrollTrigger);
+    gsap.fromTo(
+      '.cust-step-card',
+      { opacity: 0, y: 40 },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 0.8,
+        stagger: 0.12,
+        ease: 'power3.out',
+        scrollTrigger: { trigger: '.cust-process-flow', start: 'top 80%' },
+      }
+    );
+    gsap.fromTo(
+      '.cust-headline',
+      { opacity: 0, x: -60 },
+      {
+        opacity: 1,
+        x: 0,
+        duration: 1,
+        ease: 'power3.out',
+        scrollTrigger: { trigger: '.customize-section', start: 'top 75%' },
+      }
+    );
   }, []);
 
   return (

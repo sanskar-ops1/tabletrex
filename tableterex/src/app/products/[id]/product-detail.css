@@ -11,6 +11,7 @@
   font-family: var(--font-mono);
   overflow-x: hidden;
   position: relative;
+  padding-top: var(--nav-h, 72px);
 }
 
 /* 1. TOP ANNOUNCEMENT BAR */

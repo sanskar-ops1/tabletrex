@@ -1,6 +1,5 @@
 'use client';
 import { useState, useEffect } from 'react';
-import { WeeklyRefreshIcon } from '@/components/icons';
 
 const WEEK_DROPS = [
   {
@@ -108,9 +107,6 @@ export default function FreshThisWeek() {
         <div className="fresh-header-bar">
           <div className="fresh-title-group">
             <div className="fresh-icon-title">
-              <div className="fresh-icon-wrap" title="Weekly Batch Rotation">
-                <WeeklyRefreshIcon size={48} className="fresh-refresh-icon" color="var(--orange)" />
-              </div>
               <div>
                 <div className="fresh-header-badges">
                   <span className="fresh-new-batch-badge">NEW BATCH</span>

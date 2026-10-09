@@ -1,60 +1,58 @@
 'use client';
 import { useEffect } from 'react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import TornDivider from './TornDivider';
 
 export default function PhilosophySection() {
   useEffect(() => {
-    import('gsap').then(({ gsap }) => {
-      import('gsap/ScrollTrigger').then(({ ScrollTrigger }) => {
-        gsap.registerPlugin(ScrollTrigger);
+    gsap.registerPlugin(ScrollTrigger);
 
-        // Headline stagger
-        gsap.fromTo('.phil-headline span',
-          { opacity: 0, y: 80 },
-          {
-            opacity: 1, y: 0, duration: 1, stagger: 0.12, ease: 'power4.out',
-            scrollTrigger: { trigger: '.philosophy-section', start: 'top 75%' },
-          }
-        );
-        // Floating polaroid
-        gsap.fromTo('.phil-polaroid',
-          { opacity: 0, rotate: -18, scale: 0.85 },
-          {
-            opacity: 1, rotate: -8, scale: 1, duration: 1.2, ease: 'power3.out',
-            scrollTrigger: { trigger: '.philosophy-section', start: 'top 70%' },
-          }
-        );
-        // Polaroid 2
-        gsap.fromTo('.phil-polaroid-2',
-          { opacity: 0, rotate: 12, scale: 0.85 },
-          {
-            opacity: 1, rotate: 6, scale: 1, duration: 1.2, delay: 0.2, ease: 'power3.out',
-            scrollTrigger: { trigger: '.philosophy-section', start: 'top 70%' },
-          }
-        );
-        // Right text
-        gsap.fromTo('.phil-right',
-          { opacity: 0, x: 40 },
-          {
-            opacity: 1, x: 0, duration: 1, ease: 'power3.out',
-            scrollTrigger: { trigger: '.philosophy-section', start: 'top 65%' },
-          }
-        );
-        // Philosophy card
-        gsap.fromTo('.phil-card',
-          { opacity: 0, y: 50 },
-          {
-            opacity: 1, y: 0, duration: 1, ease: 'power3.out',
-            scrollTrigger: { trigger: '.phil-card', start: 'top 80%' },
-          }
-        );
-        // Watermark scroll
-        gsap.to('.phil-watermark', {
-          x: -120,
-          ease: 'none',
-          scrollTrigger: { trigger: '.phil-cream-band', start: 'top bottom', end: 'bottom top', scrub: 1 },
-        });
-      });
+    // Headline stagger
+    gsap.fromTo('.phil-headline span',
+      { opacity: 0, y: 80 },
+      {
+        opacity: 1, y: 0, duration: 1, stagger: 0.12, ease: 'power4.out',
+        scrollTrigger: { trigger: '.philosophy-section', start: 'top 75%' },
+      }
+    );
+    // Floating polaroid
+    gsap.fromTo('.phil-polaroid',
+      { opacity: 0, rotate: -18, scale: 0.85 },
+      {
+        opacity: 1, rotate: -8, scale: 1, duration: 1.2, ease: 'power3.out',
+        scrollTrigger: { trigger: '.philosophy-section', start: 'top 70%' },
+      }
+    );
+    // Polaroid 2
+    gsap.fromTo('.phil-polaroid-2',
+      { opacity: 0, rotate: 12, scale: 0.85 },
+      {
+        opacity: 1, rotate: 6, scale: 1, duration: 1.2, delay: 0.2, ease: 'power3.out',
+        scrollTrigger: { trigger: '.philosophy-section', start: 'top 70%' },
+      }
+    );
+    // Right text
+    gsap.fromTo('.phil-right',
+      { opacity: 0, x: 40 },
+      {
+        opacity: 1, x: 0, duration: 1, ease: 'power3.out',
+        scrollTrigger: { trigger: '.philosophy-section', start: 'top 65%' },
+      }
+    );
+    // Philosophy card
+    gsap.fromTo('.phil-card',
+      { opacity: 0, y: 50 },
+      {
+        opacity: 1, y: 0, duration: 1, ease: 'power3.out',
+        scrollTrigger: { trigger: '.phil-card', start: 'top 80%' },
+      }
+    );
+    // Watermark scroll
+    gsap.to('.phil-watermark', {
+      x: -120,
+      ease: 'none',
+      scrollTrigger: { trigger: '.phil-cream-band', start: 'top bottom', end: 'bottom top', scrub: 1 },
     });
   }, []);
 

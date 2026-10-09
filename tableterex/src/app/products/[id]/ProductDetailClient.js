@@ -2,6 +2,7 @@
 
 import { useState, useMemo } from 'react';
 import Link from 'next/link';
+import Navbar from '@/components/Navbar';
 import { ALL_PRODUCTS } from '@/data/allProducts';
 import Footer from '@/components/Footer';
 import { getWhatsAppProductUrl, getWhatsAppCartUrl } from '@/utils/whatsapp';
@@ -138,68 +139,26 @@ export default function ProductDetailClient({ productId }) {
         </div>
       </div>
 
-      {/* ── 2. STICKY HEADER ── */}
-      <header className="pd-header">
-        <div className="pd-header-inner">
-          <Link href="/products" className="pd-logo-wrap">
-            <img
-              src="/images/tableterex-logo.png"
-              alt="TableTerex Logo"
-              className="pd-logo-img"
-            />
-            <div className="pd-logo-text">
-              <span className="pd-logo-main">TABLETEREX</span>
-              <span className="pd-logo-sub">OFFICIAL TOURNAMENT STORE</span>
-            </div>
-          </Link>
-
-          <nav>
-            <ul className="pd-nav-links">
-              <li>
-                <Link href="/" className="pd-nav-link">
-                  Home
-                </Link>
-              </li>
-              <li>
-                <Link href="/products" className="pd-nav-link">
-                  Catalog
-                </Link>
-              </li>
-              <li>
-                <Link href="/products#categories" className="pd-nav-link">
-                  Categories
-                </Link>
-              </li>
-              <li>
-                <Link href="/about" className="pd-nav-link">
-                  Heritage
-                </Link>
-              </li>
-              <li>
-                <a href="#details" className="pd-nav-link">
-                  Specifications
-                </a>
-              </li>
-            </ul>
-          </nav>
-
-          <div className="pd-header-actions">
-            <button
-              className="pd-cart-btn"
-              onClick={() => setCartOpen(true)}
-              aria-label="View shopping bag"
-            >
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" />
-                <line x1="3" y1="6" x2="21" y2="6" />
-                <path d="M16 10a4 4 0 0 1-8 0" />
-              </svg>
-              <span>BAG</span>
-              {cartCount > 0 && <span className="pd-cart-badge">{cartCount}</span>}
-            </button>
-          </div>
-        </div>
-      </header>
+      {/* ── 2. UNIFIED STORE NAVBAR ── */}
+      <Navbar
+        solid
+        rightActions={
+          <button
+            className="nav-action-btn"
+            onClick={() => setCartOpen(true)}
+            aria-label="View shopping bag"
+            title="Shopping Bag"
+          >
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" />
+              <line x1="3" y1="6" x2="21" y2="6" />
+              <path d="M16 10a4 4 0 0 1-8 0" />
+            </svg>
+            <span>BAG</span>
+            {cartCount > 0 && <span className="nav-action-badge">{cartCount}</span>}
+          </button>
+        }
+      />
 
       {/* ── 3. BREADCRUMBS ── */}
       <nav className="pd-breadcrumbs-wrap" aria-label="Breadcrumbs">

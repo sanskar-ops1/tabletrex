@@ -1189,34 +1189,134 @@
   text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
 }
 
-/* White Squircle Add-To-Cart Action Button (Bottom Right) */
+/* ==========================================================================
+   ANIMATED ADD TO CART SQUIRCLE BUTTON (ICON-ONLY EARLIER DESIGN)
+   - Resting state: Pure white squircle button (52x52px) with centered cart icon
+   - Click interaction: Cart shoots from center to right edge, exits, immediately
+     reappears from the left edge and drives back to center with landing bounce & checkmark.
+   ========================================================================== */
 .nl-card-cart-btn {
+  position: relative;
   width: 52px;
   height: 52px;
+  min-width: 52px;
+  padding: 0;
   border-radius: 17px;
   background: #ffffff;
+  color: #000000;
   border: none;
-  display: flex;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  flex-shrink: 0;
-  transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s ease, background-color 0.2s ease;
+  overflow: hidden;
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
+  transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s ease, background-color 0.2s ease;
+  user-select: none;
+  flex-shrink: 0;
+  outline: none;
 }
 
 .nl-card-cart-btn:hover {
   transform: scale(1.08);
   box-shadow: 0 10px 26px rgba(0, 0, 0, 0.5);
-  background: #f8f8f8;
+  background: #ffffff;
 }
 
 .nl-card-cart-btn:active {
-  transform: scale(0.94);
+  transform: scale(0.93);
 }
 
-.nl-card-cart-btn.added {
-  background: #ffffff;
+/* Cart Lap Wrap */
+.nl-cart-lap-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  will-change: transform, opacity;
+  transform: translateX(0);
+}
+
+/* Lap Animation: Center -> Right Edge (exit) -> Left Edge (enter) -> Center */
+.nl-cart-lap-wrap.is-running {
+  animation: cartLapRound 0.72s cubic-bezier(0.36, 0, 0.66, 1) forwards;
+}
+
+@keyframes cartLapRound {
+  /* 1. Center to Right Edge */
+  0% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  34% {
+    transform: translateX(220%);
+    opacity: 1;
+  }
+  35% {
+    transform: translateX(220%);
+    opacity: 0;
+  }
+  /* 2. Jump to Left Edge while hidden */
+  37% {
+    transform: translateX(-220%);
+    opacity: 0;
+  }
+  38% {
+    transform: translateX(-220%);
+    opacity: 1;
+  }
+  /* 3. Left Edge Back into Center */
+  76% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  /* 4. Landing spring suspension dip & settle */
+  88% {
+    transform: translateX(0) scale(1.15) translateY(-2px);
+  }
+  100% {
+    transform: translateX(0) scale(1) translateY(0);
+  }
+}
+
+.nl-cart-lap-wrap.is-landed {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+/* Down-left Arrow inside basket during resting state */
+.nl-cart-arrow {
+  opacity: 1;
+  transition: opacity 0.12s ease;
+}
+
+.nl-cart-arrow.is-hidden {
+  opacity: 0;
+}
+
+/* Success Checkmark inside cart basket */
+.nl-cart-checkmark {
+  transform-origin: 12px 10px;
+  opacity: 0;
+  transform: scale(0.2);
+  stroke-dasharray: 12;
+  stroke-dashoffset: 12;
+  transition: opacity 0.1s ease, transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.35), stroke-dashoffset 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.nl-cart-checkmark.is-visible {
+  opacity: 1;
+  transform: scale(1);
+  stroke-dashoffset: 0;
+}
+
+/* Mobile responsive */
+@media (max-width: 540px) {
+  .nl-card-cart-btn {
+    width: 48px;
+    height: 48px;
+    min-width: 48px;
+    border-radius: 15px;
+  }
 }
 
 /* 8. BRAND STORY SPLIT FEATURE */

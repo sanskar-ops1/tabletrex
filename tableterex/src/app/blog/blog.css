@@ -1,27 +1,266 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+
 /* ==========================================================================
-   TABLETEREX NEWSROOM & BLOG STYLES
-   Clean unboxed card layout with sharp image edges
+   TABLETEREX BLOG & NEWSROOM STYLES
+   Warm Cream (#e7dfcf) Editorial Theme + Full Cover Hero Banner
    ========================================================================== */
 
-.nr-page {
-  background-color: #0b0c10;
+/* ─── 1. Full Cover Hero Banner (Matching Attached Reference Image) ─── */
+.blog-hero {
+  position: relative;
+  min-height: 100vh;
+  background: #111110;
+  display: flex;
+  align-items: flex-end;
+  overflow: hidden;
+  width: 100%;
+  font-family: 'Plus Jakarta Sans', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.blog-hero-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.blog-hero-img {
+  width: 100%;
+  height: 125%;
+  object-fit: cover;
+  object-position: center 30%;
+  opacity: 0.52;
+  filter: grayscale(12%) contrast(1.15) brightness(0.85);
+  display: block;
+}
+
+.blog-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 75% 35%, rgba(201, 86, 30, 0.15) 0%, transparent 60%),
+    linear-gradient(to bottom, rgba(11, 12, 16, 0.5) 0%, rgba(11, 12, 16, 0.25) 35%, rgba(17, 17, 16, 0.85) 75%, #111110 100%),
+    linear-gradient(90deg, rgba(11, 12, 16, 0.92) 0%, rgba(11, 12, 16, 0.65) 45%, rgba(11, 12, 16, 0.45) 100%);
+  pointer-events: none;
+}
+
+/* Seamless bottom fade overlay to guarantee 100% solid #111110 across entire bottom */
+.blog-hero::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 240px;
+  background: linear-gradient(to bottom, transparent 0%, rgba(17, 17, 16, 0.5) 30%, rgba(17, 17, 16, 0.9) 65%, #111110 90%, #111110 100%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.blog-hero-content {
+  position: relative;
+  z-index: 2;
+  padding: clamp(90px, 14vh, 130px) clamp(32px, 5.5vw, 88px) clamp(36px, 5vh, 52px);
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: clamp(36px, 5.5vh, 60px);
+}
+
+/* Eyebrow: ■ Next-Gen Tag (matching reference agency image typography & weight) */
+.blog-hero-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: 'Plus Jakarta Sans', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: clamp(0.85rem, 1.05vw, 0.95rem);
+  font-weight: 500;
+  letter-spacing: -0.01em;
   color: #ffffff;
+  text-transform: none;
+  margin-bottom: -18px;
+}
+
+.blog-hero-dot {
+  color: var(--orange, #c9561e);
+  font-size: 0.72rem;
+  line-height: 1;
+}
+
+/* Main Grid: Headline Left & Editorial Statement + CTAs Right */
+.blog-hero-main {
+  display: grid;
+  grid-template-columns: 1.35fr 1fr;
+  gap: clamp(32px, 4.5vw, 64px);
+  align-items: flex-end;
+}
+
+/* Main Display Title (exact tight line-height & tracking from reference image) */
+.blog-hero-title {
+  font-family: 'Plus Jakarta Sans', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: clamp(3.2rem, 5.8vw, 5.6rem);
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: -0.038em;
+  color: #ffffff;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.blog-hero-title-line {
+  display: block;
+  white-space: nowrap;
+}
+
+.blog-hero-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: clamp(20px, 3vh, 26px);
+  padding-bottom: 6px;
+}
+
+/* Right 3-line statement (matching Branding / Mobile & Web App Design / for Startups and Giants) */
+.blog-hero-statement {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  font-family: 'Plus Jakarta Sans', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: clamp(1.15rem, 1.4vw, 1.35rem);
+  font-weight: 400;
+  line-height: 1.38;
+  letter-spacing: -0.015em;
+  color: rgba(255, 255, 255, 0.88);
+}
+
+.blog-hero-stmt-line {
+  display: block;
+}
+
+/* Action CTA Buttons (Pills matching reference image) */
+.blog-hero-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.blog-hero-btn-primary {
+  background: var(--orange, #C9561E);
+  color: #ffffff;
+  font-family: 'Plus Jakarta Sans', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 0.88rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  padding: 12px 24px;
+  border-radius: 999px;
+  text-decoration: none;
+  transition: all 0.25s var(--ease-out, ease);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  box-shadow: 0 4px 18px rgba(201, 86, 30, 0.35);
+}
+
+.blog-hero-btn-primary:hover {
+  background: #E06830;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(201, 86, 30, 0.5);
+  color: #ffffff;
+}
+
+.blog-hero-btn-secondary {
+  background: #ffffff;
+  color: #111110;
+  font-family: 'Plus Jakarta Sans', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 0.88rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  padding: 12px 24px;
+  border-radius: 999px;
+  text-decoration: none;
+  transition: all 0.25s var(--ease-out, ease);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.blog-hero-btn-secondary:hover {
+  background: #E8E0D0;
+  transform: translateY(-2px);
+  color: #111110;
+}
+
+/* Footer Row: Category Tags (matching + Define + Design + Development) */
+.blog-hero-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 0;
+  border-top: none;
+}
+
+.blog-hero-tags {
+  display: flex;
+  align-items: center;
+  gap: clamp(32px, 4.5vw, 64px);
+  flex-wrap: wrap;
+}
+
+.blog-hero-tag {
+  font-family: 'Plus Jakarta Sans', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: clamp(0.82rem, 1vw, 0.92rem);
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.65);
+  letter-spacing: -0.01em;
+  cursor: default;
+  transition: color 0.2s ease;
+}
+
+.blog-hero-tag:hover {
+  color: #ffffff;
+}
+
+.blog-hero-scroll-hint {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-family: 'Plus Jakarta Sans', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 0.72rem;
+  letter-spacing: 0.16em;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.blog-hero-scroll-line {
+  width: 24px;
+  height: 1.5px;
+  background: var(--orange, #C9561E);
+}
+
+/* ─── 2. Whole Blog Page Cream (#e7dfcf) Theme ─── */
+.nr-page {
+  background-color: #e7dfcf;
+  color: #111110;
   min-height: 100vh;
   font-family: var(--font-body, 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif);
-  padding-top: calc(var(--nav-h, 72px) + 24px);
   position: relative;
   overflow-x: hidden;
 }
 
-/* Central ambient radial spotlight behind header */
+/* Ambient subtle warm glow */
 .nr-ambient-glow {
   position: absolute;
-  top: 40px;
+  top: 100vh;
   left: 50%;
   transform: translateX(-50%);
-  width: 720px;
-  height: 520px;
-  background: radial-gradient(circle at 50% 40%, rgba(255, 90, 31, 0.12) 0%, rgba(255, 255, 255, 0.04) 40%, transparent 75%);
+  width: 820px;
+  height: 600px;
+  background: radial-gradient(circle at 50% 30%, rgba(201, 86, 30, 0.08) 0%, rgba(231, 223, 207, 0) 70%);
   pointer-events: none;
   z-index: 0;
 }
@@ -29,38 +268,55 @@
 .nr-container {
   max-width: 1280px;
   margin: 0 auto;
-  padding: 0 32px;
+  padding: 64px 32px 100px;
   position: relative;
   z-index: 1;
 }
 
-/* ─── Header: Newsroom Title & Subtitle ─── */
+/* ─── 3. Header Section (Title & Subtitle on Cream) ─── */
 .nr-header {
-  text-align: center;
-  padding: 40px 0 56px;
-  max-width: 740px;
-  margin: 0 auto;
+  padding: 10px 0 48px;
+  margin-bottom: 56px;
+  border-bottom: 1.5px solid rgba(17, 17, 16, 0.14);
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  gap: 24px;
+}
+
+.nr-header-left {
+  max-width: 720px;
 }
 
 .nr-title {
-  font-family: var(--font-display, 'Bebas Neue', 'Plus Jakarta Sans', sans-serif);
-  font-size: clamp(3.8rem, 7vw, 5.8rem);
+  font-family: var(--font-display, 'Bebas Neue', 'Anton', sans-serif);
+  font-size: clamp(3rem, 5.5vw, 4.6rem);
   font-weight: 800;
-  letter-spacing: -0.02em;
-  color: #ffffff;
-  margin: 0 0 14px 0;
-  line-height: 1;
+  letter-spacing: -0.01em;
+  color: #111110;
+  margin: 0 0 12px 0;
+  line-height: 0.95;
 }
 
 .nr-subtitle {
   font-size: 1.05rem;
   line-height: 1.6;
-  color: #9299a8;
+  color: #555044;
   margin: 0;
-  font-weight: 400;
+  font-weight: 500;
 }
 
-/* ─── Featured Hero Card (No Container, Sharp Image) ─── */
+.nr-header-meta {
+  font-family: var(--font-mono, monospace);
+  font-size: 0.75rem;
+  letter-spacing: 0.18em;
+  color: var(--orange, #c9561e);
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+/* ─── 4. Featured Hero Card on Cream ─── */
 .nr-featured-card {
   display: grid;
   grid-template-columns: 1fr 1.15fr;
@@ -68,8 +324,9 @@
   background: transparent;
   border: none;
   border-radius: 0;
-  padding: 0;
+  padding: 0 0 56px;
   margin-bottom: 64px;
+  border-bottom: 1.5px solid rgba(17, 17, 16, 0.12);
   text-decoration: none;
   color: inherit;
   transition: transform 0.25s ease;
@@ -93,48 +350,51 @@
 }
 
 .nr-featured-tag {
-  font-size: 0.85rem;
-  font-weight: 600;
-  color: #8f97a8;
-  margin-bottom: 16px;
-  letter-spacing: 0.04em;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--orange, #c9561e);
+  margin-bottom: 14px;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
+  font-family: var(--font-mono, monospace);
 }
 
 .nr-featured-title {
-  font-size: clamp(2rem, 3.2vw, 2.75rem);
-  font-weight: 700;
-  line-height: 1.2;
-  color: #ffffff;
-  margin: 0 0 18px 0;
-  letter-spacing: -0.01em;
+  font-size: clamp(2rem, 3vw, 2.75rem);
+  font-weight: 800;
+  line-height: 1.15;
+  color: #111110;
+  margin: 0 0 16px 0;
+  letter-spacing: -0.02em;
   transition: color 0.2s ease;
 }
 
 .nr-featured-card:hover .nr-featured-title {
-  color: var(--orange, #FF5A1F);
+  color: var(--orange, #c9561e);
 }
 
 .nr-featured-excerpt {
-  font-size: 1rem;
+  font-size: 1.02rem;
   line-height: 1.7;
-  color: #8e95a5;
+  color: #4A453B;
   margin: 0;
 }
 
 .nr-featured-date {
-  font-size: 0.85rem;
-  color: #697082;
-  margin-top: 28px;
-  font-weight: 500;
+  font-size: 0.8rem;
+  color: #7A7466;
+  margin-top: 24px;
+  font-weight: 600;
+  font-family: var(--font-mono, monospace);
+  letter-spacing: 0.08em;
 }
 
 .nr-featured-media {
   position: relative;
-  border-radius: 0;
   overflow: hidden;
-  background: #1c1f28;
-  min-height: 360px;
+  background: #dcd4c3;
+  border: 1.5px solid rgba(17, 17, 16, 0.14);
+  min-height: 380px;
 }
 
 .nr-featured-img {
@@ -142,7 +402,6 @@
   height: 100%;
   object-fit: cover;
   display: block;
-  border-radius: 0;
   transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -150,16 +409,16 @@
   transform: scale(1.04);
 }
 
-/* ─── Middle Section: Newsletter + Follow Us ─── */
+/* ─── 5. Middle Section: Newsletter + Follow Us on Cream ─── */
 .nr-mid-section {
   display: grid;
   grid-template-columns: 1.4fr 1fr;
   gap: 48px;
   align-items: center;
-  padding: 36px 0 44px;
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-  margin-bottom: 60px;
+  padding: 44px 0 52px;
+  border-top: 1.5px solid rgba(17, 17, 16, 0.15);
+  border-bottom: 1.5px solid rgba(17, 17, 16, 0.15);
+  margin-bottom: 72px;
 }
 
 .nr-newsletter-box {
@@ -169,26 +428,28 @@
 }
 
 .nr-newsletter-title {
-  font-size: 1.25rem;
-  font-weight: 700;
-  color: #ffffff;
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: #111110;
   margin: 0;
   letter-spacing: -0.01em;
+  line-height: 1.3;
 }
 
 .nr-newsletter-form {
   display: flex;
   align-items: center;
-  background: #14161d;
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: #ffffff;
+  border: 1.5px solid rgba(17, 17, 16, 0.22);
   border-radius: 999px;
   padding: 5px 6px 5px 20px;
   max-width: 480px;
-  transition: border-color 0.2s ease;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .nr-newsletter-form:focus-within {
-  border-color: var(--orange, #FF5A1F);
+  border-color: var(--orange, #c9561e);
+  box-shadow: 0 0 0 3px rgba(201, 86, 30, 0.18);
 }
 
 .nr-newsletter-input {
@@ -196,21 +457,22 @@
   background: transparent;
   border: none;
   outline: none;
-  color: #ffffff;
+  color: #111110;
   font-size: 0.92rem;
   font-family: inherit;
+  font-weight: 600;
 }
 
 .nr-newsletter-input::placeholder {
-  color: #606778;
+  color: #7D776A;
 }
 
 .nr-newsletter-btn {
-  background: #ffffff;
-  color: #0b0c10;
+  background: #111110;
+  color: #ffffff;
   border: none;
   border-radius: 999px;
-  padding: 10px 22px;
+  padding: 11px 24px;
   font-size: 0.85rem;
   font-weight: 700;
   cursor: pointer;
@@ -219,7 +481,7 @@
 }
 
 .nr-newsletter-btn:hover {
-  background: var(--orange, #FF5A1F);
+  background: var(--orange, #c9561e);
   color: #ffffff;
 }
 
@@ -230,52 +492,53 @@
 }
 
 .nr-social-title {
-  font-size: 1.15rem;
-  font-weight: 700;
-  color: #ffffff;
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: #111110;
   margin: 0;
 }
 
 .nr-social-sub {
-  font-size: 0.86rem;
-  color: #798192;
+  font-size: 0.9rem;
+  color: #555044;
   margin: 0 0 10px 0;
   line-height: 1.4;
+  font-weight: 500;
 }
 
 .nr-social-icons {
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 14px;
 }
 
 .nr-social-link {
-  color: #9299a8;
+  color: #111110;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 34px;
-  height: 34px;
+  width: 38px;
+  height: 38px;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(17, 17, 16, 0.05);
+  border: 1.5px solid rgba(17, 17, 16, 0.16);
   transition: all 0.2s ease;
   text-decoration: none;
 }
 
 .nr-social-link:hover {
   color: #ffffff;
-  background: var(--orange, #FF5A1F);
-  border-color: var(--orange, #FF5A1F);
+  background: var(--orange, #c9561e);
+  border-color: var(--orange, #c9561e);
   transform: translateY(-2px);
 }
 
-/* ─── 3-Column Cards Grid (No Container Box, Sharp Images) ─── */
+/* ─── 6. 3-Column Articles Grid on Cream ─── */
 .nr-cards-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 36px 32px;
-  margin-bottom: 100px;
+  gap: 40px 32px;
+  margin-bottom: 90px;
 }
 
 .nr-card {
@@ -300,7 +563,8 @@
   aspect-ratio: 16 / 10;
   border-radius: 0;
   overflow: hidden;
-  background: #1d202a;
+  background: #dcd4c3;
+  border: 1.5px solid rgba(17, 17, 16, 0.14);
 }
 
 .nr-card-img {
@@ -308,7 +572,6 @@
   height: 100%;
   object-fit: cover;
   display: block;
-  border-radius: 0;
   transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -324,38 +587,41 @@
 }
 
 .nr-card-meta {
-  font-size: 0.8rem;
-  color: #7b8396;
+  font-size: 0.76rem;
+  color: #6B6558;
   margin-bottom: 10px;
-  font-weight: 500;
+  font-weight: 700;
+  font-family: var(--font-mono, monospace);
+  letter-spacing: 0.08em;
   display: flex;
   align-items: center;
   gap: 8px;
+  text-transform: uppercase;
 }
 
 .nr-card-meta-dot {
   font-size: 0.7rem;
-  opacity: 0.6;
+  opacity: 0.5;
 }
 
 .nr-card-title {
   font-size: 1.25rem;
   font-weight: 700;
   line-height: 1.35;
-  color: #ffffff;
+  color: #111110;
   margin: 0 0 10px 0;
   letter-spacing: -0.01em;
   transition: color 0.2s ease;
 }
 
 .nr-card:hover .nr-card-title {
-  color: var(--orange, #FF5A1F);
+  color: var(--orange, #c9561e);
 }
 
 .nr-card-excerpt {
-  font-size: 0.9rem;
+  font-size: 0.92rem;
   line-height: 1.6;
-  color: #8890a2;
+  color: #555044;
   margin: 0;
   display: -webkit-box;
   -webkit-line-clamp: 3;
@@ -364,8 +630,15 @@
   overflow: hidden;
 }
 
-/* ─── Responsive Media Queries ─── */
+/* ─── 7. Responsive Media Queries ─── */
 @media (max-width: 1080px) {
+  .blog-hero-main {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+  .blog-hero-title-line {
+    white-space: normal;
+  }
   .nr-cards-grid {
     grid-template-columns: repeat(2, 1fr);
     gap: 32px 24px;
@@ -373,16 +646,26 @@
 }
 
 @media (max-width: 860px) {
+  .blog-hero {
+    height: auto;
+    min-height: 100vh;
+    padding-top: 100px;
+  }
+  .blog-hero-content {
+    padding: 0 28px 36px;
+    gap: 28px;
+  }
+  .blog-hero-title {
+    font-size: clamp(2.6rem, 7vw, 3.8rem);
+  }
   .nr-featured-card {
     grid-template-columns: 1fr;
     gap: 24px;
   }
-
   .nr-featured-media {
-    min-height: 240px;
+    min-height: 250px;
     order: -1;
   }
-
   .nr-mid-section {
     grid-template-columns: 1fr;
     gap: 32px;
@@ -390,35 +673,39 @@
 }
 
 @media (max-width: 640px) {
-  .nr-container {
-    padding: 0 20px;
+  .blog-hero-content {
+    padding: 0 20px 28px;
+    gap: 24px;
   }
-
+  .blog-hero-footer {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+  .blog-hero-scroll-hint {
+    display: none;
+  }
+  .nr-container {
+    padding: 40px 20px 60px;
+  }
   .nr-cards-grid {
     grid-template-columns: 1fr;
     gap: 36px;
   }
-
   .nr-header {
-    padding: 24px 0 36px;
+    padding: 10px 0 28px;
+    margin-bottom: 36px;
   }
-
-  .nr-title {
-    font-size: 3.2rem;
-  }
-
   .nr-newsletter-form {
     flex-direction: column;
     border-radius: 16px;
     padding: 12px;
     gap: 10px;
   }
-
   .nr-newsletter-input {
     width: 100%;
     padding: 6px 8px;
   }
-
   .nr-newsletter-btn {
     width: 100%;
   }

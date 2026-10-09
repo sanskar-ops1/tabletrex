@@ -4,6 +4,8 @@ import { useState } from 'react';
 import Link from 'next/link';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import BlogHero from '@/components/BlogHero';
+import TornDivider from '@/components/TornDivider';
 import { BLOG_POSTS } from '@/data/blogPosts';
 import './blog.css';
 
@@ -13,8 +15,8 @@ export default function BlogPage() {
 
   // First post is featured lead card
   const featuredPost = BLOG_POSTS.find((p) => p.featured) || BLOG_POSTS[0];
-  // Remaining posts for the 3-column cards grid
-  const gridPosts = BLOG_POSTS.filter((p) => p.id !== featuredPost.id);
+  // All posts for the 3-column cards grid
+  const gridPosts = BLOG_POSTS;
 
   const handleSubscribe = (e) => {
     e.preventDefault();
@@ -28,79 +30,70 @@ export default function BlogPage() {
     <>
       <Navbar />
 
+      {/* ── 1. Full Cover Hero Banner matching attached reference image with parallax & animations ── */}
+      <BlogHero featuredPostId={featuredPost?.id} />
+
+      {/* ── Seamless Organic Hand-Torn Paper Transition: Dark Banner → Cream #e7dfcf Page ── */}
+      <div
+        style={{
+          background: '#e7dfcf',
+          marginTop: '-4px',
+          marginBottom: '-1px',
+          lineHeight: 0,
+          position: 'relative',
+          zIndex: 5,
+          overflow: 'hidden',
+        }}
+        aria-hidden="true"
+      >
+        <TornDivider
+          variant="top"
+          fill="#111110"
+          height={75}
+          variantIndex={0}
+          fiberColor="transparent"
+        />
+      </div>
+
+      {/* ── 2. Whole Blog Page in Cream #e7dfcf Theme ── */}
       <main className="nr-page">
-        {/* Ambient radial glow behind header */}
+        {/* Ambient subtle glow */}
         <div className="nr-ambient-glow" aria-hidden="true" />
 
         <div className="nr-container">
-          {/* ── 1. Page Header ── */}
-          <header className="nr-header">
-            <h1 className="nr-title">Newsroom</h1>
-            <p className="nr-subtitle">
-              News and resources from the frontiers of table tennis technology, blade engineering, and
-              tournament performance.
-            </p>
-          </header>
 
-          {/* ── 2. Featured Lead Card ── */}
-          {featuredPost && (
-            <Link
-              href={`/blog/${featuredPost.id}`}
-              className="nr-featured-card"
-              id={`featured-card-${featuredPost.id}`}
-            >
-              <div className="nr-featured-content">
-                <div className="nr-featured-top">
-                  <span className="nr-featured-tag">
-                    {featuredPost.category === 'RUBBER LAB' ? 'Insight' : featuredPost.category}
-                  </span>
-                  <h2 className="nr-featured-title">{featuredPost.title}</h2>
-                  <p className="nr-featured-excerpt">{featuredPost.excerpt}</p>
-                </div>
-                <span className="nr-featured-date">{featuredPost.publishDate}</span>
-              </div>
-              <div className="nr-featured-media">
-                <img
-                  src={featuredPost.image}
-                  alt={featuredPost.title}
-                  className="nr-featured-img"
-                  loading="eager"
-                />
-              </div>
-            </Link>
-          )}
 
-          {/* ── 3. Middle Section: Newsletter + Follow Us ── */}
+          {/* Middle Section: Newsletter + Follow Us on Cream */}
           <section className="nr-mid-section" aria-label="Newsletter and Social Channels">
             <div className="nr-newsletter-box">
               <h3 className="nr-newsletter-title">
-                Subscribe to our newsletter for daily industry insights
+                Subscribe to our dispatch for weekly equipment insights
               </h3>
               {subscribed ? (
-                <div style={{ color: 'var(--orange, #FF5A1F)', fontSize: '0.9rem', fontWeight: 600 }}>
-                  ✓ You are subscribed to daily technical dispatches!
+                <div style={{ color: 'var(--orange, #c9561e)', fontSize: '0.9rem', fontWeight: 700 }}>
+                  ✓ You are subscribed to technical field reports!
                 </div>
               ) : (
                 <form className="nr-newsletter-form" onSubmit={handleSubscribe}>
                   <input
                     type="email"
                     className="nr-newsletter-input"
-                    placeholder="Enter Your Email"
+                    placeholder="Enter your email address"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     required
                   />
                   <button type="submit" className="nr-newsletter-btn">
-                    Start Free Trial
+                    Subscribe Free
                   </button>
                 </form>
               )}
             </div>
 
             <div className="nr-social-box">
-              <h3 className="nr-social-title">Follow us</h3>
+              <h3 className="nr-social-title">Follow the Lab</h3>
               <p className="nr-social-sub">
-                Get the latest news and tournament equipment inspiration.
+                Get behind-the-scenes laboratory tests, match footage, and equipment breakdowns.
               </p>
               <div className="nr-social-icons">
                 <a
@@ -153,8 +146,8 @@ export default function BlogPage() {
             </div>
           </section>
 
-          {/* ── 4. 3-Column Cards Grid ── */}
-          <section className="nr-cards-grid" aria-label="Recent Articles">
+          {/* 3-Column Cards Grid */}
+          <section className="nr-cards-grid" id="articles-grid" aria-label="Recent Articles">
             {gridPosts.map((post) => (
               <Link
                 key={post.id}
@@ -172,7 +165,7 @@ export default function BlogPage() {
                 </div>
                 <div className="nr-card-body">
                   <div className="nr-card-meta">
-                    <span>Insight</span>
+                    <span>{post.category}</span>
                     <span className="nr-card-meta-dot">•</span>
                     <span>{post.publishDate}</span>
                   </div>
@@ -185,7 +178,22 @@ export default function BlogPage() {
         </div>
       </main>
 
-      {/* ── 5. End Section: The Footer shown in the 2nd image ── */}
+      {/* ── Seamless Organic Hand-Torn Transition: Cream #e7dfcf → Dark Footer ── */}
+      <div
+        style={{
+          background: 'var(--black, #111110)',
+          marginTop: '-3px',
+          marginBottom: '-1px',
+          lineHeight: 0,
+          position: 'relative',
+          zIndex: 5,
+          overflow: 'hidden',
+        }}
+        aria-hidden="true"
+      >
+        <TornDivider variant="top" fill="#e7dfcf" height={70} variantIndex={1} />
+      </div>
+
       <Footer />
     </>
   );

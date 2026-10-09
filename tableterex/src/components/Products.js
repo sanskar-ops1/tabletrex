@@ -1,5 +1,7 @@
 'use client';
 import { useState, useEffect } from 'react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 const PRODUCTS = [
   {
@@ -72,18 +74,14 @@ const PRODUCTS = [
 
 export default function Products({ onProductClick }) {
   useEffect(() => {
-    import('gsap').then(({ gsap }) => {
-      import('gsap/ScrollTrigger').then(({ ScrollTrigger }) => {
-        gsap.registerPlugin(ScrollTrigger);
-        gsap.fromTo('.product-card',
-          { opacity: 0, y: 60 },
-          {
-            opacity: 1, y: 0, duration: 0.9, stagger: 0.15, ease: 'power3.out',
-            scrollTrigger: { trigger: '#products', start: 'top 80%' },
-          }
-        );
-      });
-    });
+    gsap.registerPlugin(ScrollTrigger);
+    gsap.fromTo('.product-card',
+      { opacity: 0, y: 60 },
+      {
+        opacity: 1, y: 0, duration: 0.9, stagger: 0.15, ease: 'power3.out',
+        scrollTrigger: { trigger: '#products', start: 'top 80%' },
+      }
+    );
   }, []);
 
   return (

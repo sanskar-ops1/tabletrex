@@ -16,13 +16,16 @@ import {
 import CircularRacketCarousel, { CATEGORY_RACKETS } from './CircularRacketCarousel';
 import CircularRubberCarousel, { CATEGORY_RUBBERS } from './CircularRubberCarousel';
 
+import CanvasErrorBoundary from './CanvasErrorBoundary';
+import { dynamicWithRetry } from '@/utils/dynamicRetry';
+
 // Lazy-load the heavy 3D viewers (Three.js) only on client
 const RacketViewer = dynamic(
-  () => import('@/components/RacketViewer'),
+  () => dynamicWithRetry(() => import('@/components/RacketViewer')),
   { ssr: false, loading: () => <div className="rv-placeholder" /> }
 );
 const RubberViewer = dynamic(
-  () => import('@/components/RubberViewer'),
+  () => dynamicWithRetry(() => import('@/components/RubberViewer')),
   { ssr: false, loading: () => <div className="rv-placeholder" /> }
 );
 
@@ -163,7 +166,9 @@ export default function FindYourPlay() {
         <div className="finder-col" id="find-racket">
 
           {/* ── 3D Racket Viewer ── */}
-          <RacketViewer selectedLevel={racketStyle} selectedRacket={activeRacket} />
+          <CanvasErrorBoundary fallback={<div className="rv-placeholder" />}>
+            <RacketViewer selectedLevel={racketStyle} selectedRacket={activeRacket} />
+          </CanvasErrorBoundary>
 
           {/* ── Selected Racket Details ── */}
           <div className="finder-result">
@@ -227,7 +232,9 @@ export default function FindYourPlay() {
         <div className="finder-col" id="find-rubber">
 
           {/* ── 3D Rubber Viewer ── */}
-          <RubberViewer selectedStyle={rubberStyle} selectedRubber={activeRubber} />
+          <CanvasErrorBoundary fallback={<div className="rv-placeholder" />}>
+            <RubberViewer selectedStyle={rubberStyle} selectedRubber={activeRubber} />
+          </CanvasErrorBoundary>
 
           {/* ── Selected Rubber Result (dynamically updates with carousel + category) ── */}
           <div className="finder-result">

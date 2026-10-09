@@ -4,6 +4,7 @@ import { useState } from 'react';
 import Link from 'next/link';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import TornDivider from '@/components/TornDivider';
 import { BLOG_POSTS, getBlogPostById } from '@/data/blogPosts';
 import './blog-post.css';
 
@@ -27,7 +28,7 @@ export default function BlogPostClient({ postId }) {
 
   return (
     <>
-      <Navbar />
+      <Navbar solid />
 
       <main className="bp-page">
         <div className="bp-container">
@@ -195,7 +196,22 @@ export default function BlogPostClient({ postId }) {
         </div>
       </main>
 
-      {/* ── 6. In End Add the Section Shown in the 2nd Image (TableTerex Footer) ── */}
+      {/* ── Seamless Organic Hand-Torn Transition: Cream #e7dfcf → Dark Footer ── */}
+      <div
+        style={{
+          background: 'var(--black, #111110)',
+          marginTop: '-3px',
+          marginBottom: '-1px',
+          lineHeight: 0,
+          position: 'relative',
+          zIndex: 5,
+          overflow: 'hidden',
+        }}
+        aria-hidden="true"
+      >
+        <TornDivider variant="top" fill="#e7dfcf" height={70} variantIndex={1} />
+      </div>
+
       <Footer />
     </>
   );

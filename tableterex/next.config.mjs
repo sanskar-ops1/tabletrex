@@ -8,6 +8,7 @@ const nextConfig = {
   },
   basePath: isGithubActions ? '/tabletrex' : '',
   assetPrefix: isGithubActions ? '/tabletrex/' : '',
+  transpilePackages: ['three', 'gsap'],
 };
 
 export default nextConfig;

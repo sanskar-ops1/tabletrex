@@ -1,5 +1,7 @@
 'use client';
 import { useEffect } from 'react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 const CAT_PILLS = [
   { label: 'BLADES', href: '/products?category=Blades' },
@@ -69,23 +71,19 @@ const CATS = [
 
 export default function ShopByCategory() {
   useEffect(() => {
-    import('gsap').then(({ gsap }) => {
-      import('gsap/ScrollTrigger').then(({ ScrollTrigger }) => {
-        gsap.registerPlugin(ScrollTrigger);
-        gsap.fromTo(
-          '.cat-card',
-          { opacity: 0, y: 40 },
-          {
-            opacity: 1,
-            y: 0,
-            duration: 0.8,
-            stagger: 0.1,
-            ease: 'power3.out',
-            scrollTrigger: { trigger: '.shop-category-section', start: 'top 85%' },
-          }
-        );
-      });
-    });
+    gsap.registerPlugin(ScrollTrigger);
+    gsap.fromTo(
+      '.cat-card',
+      { opacity: 0, y: 40 },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 0.8,
+        stagger: 0.1,
+        ease: 'power3.out',
+        scrollTrigger: { trigger: '.shop-category-section', start: 'top 85%' },
+      }
+    );
   }, []);
 
   return (

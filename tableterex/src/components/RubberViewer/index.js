@@ -3,9 +3,11 @@ import { useState, useEffect, useRef } from 'react';
 import dynamic from 'next/dynamic';
 import CalloutOverlay from './CalloutOverlay';
 import { RUBBER_CONFIGS } from './rubberConfigs';
+import CanvasErrorBoundary from '../CanvasErrorBoundary';
+import { dynamicWithRetry } from '@/utils/dynamicRetry';
 
 // Dynamically import 3D rubber canvas to avoid SSR issues
-const RubberCanvas = dynamic(() => import('./RubberCanvas'), { ssr: false });
+const RubberCanvas = dynamic(() => dynamicWithRetry(() => import('./RubberCanvas')), { ssr: false });
 
 const CANVAS_W = 520;
 const CANVAS_H = 380;
@@ -65,7 +67,9 @@ export default function RubberViewer({ selectedStyle, selectedRubber }) {
   return (
     <div className="rv-wrapper">
       <div className="rv-canvas-wrap">
-        <RubberCanvas config={cfg} />
+        <CanvasErrorBoundary fallback={<div className="rv-placeholder" />}>
+          <RubberCanvas config={cfg} />
+        </CanvasErrorBoundary>
         <CalloutOverlay
           callouts={callouts}
           activeKey={overlayKey}

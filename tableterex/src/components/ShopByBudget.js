@@ -1,4 +1,5 @@
 'use client';
+import ExploreGearButton from './ExploreGearButton';
 
 const BUDGET_TIERS = [
   {
@@ -101,9 +102,12 @@ export default function ShopByBudget() {
                   <span className="budget-price-label">RANGE</span>
                   <span className="budget-price-val">{tier.priceRange}</span>
                 </div>
-                <a href="/products" className="budget-cta-btn" id={`budget-cta-${tier.id}`}>
-                  EXPLORE GEAR →
-                </a>
+                <ExploreGearButton
+                  href={tier.href || '/products'}
+                  id={`budget-cta-${tier.id}`}
+                  defaultText="explore gear"
+                  hoverText="Improve game"
+                />
               </div>
             </div>
           ))}

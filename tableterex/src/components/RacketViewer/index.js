@@ -3,9 +3,11 @@ import { useState, useEffect, useRef } from 'react';
 import dynamic from 'next/dynamic';
 import CalloutOverlay from './CalloutOverlay';
 import { LEVEL_CONFIGS } from './racketConfigs';
+import CanvasErrorBoundary from '../CanvasErrorBoundary';
+import { dynamicWithRetry } from '@/utils/dynamicRetry';
 
 // Dynamically import 3D canvas to avoid SSR issues
-const RacketCanvas = dynamic(() => import('./RacketCanvas'), { ssr: false });
+const RacketCanvas = dynamic(() => dynamicWithRetry(() => import('./RacketCanvas')), { ssr: false });
 
 const CANVAS_W = 520;
 const CANVAS_H = 380;
@@ -67,7 +69,9 @@ export default function RacketViewer({ selectedLevel, selectedRacket }) {
   return (
     <div className="rv-wrapper">
       <div className="rv-canvas-wrap">
-        <RacketCanvas config={cfg} />
+        <CanvasErrorBoundary fallback={<div className="rv-placeholder" />}>
+          <RacketCanvas config={cfg} />
+        </CanvasErrorBoundary>
         <CalloutOverlay
           callouts={callouts}
           activeKey={overlayKey}
