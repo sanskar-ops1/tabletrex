@@ -7,8 +7,6 @@ const CAT_PILLS = [
   { label: 'READY-MADE BATS', href: '/products?category=ready-made' },
   { label: 'BALLS', href: '/products?category=Balls' },
   { label: 'ACCESSORIES', href: '/products?category=Accessories' },
-  { label: 'APPAREL', href: '/products?category=Apparel' },
-  { label: 'SHOES', href: '/products?category=Shoes' },
 ];
 
 const CATS = [
