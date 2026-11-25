@@ -72,7 +72,7 @@ export const CATEGORY_RACKETS = {
       "name": "Butterfly Primorac Classic",
       "brand": "BUTTERFLY",
       "price": "₹6,290 MRP",
-      "image": "/images/pro-blade.jpg",
+      "image": "/images/products/tt-but-049-butterfly-primorac-fl.png",
       "desc": "Proven 5-ply African wood design engineered for balanced progression and clean ball feedback.",
       "summary": "Time-tested African wood feel. Smooth rally transition.",
       "profile": {
@@ -260,7 +260,7 @@ export const CATEGORY_RACKETS = {
       "name": "Butterfly Petr Korbel",
       "brand": "BUTTERFLY",
       "price": "₹7,490 MRP",
-      "image": "/images/pro-blade.jpg",
+      "image": "/images/products/tt-but-053-butterfly-korbel.png",
       "desc": "Classic Limba outer plies for high-dwell looping and counter topspins from mid-distance.",
       "summary": "Benchmark looping blade for developing technical attackers.",
       "profile": {
@@ -386,7 +386,7 @@ export const CATEGORY_RACKETS = {
       "name": "Butterfly Timo Boll ALC",
       "brand": "BUTTERFLY",
       "price": "₹24,200 MRP",
-      "image": "/images/pro-blade.jpg",
+      "image": "/images/products/tt-but-065-butterfly-timoboll-alc-fl.png",
       "desc": "Arylate-Carbon composite offering world-class stiffness, vibration dampening, and lethal spin precision.",
       "summary": "Arylate-Carbon. World-class tournament standard.",
       "profile": {
@@ -574,7 +574,7 @@ export const CATEGORY_RACKETS = {
       "name": "Butterfly Timo Boll ALC",
       "brand": "BUTTERFLY",
       "price": "₹24,200 MRP",
-      "image": "/images/pro-blade.jpg",
+      "image": "/images/products/tt-but-065-butterfly-timoboll-alc-fl.png",
       "desc": "Arylate-Carbon weave dampens vibration while unlocking extreme explosive looping drive power.",
       "summary": "Gold standard tournament offensive weapon.",
       "profile": {
@@ -824,7 +824,7 @@ export const CATEGORY_RACKETS = {
       "name": "Butterfly Diode V",
       "brand": "BUTTERFLY",
       "price": "₹11,200 MRP",
-      "image": "/images/pro-blade.jpg",
+      "image": "/images/products/tt-but-052-butterfly-diode-v.png",
       "desc": "Hard 5-ply defensive construction engineered for heavy backspin chops with aggressive counter capabilities.",
       "summary": "Tour standard modern defensive blade with sharp backspin bite.",
       "profile": {
@@ -1074,7 +1074,7 @@ export const CATEGORY_RACKETS = {
       "name": "Butterfly Primorac Classic",
       "brand": "BUTTERFLY",
       "price": "₹6,290 MRP",
-      "image": "/images/pro-blade.jpg",
+      "image": "/images/products/tt-but-049-butterfly-primorac-fl.png",
       "desc": "Proven 5-ply African wood design engineered for balanced progression and clean ball feedback.",
       "summary": "Time-tested African wood feel. Smooth rally transition.",
       "profile": {

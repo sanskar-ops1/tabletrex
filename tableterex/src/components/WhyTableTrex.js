@@ -141,7 +141,7 @@ export default function WhyTableTrex() {
             <div className="why-lineup-card">
               <div className="why-lineup-img-box">
                 <img
-                  src="/images/pro-blade.jpg"
+                  src="/images/products/tt-but-065-butterfly-timoboll-alc-fl.png"
                   alt="Butterfly Timo Boll ALC"
                   className="why-lineup-img"
                 />
@@ -158,7 +158,7 @@ export default function WhyTableTrex() {
             <div className="why-lineup-card">
               <div className="why-lineup-img-box">
                 <img
-                  src="/images/red-rubber.jpg"
+                  src="/images/products/tt-but-039-butterfly-tenergy-05-05-fx.png"
                   alt="Butterfly Tenergy 05"
                   className="why-lineup-img"
                 />

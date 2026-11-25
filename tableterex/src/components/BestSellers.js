@@ -20,7 +20,7 @@ const BEST_SELLERS = [
     specs: { spin: 98, speed: 85, control: 72 },
     tags: ['SPRING SPONGE', 'HIGH TENSION', 'TOURNAMENT CHOICE'],
     accent: '#ff3b30',
-    img: '/images/red-rubber.jpg',
+    img: '/images/products/tt-but-039-butterfly-tenergy-05-05-fx.png',
     desc: 'The global benchmark for high-tension spin attack. Spring Sponge technology delivers explosive catapult effect and tremendous rotation on heavy loop drives.',
   },
   {

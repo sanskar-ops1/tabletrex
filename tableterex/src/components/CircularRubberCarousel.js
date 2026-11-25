@@ -41,7 +41,7 @@ export const CATEGORY_RUBBERS = {
       "name": "Butterfly Tenergy 05",
       "brand": "BUTTERFLY",
       "price": "₹10,600 MRP",
-      "image": "/images/red-rubber.jpg",
+      "image": "/images/products/tt-but-039-butterfly-tenergy-05-05-fx.png",
       "desc": "Spring Sponge technology combined with high-tension rubber produces heavy rotation on looping drives and serve returns.",
       "summary": "The global benchmark for heavy rotation topspin loops.",
       "profile": {
@@ -198,7 +198,7 @@ export const CATEGORY_RUBBERS = {
       "name": "Butterfly Tenergy 64",
       "brand": "BUTTERFLY",
       "price": "₹10,600 MRP",
-      "image": "/images/red-rubber.jpg",
+      "image": "/images/products/tt-but-040-butterfly-tenergy-64-64-fx.png",
       "desc": "Code 64 pimples produce the fastest catapult and flat drive speed within the Tenergy series from mid-distance.",
       "summary": "Fastest catapult Tenergy sheet for aggressive drives.",
       "profile": {
@@ -353,7 +353,7 @@ export const CATEGORY_RUBBERS = {
       "name": "Butterfly Rozena",
       "brand": "BUTTERFLY",
       "price": "₹5,490 MRP",
-      "image": "/images/red-rubber.jpg",
+      "image": "/images/products/tt-but-032-butterfly-rozena.png",
       "desc": "Spring Sponge technology combined with High Tension topsheet forgives minor stroke imperfections while sustaining fast pace.",
       "summary": "High-tolerance Spring Sponge speed with forgiving trajectory.",
       "profile": {
@@ -510,7 +510,7 @@ export const CATEGORY_RUBBERS = {
       "name": "Butterfly Rozena",
       "brand": "BUTTERFLY",
       "price": "₹5,490 MRP",
-      "image": "/images/red-rubber.jpg",
+      "image": "/images/products/tt-but-032-butterfly-rozena.png",
       "desc": "Engineered specifically for players needing high tolerance on active blocking and directional placement.",
       "summary": "High-tolerance balance for consistent rally control.",
       "profile": {
@@ -574,7 +574,7 @@ export const CATEGORY_RUBBERS = {
       "name": "Butterfly Tenergy 05",
       "brand": "BUTTERFLY",
       "price": "₹10,600 MRP",
-      "image": "/images/red-rubber.jpg",
+      "image": "/images/products/tt-but-039-butterfly-tenergy-05-05-fx.png",
       "desc": "Spring Sponge technology powers high-impact loop drives with tremendous rotational energy.",
       "summary": "The world tournament standard attacking tensor rubber.",
       "profile": {
@@ -698,7 +698,7 @@ export const CATEGORY_RUBBERS = {
       "name": "Butterfly Tenergy 64",
       "brand": "BUTTERFLY",
       "price": "₹10,600 MRP",
-      "image": "/images/red-rubber.jpg",
+      "image": "/images/products/tt-but-040-butterfly-tenergy-64-64-fx.png",
       "desc": "Dynamic Spring Sponge creates blistering mid-distance velocity on forward counter attacks.",
       "summary": "Extreme catapult velocity from all attacking zones.",
       "profile": {
@@ -886,7 +886,7 @@ export const CATEGORY_RUBBERS = {
       "name": "Butterfly Rozena",
       "brand": "BUTTERFLY",
       "price": "₹5,490 MRP",
-      "image": "/images/red-rubber.jpg",
+      "image": "/images/products/tt-but-032-butterfly-rozena.png",
       "desc": "Forgiving High Tension surface allows defensive players to launch sudden attacking counter-loops.",
       "summary": "High-tolerance sheet for modern counter-choppers.",
       "profile": {
@@ -1074,7 +1074,7 @@ export const CATEGORY_RUBBERS = {
       "name": "Butterfly Rozena",
       "brand": "BUTTERFLY",
       "price": "₹5,490 MRP",
-      "image": "/images/red-rubber.jpg",
+      "image": "/images/products/tt-but-032-butterfly-rozena.png",
       "desc": "Spring Sponge technology designed to absorb opponents aggressive spin while maintaining high offensive quality.",
       "summary": "Forgiving tournament tensor for consistent all-round play.",
       "profile": {
